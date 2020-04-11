@@ -12,6 +12,6 @@ public interface Serializer {
      * Sets all the instance variables according to the data from the specified file
      * @param file - The file to extract data from
      */
-    void deSerialize(String file);
+    void deserialize(String file);
 
 }
