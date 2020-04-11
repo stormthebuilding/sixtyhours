@@ -1,7 +1,7 @@
 package Model;
 
 public class Stronghold {
-    private int health;
+    private int health=100;
 
     public Stronghold() {
 
@@ -12,4 +12,13 @@ public class Stronghold {
     public void breached(EnemyType type) {
 
     }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+    
 }

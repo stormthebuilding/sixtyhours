@@ -1,3 +1,9 @@
+//-----------------------------------------------------------
+//File:   (Collaboration)Project.java
+//Desc:   This program making a game the player use mouse 
+//and keyboard to destroy enemy the robots and defend
+//the stronghold.
+//----------------------------------------------------------- 
 package Model;
 
 public class Enemy {
@@ -14,6 +20,10 @@ public class Enemy {
 
     //called when enemy is destroyed
     public void destroyEnemy() {
+
+    }
+    //called when enemy is attacking
+    public void attack() {
 
     }
 }
