@@ -1,3 +1,3 @@
 package Model;
 
-public enum EnemyType {Basic, Advanced, Boss};
+public enum EnemyType {BASIC, ADVANCED, BOSS};

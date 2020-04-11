@@ -1,3 +1,3 @@
 package Model;
 
-public enum Weapon {Pistol, Rifle, Sniper, Grenade};
+public enum Weapon {PISTOL, RIFLE, SNIPER, GRENADE};
