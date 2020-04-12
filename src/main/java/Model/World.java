@@ -76,32 +76,26 @@ public class World  {
         PrintWriter printWriter = new PrintWriter(fileWriter);
         for (Object object : objectCollection) {
             if (object instanceof Player) {
-                printWriter.println("PLAYER");
-                printWriter.println(((Player) object).serialize()+";");
+                printWriter.println("PLAYER;" + ((Player) object).serialize());
             }
             else if (object instanceof Stronghold) {
-                printWriter.println("STRONGHOLD");
-                printWriter.println(((Stronghold) object).serialize()+";");
+                printWriter.println("STRONGHOLD;" + ((Stronghold) object).serialize());
             }
             else if (object instanceof Score) {
-                printWriter.println("SCORE");
-                printWriter.println(((Score) object).serialize()+";");
+                printWriter.println("SCORE;" + ((Score) object).serialize());
             }
             // CHECK WITH RESHI
             // else if (object instanceof HighScore) {
-            //     printWriter.println("HIGHSCORE");
-            //     printWriter.println(((HighScore) object).serialize()+";");
+            //     printWriter.println("HIGHSCORE;" + ((HighScore) object).serialize());
             // }
             else if (object instanceof Enemy) {
-                printWriter.println("ENEMY");
-                printWriter.println(((Enemy) object).serialize()+";");
+                printWriter.println("ENEMY;" + ((Enemy) object).serialize());
             }
             else if (object instanceof Weapon) {
-                printWriter.println("WEAPON");
-                printWriter.println(((Weapon) object).serialize()+";");
+                printWriter.println("WEAPON;" + ((Weapon) object).serialize());
             }
             if (objectCollection.indexOf(object) == objectCollection.size() -1 ) {
-                printWriter.println("END");
+                printWriter.println("END;");
             }
         }
         printWriter.close();
