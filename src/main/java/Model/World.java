@@ -132,7 +132,7 @@ public class World  {
                     ((Enemy) object).deserialize(line);
                 }
                 else if (line.equals("WEAPON")) {
-                    object = new Weapon();
+                    object = new Weapon(WeaponType.PISTOL);
                     ((Weapon) object).deserialize(line); 
                 }
             }

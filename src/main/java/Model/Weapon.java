@@ -2,8 +2,10 @@ package Model;
 
 public class Weapon implements Serializer{
 
-    Weapon() {
-        ;
+    private WeaponType type;
+
+    Weapon(WeaponType type) {
+        
     }
 
     @Override
