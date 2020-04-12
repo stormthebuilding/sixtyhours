@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -71,8 +72,7 @@ public class World  {
      * @param fileName - The name of the file to save data to
      */
     public void save(String fileName) throws IOException {
-        // create new file
-        FileWriter fileWriter = new FileWriter("filePath", true); 
+        FileWriter fileWriter = new FileWriter(fileName, true); 
         PrintWriter printWriter = new PrintWriter(fileWriter);
         for (Object object : objectCollection) {
             if (object instanceof Player) {
@@ -106,7 +106,7 @@ public class World  {
      * @param fileName - The name of the file to extract data from
      */
     public void load(String fileName) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader("fileName"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while (!(line = reader.readLine()).equals("END")) {
                 Object object = null;
