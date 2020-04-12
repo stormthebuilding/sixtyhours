@@ -74,7 +74,6 @@ public class World  {
         // create new file
         FileWriter fileWriter = new FileWriter("filePath", true); 
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        
         for (Object object : objectCollection) {
             if (object instanceof Player) {
                 printWriter.println("PLAYER");
@@ -97,12 +96,12 @@ public class World  {
                 printWriter.println("ENEMY");
                 printWriter.println(((Enemy) object).serialize()+";");
             }
-            // CHECK WITH NICK/KEVIN
-            // else if (object instanceof Weapon) {
-            //     printWriter.println((Weapon) object).serialize()+";";
-            // }
+            else if (object instanceof Weapon) {
+                printWriter.println("WEAPON");
+                printWriter.println(((Weapon) object).serialize()+";");
+            }
             if (objectCollection.indexOf(object) == objectCollection.size() -1 ) {
-                printWriter.print("END");
+                printWriter.println("END");
             }
         }
         printWriter.close();
@@ -113,7 +112,6 @@ public class World  {
      * @param fileName - The name of the file to extract data from
      */
     public void load(String fileName) throws IOException {
-
         try (BufferedReader reader = new BufferedReader(new FileReader("fileName"))) {
             String line;
             while (!(line = reader.readLine()).equals("END")) {
@@ -139,13 +137,11 @@ public class World  {
                     object = new Enemy(EnemyType.BASIC);
                     ((Enemy) object).deserialize(line);
                 }
-                // CHECK WITH KEVIN/NICK
-                // else if (line.equals("WEAPON")) {
-                //     object = new Weapon();
-                //     ((Weapon) object).deserialize(line); 
-                // }
+                else if (line.equals("WEAPON")) {
+                    object = new Weapon();
+                    ((Weapon) object).deserialize(line); 
+                }
             }
         }
-
     }
 }
