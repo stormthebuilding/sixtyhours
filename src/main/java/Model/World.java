@@ -71,8 +71,8 @@ public class World  {
      * @param fileName - The name of the file to save data to
      */
     public void save(String fileName) throws IOException {
-
-        FileWriter fileWriter = new FileWriter("filePath", true);
+        // create new file
+        FileWriter fileWriter = new FileWriter("filePath", true); 
         PrintWriter printWriter = new PrintWriter(fileWriter);
         
         for (Object object : objectCollection) {
@@ -88,14 +88,16 @@ public class World  {
                 printWriter.println("SCORE");
                 printWriter.println(((Score) object).serialize()+";");
             }
-            else if (object instanceof HighScore) {
-                printWriter.println("HIGHSCORE");
-                printWriter.println(((HighScore) object).serialize()+";");
-            }
+            // CHECK WITH RESHI
+            // else if (object instanceof HighScore) {
+            //     printWriter.println("HIGHSCORE");
+            //     printWriter.println(((HighScore) object).serialize()+";");
+            // }
             else if (object instanceof Enemy) {
                 printWriter.println("ENEMY");
                 printWriter.println(((Enemy) object).serialize()+";");
             }
+            // CHECK WITH NICK/KEVIN
             // else if (object instanceof Weapon) {
             //     printWriter.println((Weapon) object).serialize()+";";
             // }
@@ -128,6 +130,7 @@ public class World  {
                     object = new Score("", 0, DifficultyType.NORMAL);
                     ((Score) object).deserialize(line);
                 }
+                // CHECK WITH RESHI
                 // else if (line.equals("HIGHSCORE")) {
                 //     object = new HighScore();
                 //     ((HighScore) object).deserialize(line);
@@ -136,9 +139,10 @@ public class World  {
                     object = new Enemy(EnemyType.BASIC);
                     ((Enemy) object).deserialize(line);
                 }
+                // CHECK WITH KEVIN/NICK
                 // else if (line.equals("WEAPON")) {
                 //     object = new Weapon();
-                //     ((Weapon) object).deserialize(line);
+                //     ((Weapon) object).deserialize(line); 
                 // }
             }
         }
