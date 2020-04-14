@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HighScore {
+public class HighScore implements Serializer {
     private List<Score> scoresList = new ArrayList<Score>();
     private int maxNumOfHighScoreEntries = 15;
     private int maxScoresDisplayed = 5;
@@ -110,6 +110,18 @@ public class HighScore {
 
     public static void reset() {
         instance = new HighScore();
+    }
+
+    @Override
+    public String serialize() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void deserialize(String data) {
+        // TODO Auto-generated method stub
+
     }
 }
 

@@ -6,7 +6,7 @@
 //----------------------------------------------------------- 
 package Model;
 
-public class Enemy {
+public class Enemy implements Serializer{
     private EnemyType type;
 
     public Enemy(EnemyType type) {
@@ -26,4 +26,18 @@ public class Enemy {
     public void attack() {
 
     }
+
+    @Override
+    public String serialize() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void deserialize(String data) {
+        // TODO Auto-generated method stub
+
+    }
+
+
 }

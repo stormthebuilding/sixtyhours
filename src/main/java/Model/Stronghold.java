@@ -1,6 +1,6 @@
 package Model;
 
-public class Stronghold {
+public class Stronghold implements Serializer {
     private int health=100;
 
     public Stronghold() {
@@ -19,6 +19,18 @@ public class Stronghold {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    @Override
+    public String serialize() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void deserialize(String data) {
+        // TODO Auto-generated method stub
+
     }
     
 }

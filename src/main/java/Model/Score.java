@@ -1,6 +1,6 @@
 package Model;
 
-public class Score {
+public class Score implements Serializer {
     private String name;
     private int score;
     private DifficultyType difficultyType;
@@ -77,6 +77,18 @@ public class Score {
     @Override
     public String toString() {
         return "Score [difficultyType=" + difficultyType + ", name=" + name + ", score=" + score + "]";
+    }
+
+    @Override
+    public String serialize() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void deserialize(String data) {
+        // TODO Auto-generated method stub
+
     }
     
 }

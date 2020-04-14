@@ -1,6 +1,6 @@
 package Model;
 
-public class Player {
+public class Player implements Serializer {
     private int clipCapacity;
     private int clipRest;
     private int point;
@@ -47,6 +47,18 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    @Override
+    public String serialize() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void deserialize(String data) {
+        // TODO Auto-generated method stub
+
     }
     
 }
