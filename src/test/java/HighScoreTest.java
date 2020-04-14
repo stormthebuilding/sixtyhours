@@ -22,19 +22,27 @@ public class HighScoreTest {
         assertTrue(score.getName().equals("Frank"));
         assertTrue(score.getScore() == 20000);
         assertEquals(1, highScores.getScoresList().size());
+        assertEquals("Frank", highScores.getScoresList().get(0).getName());
 
 
         //Create 2nd Score and add to High Scores
-        score = new Score("Joe", 15000, DifficultyType.HARD);
+        score = new Score("Joe", 25000, DifficultyType.HARD);
         highScores.addHighScore(score);
+        assertEquals("Joe", highScores.getScoresList().get(1).getName());
 
         assertTrue(score.getName().equals("Joe"));
-        assertTrue(score.getScore() == 15000);
+        assertTrue(score.getScore() == 25000);
         assertEquals(2, highScores.getScoresList().size());
+
+        // Once Joe is added as above into the High Scores list
+        // The Scores would have to be sorted in the allScoresList and 
+        // also in the file.
+        assertEquals("Joe", highScores.getScoresList().get(0).getName());
+        assertEquals("Frank", highScores.getScoresList().get(1).getName());
 
     }
 
-    /**
+     /**
      * Unit Test for checking sucessful loading of
      * High Scores from File
      */
@@ -51,6 +59,7 @@ public class HighScoreTest {
         
         assertEquals(5, highScores.getScoresList().size());
     }
-  
-
+    
+    @Test
+    public void testSaveScores() {}
 }

@@ -21,13 +21,14 @@ public class Score {
 
     /**
      * 
-     * @return String
+     * @return - returns the name of the player.
      */
     public String getName() {
         return name;
     }
 
     /**
+     * Takes a string(name) as input for the player's name and sets the name to this string.
      * 
      * @param name
      */
@@ -37,13 +38,14 @@ public class Score {
 
     /**
      * 
-     * @return int
+     * @return - returns the score of the player.
      */
     public int getScore() {
         return score;
     }
 
     /**
+     * Takes an int(score) as input for the player's score and sets the score to this value.
      * 
      * @param score
      */
@@ -53,13 +55,14 @@ public class Score {
 
     /**
      * 
-     * @return DifficultyType
+     * @return- returns the DifficultyType of the game (EASY, HARD or INSANE).
      */
     public DifficultyType getDifficultyType() {
         return difficultyType;
     }
 
     /**
+     * Sets the DifficultyType of the game to EASY, HARD or INSANE as selected by the player.
      * 
      * @param difficultyType
      */
