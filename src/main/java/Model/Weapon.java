@@ -3,9 +3,25 @@ package Model;
 public class Weapon implements Serializer{
 
     private WeaponType type;
+    private int cost;
+    private int damage;
 
-    Weapon(WeaponType type) {
-        
+    Weapon(WeaponType type, int damage) {
+        this.type = type;
+        this.damage = damage;
+        cost = 0;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     @Override

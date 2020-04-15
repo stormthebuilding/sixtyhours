@@ -8,9 +8,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
-public class World  {
-    //arguments for the world
+public class World {
+    // arguments for the world
     private String difficulty;
     private String userName;
     private int id;
@@ -18,12 +22,11 @@ public class World  {
     private static int nextId;
 
     private ArrayList<Object> objectCollection = new ArrayList<Object>();
+    private ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 
-    //Store methods
+    // Store methods
 
-
-    //Stronghold methods (pending)
-
+    // Stronghold methods (pending)
 
     // Singleton implementation
 
@@ -40,6 +43,11 @@ public class World  {
 
     public static void reset() {
         instance = new World();
+    }
+
+    public void handleEnemies() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> searchList()));
+        timeline.setCycleCount(Animation.INDEFINITE);
     }
 
     //Getter and Setter
@@ -65,6 +73,24 @@ public class World  {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void searchList() {
+        for (int i = 0; i < enemyList.size(); ++i) {
+            Enemy enemy = enemyList.get(i);
+            if (enemy.getHealth() <= 0) {
+                enemyList.remove(i);
+            }
+            else {
+                if (enemy.getX() == 250) {
+                    // code for enemy attacking goes here
+                }
+                else {
+                    enemy.moveEnemy();
+                }
+            }
+            
+        }
     }
 
     /**
