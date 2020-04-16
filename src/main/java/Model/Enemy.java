@@ -78,7 +78,7 @@ public class Enemy implements Serializer {
         return health;
     }
 
-    public 
+    
 
     @Override
     public String serialize() {
