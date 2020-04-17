@@ -7,6 +7,6 @@
     spacing="10" prefHeight="400" prefWidth="250">
 
     <Label text="Main Menu"/>
-    <Button text="Start"/>
+    <Button text="Start" onAction="#onStartClicked"/>
 
 </VBox>
