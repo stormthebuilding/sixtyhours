@@ -9,7 +9,7 @@ Kevin
 Nick
 
 Reshi
-**High scores designed and implemented
+*High scores designed and implemented
 **Title Screen designed and implemented
 
 ## Known Issues
