@@ -21,6 +21,7 @@ public class World {
     private static int nextId;
 
     private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
+    String file = "SavedGame.txt";
     private ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 
     // Store methods
