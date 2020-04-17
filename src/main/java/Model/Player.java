@@ -5,16 +5,18 @@ public class Player implements Serializer {
     private int clipRest;
     private int point;
     private int score;
+    private Weapon currentWeapon;
 
 
     public Player() {
-
+        Weapon pistol = new Weapon(WeaponType.PISTOL, 2);
+        currentWeapon = pistol;
     }
 
     //called when the player attacks an enemy
     //check the weapon then edit the corresponding enemy
-    public void attack() {
-
+    public int attack() {
+        return currentWeapon.getDamage();
     }
 
     public int getClipCapacity() {

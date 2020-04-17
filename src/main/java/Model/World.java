@@ -1,29 +1,32 @@
 package Model;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
-public class World  {
-    //arguments for the world
+public class World {
+    // arguments for the world
     private String difficulty;
     private String userName;
     private int id;
 
     private static int nextId;
 
-    private ArrayList<Object> objectCollection = new ArrayList<Object>();
+    private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
+    String file = "SavedGame.txt";
+    private ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 
-    //Store methods
+    // Store methods
 
-
-    //Stronghold methods (pending)
-
+    // Stronghold methods (pending)
 
     // Singleton implementation
 
@@ -40,6 +43,11 @@ public class World  {
 
     public static void reset() {
         instance = new World();
+    }
+
+    public void handleEnemies() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> searchList()));
+        timeline.setCycleCount(Animation.INDEFINITE);
     }
 
     //Getter and Setter
@@ -67,75 +75,74 @@ public class World  {
         this.id = id;
     }
 
+    public void searchList() {
+        for (int i = 0; i < enemyList.size(); ++i) {
+            Enemy enemy = enemyList.get(i);
+            if (enemy.getHealth() <= 0) {
+                enemyList.remove(i);
+            }
+            else {
+                if (enemy.getX() == 250) {
+                    // code for enemy attacking goes here
+                }
+                else {
+                    enemy.moveEnemy();
+                }
+            }
+            
+        }
+    }
+
     /**
-     * 
+     * Saves the existing game objects to a text file
      * @param fileName - The name of the file to save data to
      */
     public void save(String fileName) throws IOException {
         FileWriter fileWriter = new FileWriter(fileName, true); 
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        for (Object object : objectCollection) {
-            if (object instanceof Player) {
-                printWriter.println("PLAYER;" + ((Player) object).serialize());
-            }
-            else if (object instanceof Stronghold) {
-                printWriter.println("STRONGHOLD;" + ((Stronghold) object).serialize());
-            }
-            else if (object instanceof Score) {
-                printWriter.println("SCORE;" + ((Score) object).serialize());
-            }
-            // CHECK WITH RESHI
-            // else if (object instanceof HighScore) {
-            //     printWriter.println("HIGHSCORE;" + ((HighScore) object).serialize());
-            // }
-            else if (object instanceof Enemy) {
-                printWriter.println("ENEMY;" + ((Enemy) object).serialize());
-            }
-            else if (object instanceof Weapon) {
-                printWriter.println("WEAPON;" + ((Weapon) object).serialize());
-            }
-            if (objectCollection.indexOf(object) == objectCollection.size() -1 ) {
-                printWriter.println("END;");
-            }
+        for (Serializer object : objectCollection) {
+            printWriter.println(object.serialize());
         }
+        printWriter.println("END;");
         printWriter.close();
     }
 
     /**
      * https://stackoverflow.com/questions/5868369/how-can-i-read-a-large-text-file-line-by-line-using-java Used with modifications.
+     * Retrieves data from a text file and places the data into the appropriate entity
      * @param fileName - The name of the file to extract data from
      */
     public void load(String fileName) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
-            while (!(line = reader.readLine()).equals("END")) {
-                Object object = null;
-                if (line.equals("PLAYER")) {
+            while (!(line = reader.readLine()).startsWith("END")) {
+                Serializer object = null;
+                if (line.startsWith("PLAYER")) {
                     object = new Player();
-                    ((Player) object).deserialize(line);
                 }
-                else if (line.equals("STRONGHOLD")) {
+                else if (line.startsWith("STRONGHOLD")) {
                     object = new Stronghold();
-                    ((Stronghold) object).deserialize(line);
                 }
-                else if (line.equals("SCORE")) {
+                else if (line.startsWith("SCORE")) {
                     object = new Score("", 0, DifficultyType.NORMAL);
-                    ((Score) object).deserialize(line);
                 }
-                // CHECK WITH RESHI
-                // else if (line.equals("HIGHSCORE")) {
-                //     object = new HighScore();
-                //     ((HighScore) object).deserialize(line);
-                // }
-                else if (line.equals("ENEMY")) {
+                else if (line.startsWith("ENEMY")) {
                     object = new Enemy(EnemyType.BASIC);
-                    ((Enemy) object).deserialize(line);
                 }
-                else if (line.equals("WEAPON")) {
-                    object = new Weapon(WeaponType.PISTOL);
-                    ((Weapon) object).deserialize(line); 
+                else if (line.startsWith("WEAPON")) {
+                    object = new Weapon(WeaponType.PISTOL, 0);
                 }
+                object.deserialize(line);
+                objectCollection.add(object);
             }
         }
+    }
+
+    public ArrayList<Serializer> getObjectCollection() {
+        return objectCollection;
+    }
+
+    public void setObjectCollection(ArrayList<Serializer> objectCollection) {
+        this.objectCollection = objectCollection;
     }
 }

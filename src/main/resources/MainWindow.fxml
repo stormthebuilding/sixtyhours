@@ -6,6 +6,7 @@
 <VBox fx:controller="MainWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css" spacing="30" prefHeight="400" prefWidth="500" alignment="CENTER">
     <Label fx:id="title" />
 
+    <Label text="Main Menu" style="-fx-font-size: 30px;"/>
     <Button onAction="#onPlayClicked" text="Play" alignment="CENTER" />
 
 </VBox>

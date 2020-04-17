@@ -1,10 +1,14 @@
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 public class MainWindow {
@@ -27,10 +31,12 @@ public class MainWindow {
     }
 
     @FXML
-    void onPlayClicked(ActionEvent event) {
-        var alert = new Alert(AlertType.INFORMATION, "Game screen still has to be attached.");
-        alert.setHeaderText(null);
-        alert.show();
+    void onPlayClicked(ActionEvent event) throws IOException {
+        var loader = new FXMLLoader(getClass().getResource("GameWindow.fxml"));
+        var scene = new Scene(loader.load());
 
+        var stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
 }

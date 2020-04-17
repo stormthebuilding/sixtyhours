@@ -2,10 +2,26 @@ package Model;
 
 public class Weapon implements Serializer{
 
-    private WeaponType type;
+    protected WeaponType type;
+    protected int cost;
+    protected int damage;
 
-    Weapon(WeaponType type) {
-        
+    public Weapon(WeaponType type, int damage) {
+        this.type = type;
+        this.damage = damage;
+        cost = 0;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     @Override
@@ -19,4 +35,10 @@ public class Weapon implements Serializer{
         // TODO Auto-generated method stub
 
     }
+
+    public WeaponType getType() {
+        return type;
+    }
+
+
 }
