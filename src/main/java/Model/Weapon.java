@@ -2,11 +2,11 @@ package Model;
 
 public class Weapon implements Serializer{
 
-    private WeaponType type;
-    private int cost;
-    private int damage;
+    protected WeaponType type;
+    protected int cost;
+    protected int damage;
 
-    Weapon(WeaponType type, int damage) {
+    protected Weapon(WeaponType type, int damage) {
         this.type = type;
         this.damage = damage;
         cost = 0;

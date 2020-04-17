@@ -6,6 +6,7 @@
 <VBox fx:controller="MainWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css"
     spacing="10" prefHeight="400" prefWidth="250">
 
-    <Button onAction="#onGreetClicked" text="Greet"  />
+    <Label text="Main Menu"/>
+    <Button text="Start"/>
 
 </VBox>
