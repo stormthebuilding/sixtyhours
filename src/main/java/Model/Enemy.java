@@ -92,5 +92,11 @@ public class Enemy implements Serializer {
 
     }
 
+    public EnemyType getType() {
+        return type;
+    }
+
+
+
 
 }

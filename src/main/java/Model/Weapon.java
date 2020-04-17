@@ -6,7 +6,7 @@ public class Weapon implements Serializer{
     protected int cost;
     protected int damage;
 
-    protected Weapon(WeaponType type, int damage) {
+    public Weapon(WeaponType type, int damage) {
         this.type = type;
         this.damage = damage;
         cost = 0;
@@ -35,4 +35,10 @@ public class Weapon implements Serializer{
         // TODO Auto-generated method stub
 
     }
+
+    public WeaponType getType() {
+        return type;
+    }
+
+
 }
