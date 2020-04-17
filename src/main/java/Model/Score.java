@@ -1,6 +1,6 @@
 package Model;
 
-public class Score implements Serializer {
+public class Score implements Serializer, Comparable<Score> {
     private String name;
     private int score;
     private DifficultyType difficultyType;
@@ -91,4 +91,13 @@ public class Score implements Serializer {
 
     }
     
+    public int compareTo(Score scoreObj) {
+        int scoreToCompare = ((Score) scoreObj).getScore(); // same type object
+        if (this.score > scoreToCompare)
+         return 1;
+        else if (this.score < scoreToCompare)
+         return -1;
+        else
+         return 0;
+}
 }
