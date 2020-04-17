@@ -3,10 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:controller="MainWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css"
-    spacing="10" prefHeight="400" prefWidth="250">
+<VBox fx:controller="MainWindow" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css"
+    spacing="10" prefHeight="600" prefWidth="1000">
 
-    <Label text="Main Menu"/>
-    <Button text="Start" onAction="#onStartClicked"/>
+    <Label text="Main Menu" style="-fx-font-size: 30px;"/>
+    <Button text="Start" onAction="#onStartClicked" prefHeight="40" prefWidth="80"/>
 
 </VBox>
