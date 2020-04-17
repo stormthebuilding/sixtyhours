@@ -93,7 +93,7 @@ public class World {
     }
 
     /**
-     * 
+     * Saves the existing game objects to a text file
      * @param fileName - The name of the file to save data to
      */
     public void save(String fileName) throws IOException {
@@ -108,6 +108,7 @@ public class World {
 
     /**
      * https://stackoverflow.com/questions/5868369/how-can-i-read-a-large-text-file-line-by-line-using-java Used with modifications.
+     * Retrieves data from a text file and places the data into the appropriate entity
      * @param fileName - The name of the file to extract data from
      */
     public void load(String fileName) throws IOException {
@@ -117,29 +118,30 @@ public class World {
                 Serializer object = null;
                 if (line.startsWith("PLAYER")) {
                     object = new Player();
-                    object.deserialize(line);
                 }
                 else if (line.startsWith("STRONGHOLD")) {
                     object = new Stronghold();
-                    object.deserialize(line);
                 }
                 else if (line.startsWith("SCORE")) {
                     object = new Score("", 0, DifficultyType.NORMAL);
-                    object.deserialize(line);
-                }
-                else if (line.equals("HIGHSCORE")) {
-                    object = HighScore.getInstance();
-                    object.deserialize(line);
                 }
                 else if (line.startsWith("ENEMY")) {
                     object = new Enemy(EnemyType.BASIC);
-                    object.deserialize(line);
                 }
                 else if (line.startsWith("WEAPON")) {
                     object = new Weapon(WeaponType.PISTOL, 0);
-                    object.deserialize(line); 
                 }
+                object.deserialize(line);
+                objectCollection.add(object);
             }
         }
+    }
+
+    public ArrayList<Serializer> getObjectCollection() {
+        return objectCollection;
+    }
+
+    public void setObjectCollection(ArrayList<Serializer> objectCollection) {
+        this.objectCollection = objectCollection;
     }
 }
