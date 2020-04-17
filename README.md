@@ -9,8 +9,8 @@ Kevin
 Nick
 
 Reshi
-*High scores designed and implemented
-**Title Screen designed and implemented
+ High scores designed and implemented
+ Title Screen designed and implemented
 
 ## Known Issues
 Caleb
@@ -20,7 +20,7 @@ Kevin
 Nick
 
 Reshi
-**No known issues
+ No known issues
 ## Recording
 
 ## Expenses
