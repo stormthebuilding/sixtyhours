@@ -81,8 +81,20 @@ public class Score implements Serializer, Comparable<Score> {
 
     @Override
     public String serialize() {
-        // TODO Auto-generated method stub
-        return null;
+        String serialized = "";
+        String difficultyToSave = "";
+        if (difficultyType == DifficultyType.NORMAL) {
+            difficultyToSave = "NORMAL";
+        }
+        else if (difficultyType == DifficultyType.HARD) {
+            difficultyToSave = "HARD";
+        }
+        else if (difficultyType == DifficultyType.INSANE) {
+            difficultyToSave = "INSANE";
+        }
+        serialized = "SCORE;"+name+","+score+","+difficultyToSave;
+       
+        return serialized;
     }
 
     @Override

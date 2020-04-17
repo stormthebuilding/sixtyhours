@@ -24,10 +24,36 @@ public class Weapon implements Serializer{
         return damage;
     }
 
+    public WeaponType getType() {
+        return type;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+
     @Override
     public String serialize() {
-        // TODO Auto-generated method stub
-        return null;
+        String serialized = "";
+        String typeToSave = "";
+        if (type == WeaponType.PISTOL) {
+            typeToSave = "PISTOL";
+        }
+        else if (type == WeaponType.RIFLE) {
+            typeToSave = "RIFLE";
+        }
+        else if (type == WeaponType.SNIPER) {
+            typeToSave = "SNIPER";
+        }
+        else if (type == WeaponType.MACHINEGUN) {
+            typeToSave = "MACHINEGUN";
+        }
+        else if (type == WeaponType.GRENADE) {
+            typeToSave = "GRENADE";
+        }
+        serialized = "WEAPON;"+typeToSave+","+cost+","+damage;
+        return serialized;
     }
 
     @Override
@@ -36,9 +62,6 @@ public class Weapon implements Serializer{
 
     }
 
-    public WeaponType getType() {
-        return type;
-    }
 
 
 }

@@ -23,8 +23,10 @@ public class Stronghold implements Serializer {
 
     @Override
     public String serialize() {
-        // TODO Auto-generated method stub
-        return null;
+        String serialized = "";
+        serialized = "STRONGHOLD;"+health;
+
+        return serialized;
     }
 
     @Override

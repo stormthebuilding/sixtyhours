@@ -51,10 +51,42 @@ public class Player implements Serializer {
         this.score = score;
     }
 
+    public Weapon getCurrentWeapon() {
+        return currentWeapon;
+    }
+
+    public void setCurrentWeapon(Weapon currentWeapon) {
+        this.currentWeapon = currentWeapon;
+    }
+
     @Override
     public String serialize() {
-        // TODO Auto-generated method stub
-        return null;
+        String serialized = "";
+        String typeToSave = "";
+    
+        if (currentWeapon.getType() == WeaponType.PISTOL) {
+            typeToSave = "PISTOL";
+        }
+        else if (currentWeapon.getType() == WeaponType.RIFLE) {
+            typeToSave = "RIFLE";
+        }
+        else if (currentWeapon.getType() == WeaponType.SNIPER) {
+            typeToSave = "SNIPER";
+        }
+        else if (currentWeapon.getType() == WeaponType.MACHINEGUN) {
+            typeToSave = "MACHINEGUN";
+        }
+        else if (currentWeapon.getType() == WeaponType.GRENADE) {
+            typeToSave = "GRENADE";
+        }
+
+    
+
+        serialized = "PLAYER;"+clipCapacity+","+clipRest+","+point+","+score
+        +","+typeToSave+","+Integer.toString(currentWeapon.getCost())+","+Integer.toString(currentWeapon.getDamage());
+
+        return serialized;
+        
     }
 
     @Override
@@ -62,5 +94,7 @@ public class Player implements Serializer {
         // TODO Auto-generated method stub
 
     }
+
+
     
 }

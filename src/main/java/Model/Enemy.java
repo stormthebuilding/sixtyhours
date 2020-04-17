@@ -74,16 +74,52 @@ public class Enemy implements Serializer {
         return x;
     }
 
+    public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
     public int getHealth() {
         return health;
     }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+
 
     
 
     @Override
     public String serialize() {
-        // TODO Auto-generated method stub
-        return null;
+        String serialized = "";
+        String typeToSave = "";
+        if (type == EnemyType.BASIC) {
+            typeToSave = "BASIC";
+        }
+        else if (type == EnemyType.ADVANCED) {
+            typeToSave = "ADVANCED";
+        }
+        else if (type == EnemyType.HEAVY) {
+            typeToSave = "HEAVY";
+        }
+        else if (type == EnemyType.BOSS) {
+            typeToSave = "BOSS";
+        }
+        serialized = "ENEMY;"+typeToSave+","+x+","+y+","+speed+","+health+","+damage;
+        return serialized;
     }
 
     @Override
@@ -92,9 +128,10 @@ public class Enemy implements Serializer {
 
     }
 
-    public EnemyType getType() {
-        return type;
-    }
+
+
+
+
 
 
 
