@@ -37,6 +37,8 @@ public class World {
     private World() {
         this.id = ++nextId;
         objectCollection.add(stronghold);
+        objectCollection.add(player);
+        objectCollection.add(player.getCurrentWeapon());
     }
 
     private static World instance = new World();
