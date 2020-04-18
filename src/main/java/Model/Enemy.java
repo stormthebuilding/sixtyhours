@@ -25,6 +25,9 @@ public class Enemy implements Serializer {
         health = 10;
         damage = .5;
         id = ++nextId;
+        collectObject();
+
+
     }
 
     //called when enemy is damaged
@@ -117,6 +120,12 @@ public class Enemy implements Serializer {
         damage = Integer.parseInt(splitted[5]);
         
 
+    }
+
+    public void collectObject() {
+        var objectList = World.instance().getObjectCollection();
+        objectList.add(this);
+        World.instance().setObjectCollection(objectList);
     }
 
 

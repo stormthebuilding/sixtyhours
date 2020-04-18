@@ -36,9 +36,6 @@ public class World {
     // prevent direct instantiation outside this class
     private World() {
         this.id = ++nextId;
-        objectCollection.add(stronghold);
-        objectCollection.add(player);
-        objectCollection.add(player.getCurrentWeapon());
     }
 
     private static World instance = new World();
@@ -104,7 +101,6 @@ public class World {
     public Enemy spawnEnemy() {
         Enemy enemy = new Enemy(EnemyType.BASIC);
         enemyList.add(enemy);
-        objectCollection.add(enemy);
         return enemy;
     }
 

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -13,6 +14,7 @@ import Model.Enemy;
 import Model.EnemyType;
 import Model.Player;
 import Model.Score;
+import Model.Serializer;
 import Model.Stronghold;
 import Model.Weapon;
 import Model.WeaponType;
@@ -24,7 +26,7 @@ public class WorldTest {
         // start with a new world 
         World.reset();
         World instance = World.instance();
-        var objectCollection = instance.getObjectCollection();
+        ArrayList<Serializer> objectCollection = new ArrayList();
         // add player
         Player player = new Player();
         player.setClipCapacity(10);
