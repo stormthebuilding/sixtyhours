@@ -10,7 +10,7 @@
     <VBox>
         <MenuBar>
             <Menu text="Main Menu">
-                <MenuItem fx:id="menuitSave" text="Save"/>
+                <MenuItem fx:id="menuitSave" text="Save" onAction = "#onSaveClicked" />
                 <MenuItem fx:id="menuitLoad" text="Load"/>
                 <MenuItem fx:id="menuitHighScore" text="High Score"/>
             </Menu>

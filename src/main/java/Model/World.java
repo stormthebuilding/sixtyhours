@@ -89,6 +89,9 @@ public class World {
      * @param fileName - The name of the file to save data to
      */
     public void save(String fileName) throws IOException {
+        PrintWriter cleaner = new PrintWriter(fileName);
+        cleaner.print("");
+        cleaner.close();
         FileWriter fileWriter = new FileWriter(fileName, true); 
         PrintWriter printWriter = new PrintWriter(fileWriter);
         for (Serializer object : objectCollection) {

@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import Model.Enemy;
 import Model.World;
 import javafx.animation.KeyFrame;
@@ -12,11 +14,14 @@ import javafx.util.Duration;
 
 public class GameWindow {
 
-    @FXML Pane map;
-    @FXML Label lblHealth;
-    @FXML Label lblCoins;
-    @FXML Label lblPoints;
-
+    @FXML
+    Pane map;
+    @FXML
+    Label lblHealth;
+    @FXML
+    Label lblCoins;
+    @FXML
+    Label lblPoints;
 
     @FXML
     void initialize() {
@@ -27,7 +32,7 @@ public class GameWindow {
         timeline.play();
     }
 
-    //code for spawning a new enemy
+    // code for spawning a new enemy
     @FXML
     public void onSpawnEnemyClicked() {
         Enemy enemy = World.instance().spawnEnemy();
@@ -38,6 +43,11 @@ public class GameWindow {
         view.setId("" + enemy.getId());
         view.relocate(x, y);
         map.getChildren().add(view);
+    }
+
+    @FXML
+    public void onSaveClicked() throws IOException {
+        World.instance().save("GameSave.txt");
     }
 
     //code for enemy attack and movement
