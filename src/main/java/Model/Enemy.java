@@ -69,6 +69,10 @@ public class Enemy implements Serializer {
         return damage;
     }
 
+    public EnemyType getType() {
+        return type;
+    }
+
     
 
     @Override
@@ -114,6 +118,9 @@ public class Enemy implements Serializer {
         
 
     }
+
+
+
 
 
 

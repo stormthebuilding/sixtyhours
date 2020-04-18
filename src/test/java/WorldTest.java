@@ -117,7 +117,7 @@ public class WorldTest {
         assertEquals(DifficultyType.NORMAL, ((Score) score).getDifficultyType());
         // check enemy
         var enemy = objectCollection.get(3);
-        assertEquals(EnemyType.HEAVY, ((Enemy) enemy).getType()); //TODO Check with Kevin/Nick to add getter
+        assertEquals(EnemyType.HEAVY, ((Enemy) enemy).getType());
         assertEquals(0.0, ((Enemy) enemy).getX(), 0.0);
         assertEquals(100.0, ((Enemy) enemy).getY(), 0.0);
         assertEquals(5, ((Enemy) enemy).getSpeed());
