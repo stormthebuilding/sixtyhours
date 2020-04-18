@@ -1,4 +1,4 @@
-# Storm the Stronghold
+# Storm the Stronghold (Alpha)
 ## Instructions
 Instructions to be added.
 
@@ -21,6 +21,9 @@ Kevin
 
 Nick
 
+The shoot implement didn't implement the model-view requirement yet. I creat the observer but didn't use it now.
+ConcurrentModificationException (The basic functions are not affected)
+
 Reshi
 
 * No known issues
@@ -33,5 +36,5 @@ Developer|Time Spent|Time Left|Journal Links
 ---------|----------|---------|--------------
 |Caleb|         |         |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NguyenJournal)
 |Kevin|   | |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/HansenJournal)
-|Nick| | |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NickJournal)
+|Nick| 13.75 hrs | |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NickJournal)
 |Reshi|20 hrs 40 min | 39 hrs 20 min|[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/ReshiJournal)
