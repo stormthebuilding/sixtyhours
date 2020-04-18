@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class HighScore implements Serializer {
+public class HighScore {
     private List<Score> scoresList = new ArrayList<Score>();
     private int maxNumOfHighScoreEntries = 15;
     private int maxScoresDisplayed = 5;
@@ -177,16 +177,5 @@ public class HighScore implements Serializer {
         instance = new HighScore();
     }
 
-    @Override
-    public String serialize() {
-        // Not needed?
-        return null;
-    }
-
-    @Override
-    public void deserialize(String data) {
-        // Not needed?
-
-    }
 }
 

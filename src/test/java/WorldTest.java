@@ -34,7 +34,7 @@ public class WorldTest {
         objectCollection.add(player);
         // add stronghold
         Stronghold stronghold = new Stronghold();
-        stronghold.setHealth(99);
+        stronghold.setHealth(99.0);
         objectCollection.add(stronghold);
         // add score
         Score score = new Score("Moe", 1000, DifficultyType.INSANE);
@@ -42,9 +42,6 @@ public class WorldTest {
         // add enemy
         Enemy enemy = new Enemy(EnemyType.BASIC);
         enemy.setY(200);
-        enemy.setSpeed(7);
-        enemy.setHealth(10);
-        enemy.setDamage(10);
         objectCollection.add(enemy);
         // add weapon
         Weapon weapon = new Weapon(WeaponType.SNIPER, 4);
@@ -67,11 +64,11 @@ public class WorldTest {
                 line = reader.readLine();
                 assertEquals("PLAYER;10,5,100,1000,PISTOL,0,2", line);
                 line = reader.readLine();
-                assertEquals("STRONGHOLD;99", line);
+                assertEquals("STRONGHOLD;99.0", line);
                 line = reader.readLine();
                 assertEquals("SCORE;Moe,1000,INSANE", line);
                 line = reader.readLine();
-                assertEquals("ENEMY;BASIC,0,200,7,10,10", line);
+                assertEquals("ENEMY;BASIC,0.0,200.0,7,10,0.5", line);
                 line = reader.readLine();
                 assertEquals("WEAPON;SNIPER,40,4", line);
                 line = reader.readLine();
@@ -112,7 +109,7 @@ public class WorldTest {
         assertEquals(2, ((Player) player).getCurrentWeapon().getDamage()); 
         // check stronghold
         var stronghold = objectCollection.get(1);
-        assertEquals(1, ((Stronghold) stronghold).getHealth());
+        assertEquals(1.0, ((Stronghold) stronghold).getHealth(), 0.0);
         // check score
         var score = objectCollection.get(2);
         assertEquals("Larry", ((Score) score).getName());
@@ -120,12 +117,12 @@ public class WorldTest {
         assertEquals(DifficultyType.NORMAL, ((Score) score).getDifficultyType());
         // check enemy
         var enemy = objectCollection.get(3);
-        assertEquals(EnemyType.HEAVY, ((Enemy) enemy).getType());
-        assertEquals(0, ((Enemy) enemy).getX());
-        assertEquals(100, ((Enemy) enemy).getY());
+        assertEquals(EnemyType.HEAVY, ((Enemy) enemy).getType()); //TODO Check with Kevin/Nick to add getter
+        assertEquals(0.0, ((Enemy) enemy).getX(), 0.0);
+        assertEquals(100.0, ((Enemy) enemy).getY(), 0.0);
         assertEquals(5, ((Enemy) enemy).getSpeed());
         assertEquals(35, ((Enemy) enemy).getHealth());
-        assertEquals(30, ((Enemy) enemy).getDamage());
+        assertEquals(30.0, ((Enemy) enemy).getDamage(), 0.0);
         // check weapon
         var weapon = objectCollection.get(4);
         assertEquals(WeaponType.RIFLE, ((Weapon) weapon).getType());
