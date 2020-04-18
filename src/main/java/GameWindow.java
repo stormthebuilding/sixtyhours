@@ -5,11 +5,14 @@ import Model.World;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+
+import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+
 import javafx.util.Duration;
 
 public class GameWindow {
@@ -26,6 +29,9 @@ public class GameWindow {
     @FXML
     void initialize() {
         ImageView view = new ImageView(new Image("/images/strongholdmap.jpg"));
+        // view.setPreserveRatio(true);
+        view.setFitWidth(1180);
+        view.setFitHeight(850);
         map.getChildren().add(view);
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> handleEnemies()));
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -42,6 +48,8 @@ public class GameWindow {
         view.getStyleClass().add("current");
         view.setId("" + enemy.getId());
         view.relocate(x, y);
+        view.setUserData(enemy);
+        setEnermy(view);
         map.getChildren().add(view);
     }
 
@@ -60,6 +68,12 @@ public class GameWindow {
                         if (enemy.getHealth() <= 0) {
                             map.getChildren().remove(node);
                             World.instance().enemyList.remove(enemy);
+                            World.instance().addScore(10);
+                            int score = World.instance().getScore();
+                            lblPoints.setText("Points: " + score);
+                            World.instance().addCoins(3);
+                            int coins = World.instance().getCoins();
+                            lblCoins.setText("Coins: " + coins);
                         }
                         else {
                             if (node.getLayoutX() >= 870) {
@@ -82,5 +96,35 @@ public class GameWindow {
                 }
             }
         }
+    }
+
+
+    @FXML
+    private void setEnermy(Node node) {
+        final Delta dragDelta = new Delta();
+
+        // node.setOnMouseEntered(me -> node.getScene().setCursor(Cursor.HAND));
+        node.setOnMouseExited(me -> node.getScene().setCursor(Cursor.DEFAULT));
+        node.setOnMousePressed(me -> {
+            dragDelta.x = me.getX();
+            dragDelta.y = me.getY();
+            node.getScene().setCursor(Cursor.MOVE);
+        });
+        node.setOnMouseDragged(me -> {
+            node.setLayoutX(node.getLayoutX() + me.getX() - dragDelta.x);
+            node.setLayoutY(node.getLayoutY() + me.getY() - dragDelta.y);
+            Enemy e = (Enemy) node.getUserData();
+            e.setX(node.getLayoutX() + me.getX() - dragDelta.x);
+            e.setY(node.getLayoutY() + me.getY() - dragDelta.y);
+        });
+        node.setOnMouseReleased(me -> node.getScene().setCursor(Cursor.HAND));
+
+        node.setOnMouseClicked(me -> {
+        });
+    }
+
+    private class Delta {
+        public double x;
+        public double y;
     }
 }

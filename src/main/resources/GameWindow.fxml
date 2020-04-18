@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <HBox fx:controller="GameWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css"
-    spacing="10" prefHeight="900" prefWidth="1700">
+    spacing="10" prefHeight="900" prefWidth="1440">
 
     <VBox>
         <MenuBar>
@@ -16,7 +16,7 @@
             </Menu>
         </MenuBar>
         
-        <Pane fx:id="map" prefHeight="900" prefWidth="1440" />
+        <Pane fx:id="map" prefHeight="850" prefWidth="1180" />
     </VBox>
 
     <VBox spacing="10">
