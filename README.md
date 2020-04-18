@@ -22,6 +22,7 @@ Kevin
 Nick
 
 The shoot implement didn't implement the model-view requirement yet. I creat the observer but didn't use it now.
+ConcurrentModificationException (The basic functions are not affected)
 
 Reshi
 
