@@ -17,7 +17,6 @@ public class World {
     private static int nextId;
 
     private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
-    String file = "SavedGame.txt";
     public ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 
     public Random rand = new Random();
@@ -26,7 +25,7 @@ public class World {
 
     // Stronghold methods (pending)
     public Stronghold stronghold = new Stronghold();
-
+    
     // Singleton implementation
 
     // prevent direct instantiation outside this class
@@ -81,7 +80,16 @@ public class World {
     public Enemy spawnEnemy() {
         Enemy enemy = new Enemy(EnemyType.BASIC);
         enemyList.add(enemy);
+        objectCollection.add(enemy);
         return enemy;
+    }
+
+    public ArrayList<Serializer> getObjectCollection() {
+        return objectCollection;
+    }
+
+    public void setObjectCollection(ArrayList<Serializer> objectCollection) {
+        this.objectCollection = objectCollection;
     }
 
     /**
@@ -132,11 +140,5 @@ public class World {
         }
     }
 
-    public ArrayList<Serializer> getObjectCollection() {
-        return objectCollection;
-    }
 
-    public void setObjectCollection(ArrayList<Serializer> objectCollection) {
-        this.objectCollection = objectCollection;
-    }
 }

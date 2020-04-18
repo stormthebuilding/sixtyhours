@@ -17,6 +17,8 @@ public class Score implements Serializer, Comparable<Score> {
         this.name = name;
         this.score = score;
         this.difficultyType = difficultyType;
+
+        
     }
 
     /**
@@ -122,4 +124,5 @@ public class Score implements Serializer, Comparable<Score> {
         else
          return 0;
 }
+
 }

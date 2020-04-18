@@ -47,7 +47,7 @@ public class GameWindow {
 
     @FXML
     public void onSaveClicked() throws IOException {
-        World.instance().save("GameSave.txt");
+        World.instance().save("SavedGame.txt");
     }
 
     //code for enemy attack and movement

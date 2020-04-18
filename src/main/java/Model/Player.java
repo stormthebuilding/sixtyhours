@@ -11,6 +11,8 @@ public class Player implements Serializer {
     public Player() {
         Weapon pistol = new Weapon(WeaponType.PISTOL, 2);
         currentWeapon = pistol;
+
+
     }
 
     //called when the player attacks an enemy
@@ -113,14 +115,6 @@ public class Player implements Serializer {
         }
         currentWeapon.cost = Integer.parseInt(splitted[5]);
         currentWeapon.damage = Integer.parseInt(splitted[6]);
-
-
-
-
-
-
-        
-
     }
 
 
