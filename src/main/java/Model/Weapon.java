@@ -11,6 +11,7 @@ public class Weapon implements Serializer{
         this.type = type;
         this.damage = damage;
         cost = 0;
+        
     }
 
     //getter and setter

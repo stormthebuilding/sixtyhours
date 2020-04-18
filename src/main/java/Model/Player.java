@@ -130,14 +130,6 @@ public class Player implements Serializer {
         }
         currentWeapon.cost = Integer.parseInt(splitted[5]);
         currentWeapon.damage = Integer.parseInt(splitted[6]);
-
-
-
-
-
-
-        
-
     }
 
 

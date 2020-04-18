@@ -12,12 +12,13 @@ public class World {
     private String difficulty;
     private String userName;
     private int id;
+    private int score;
+    private int coins;
     private int currentWave;
 
     private static int nextId;
 
     private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
-    String file = "SavedGame.txt";
     public ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 
     public Random rand = new Random();
@@ -81,9 +82,26 @@ public class World {
         this.id = id;
     }
 
+    public void addScore(int score) {
+        this.score += score;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void addCoins(int coins) {
+        this.coins += coins;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
     public Enemy spawnEnemy() {
         Enemy enemy = new Enemy(EnemyType.BASIC);
         enemyList.add(enemy);
+        objectCollection.add(enemy);
         return enemy;
     }
 
@@ -93,6 +111,14 @@ public class World {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public ArrayList<Serializer> getObjectCollection() {
+        return objectCollection;
+    }
+
+    public void setObjectCollection(ArrayList<Serializer> objectCollection) {
+        this.objectCollection = objectCollection;
     }
 
     /**
@@ -143,13 +169,4 @@ public class World {
         }
     }
 
-    public ArrayList<Serializer> getObjectCollection() {
-        return objectCollection;
-    }
-
-    public void setObjectCollection(ArrayList<Serializer> objectCollection) {
-        this.objectCollection = objectCollection;
-   
-
-}
 }

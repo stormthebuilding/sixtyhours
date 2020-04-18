@@ -64,7 +64,7 @@ public class GameWindow implements PlayerObserver {
 
     @FXML
     public void onSaveClicked() throws IOException {
-        World.instance().save("GameSave.txt");
+        World.instance().save("SavedGame.txt");
     }
 
     // code for enemy attack and movement
@@ -77,16 +77,25 @@ public class GameWindow implements PlayerObserver {
                         if (enemy.getHealth() <= 0) {
                             map.getChildren().remove(node);
                             World.instance().enemyList.remove(enemy);
-                        } else {
+                            World.instance().addScore(10);
+                            int score = World.instance().getScore();
+                            lblPoints.setText("Points: " + score);
+                            World.instance().addCoins(3);
+                            int coins = World.instance().getCoins();
+                            lblCoins.setText("Coins: " + coins);
+                        }
+                        else {
                             if (node.getLayoutX() >= 870) {
                                 if (World.instance().stronghold.getHealth() <= 0) {
-                                    // implementation for loosing game goes here
-                                } else {
+                                    //implementation for loosing game goes here
+                                }
+                                else {
                                     double health = World.instance().stronghold.getHealth();
                                     World.instance().stronghold.setHealth(health - enemy.getDamage());
                                     lblHealth.setText("Stronghold health: " + World.instance().stronghold.getHealth());
                                 }
-                            } else {
+                            }
+                            else {
                                 double x = node.getLayoutX();
                                 node.setLayoutX(x + 4);
                                 enemy.setX(node.getLayoutX());
