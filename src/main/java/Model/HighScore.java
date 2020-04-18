@@ -179,13 +179,13 @@ public class HighScore implements Serializer {
 
     @Override
     public String serialize() {
-        // TODO Auto-generated method stub
+        // Not needed?
         return null;
     }
 
     @Override
     public void deserialize(String data) {
-        // TODO Auto-generated method stub
+        // Not needed?
 
     }
 }

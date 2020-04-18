@@ -23,14 +23,16 @@ public class Stronghold implements Serializer {
 
     @Override
     public String serialize() {
-        // TODO Auto-generated method stub
-        return null;
+        String serialized = "";
+        serialized = "STRONGHOLD;"+health;
+
+        return serialized;
     }
 
     @Override
     public void deserialize(String data) {
-        // TODO Auto-generated method stub
-
+        String[] splitted = data.split(";");
+        health = Integer.parseInt(splitted[1]);
     }
     
 }

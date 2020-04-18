@@ -80,31 +80,98 @@ public class Enemy implements Serializer {
         return x;
     }
 
+    public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
     public int getHealth() {
         return health;
     }
 
+<<<<<<< HEAD
     public int getId() {
         return id;
     }
 
-    
-
-    @Override
-    public String serialize() {
-        // TODO Auto-generated method stub
-        return null;
+=======
+    public void setHealth(int health) {
+        this.health = health;
     }
 
-    @Override
-    public void deserialize(String data) {
-        // TODO Auto-generated method stub
+    public int getDamage() {
+        return damage;
+    }
 
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
     public EnemyType getType() {
         return type;
     }
+
+    public void setType(EnemyType type) {
+        this.type = type;
+    }
+
+
+>>>>>>> 1519d34a4c299e8cac63a8fad980f420a320aa4a
+    
+
+    @Override
+    public String serialize() {
+        String serialized = "";
+        String typeToSave = "";
+        if (type == EnemyType.BASIC) {
+            typeToSave = "BASIC";
+        }
+        else if (type == EnemyType.ADVANCED) {
+            typeToSave = "ADVANCED";
+        }
+        else if (type == EnemyType.HEAVY) {
+            typeToSave = "HEAVY";
+        }
+        else if (type == EnemyType.BOSS) {
+            typeToSave = "BOSS";
+        }
+        serialized = "ENEMY;"+typeToSave+","+x+","+y+","+speed+","+health+","+damage;
+        return serialized;
+    }
+
+    @Override
+    public void deserialize(String data) {
+        String[] splitted = data.split(";")[1].split(",");
+        if (splitted[0].equals("BASIC")) {
+            type = EnemyType.BASIC;
+        }
+        else if (splitted[0].equals("ADVANCED")) {
+            type = EnemyType.ADVANCED;
+        }
+        else if (splitted[0].equals("HEAVY")) {
+            type = EnemyType.HEAVY;
+        }
+        else if (splitted[0].equals("BOSS")) {
+            type = EnemyType.BOSS;
+        }
+        x = Integer.parseInt(splitted[1]);
+        y = Integer.parseInt(splitted[2]);
+        speed = Integer.parseInt(splitted[3]);
+        health = Integer.parseInt(splitted[4]);
+        damage = Integer.parseInt(splitted[5]);
+        
+
+    }
+
+
+
+
+
+
+
 
 
 
