@@ -36,6 +36,7 @@ public class World {
     // prevent direct instantiation outside this class
     private World() {
         this.id = ++nextId;
+        objectCollection.add(stronghold);
     }
 
     private static World instance = new World();
