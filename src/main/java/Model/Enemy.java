@@ -10,17 +10,23 @@ import java.util.Random;
 
 public class Enemy implements Serializer {
     private EnemyType type;
+    private int id;
     private int y;
     private int x;
     private int speed;
     private int health;
     private int damage;
 
+    private static int nextId;
+
     public Enemy(EnemyType type) {
         this.type = type;
-        Random rand = new Random();
-        y = rand.nextInt();//section of left side of window we want the enemies to spawn
+        y = World.instance().rand.nextInt(900);//section of left side of window we want the enemies to spawn
         x = 0;
+        speed = 7;
+        health = 10;
+        damage = 10;
+        id = ++nextId;
         // if (type == EnemyType.BASIC) {
         //     speed = 7;
         //     health = 10;
@@ -76,6 +82,10 @@ public class Enemy implements Serializer {
 
     public int getHealth() {
         return health;
+    }
+
+    public int getId() {
+        return id;
     }
 
     

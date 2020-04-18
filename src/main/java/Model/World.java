@@ -17,16 +17,20 @@ public class World {
     private String difficulty;
     private String userName;
     private int id;
+    private int currentWave;
 
     private static int nextId;
 
     private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
     String file = "SavedGame.txt";
-    private ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+    public ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+
+    public Random rand = new Random();
 
     // Store methods
 
     // Stronghold methods (pending)
+    public Stronghold stronghold = new Stronghold();
 
     // Singleton implementation
 
@@ -46,8 +50,31 @@ public class World {
     }
 
     public void handleEnemies() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> searchList()));
-        timeline.setCycleCount(Animation.INDEFINITE);
+        for (int i = 0; i < enemyList.size(); ++i) {
+            Enemy enemy = enemyList.get(i);
+            if (enemy.getHealth() <= 0) {
+                enemyList.remove(i);
+            }
+            else {
+                if (enemy.getX() == 870) {
+                    int damage = enemy.attack();
+                    int health = stronghold.getHealth();
+                    stronghold.setHealth(health - damage);
+                }
+                else {
+                    enemy.moveEnemy();
+                }
+            }
+        }
+    }
+
+    public Enemy findEnemy(int id) {
+        for (Enemy enemy: enemyList) {
+            if (enemy.getId() == id) {
+                return enemy;
+            }
+        }
+        return null;
     }
 
     //Getter and Setter
@@ -75,22 +102,10 @@ public class World {
         this.id = id;
     }
 
-    public void searchList() {
-        for (int i = 0; i < enemyList.size(); ++i) {
-            Enemy enemy = enemyList.get(i);
-            if (enemy.getHealth() <= 0) {
-                enemyList.remove(i);
-            }
-            else {
-                if (enemy.getX() == 250) {
-                    // code for enemy attacking goes here
-                }
-                else {
-                    enemy.moveEnemy();
-                }
-            }
-            
-        }
+    public Enemy spawnEnemy() {
+        Enemy enemy = new Enemy(EnemyType.BASIC);
+        enemyList.add(enemy);
+        return enemy;
     }
 
     /**

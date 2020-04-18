@@ -6,8 +6,9 @@
 
 <HBox fx:controller="GameWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css"
     spacing="10" prefHeight="900" prefWidth="1840">
+
+    <Pane fx:id="map" prefHeight="900" prefWidth="1440" />
     
-    <ImageView><image><Image url="@images/strongholdmap.png" /></image></ImageView>
     <VBox spacing="10">
         <Label text="Shop">
             <style>
@@ -34,7 +35,7 @@
         <Label text="Coins:" />
         <Label text="Points:" />
         <HBox spacing="10" alignment="center">
-            <Button fx:id="btnNextWave" text="Next Wave" />
+            <Button fx:id="btnNextWave" text="Spawn Enemy" onAction="#onSpawnEnemyClicked" />
             <Button fx:id="btnSave" text="Save" />
             <Button fx:id="btnMenu" text="Menu" />
         </HBox>

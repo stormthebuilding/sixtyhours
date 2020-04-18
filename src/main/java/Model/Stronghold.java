@@ -1,7 +1,7 @@
 package Model;
 
 public class Stronghold implements Serializer {
-    private int health=100;
+    private int health= 500;
 
     public Stronghold() {
 
