@@ -62,8 +62,8 @@
 
                 </HBox>
                 
-                <Button fx:id="btnReload" text = "Reload" style="-fx-font-size: 14px"/>
-                
+                <Button fx:id="btnReload" text = "Reload" onAction="#onReloadClicked" style="-fx-font-size: 14px"/>
+
             </HBox>
         </VBox>
     </VBox>

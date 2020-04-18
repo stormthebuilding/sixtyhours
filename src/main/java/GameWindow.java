@@ -45,6 +45,7 @@ public class GameWindow implements PlayerObserver {
         int bulletNum = World.instance().getPlayer().getClipCapacity();
         lblMaxMagazine.setText(String.valueOf(bulletNum));
         lblCurMagazine.setText(String.valueOf(bulletNum));
+        
     }
 
     // code for spawning a new enemy
@@ -59,12 +60,23 @@ public class GameWindow implements PlayerObserver {
         view.relocate(x, y);
         view.setUserData(enemy);
         setEnermy(view);
+        
+        //miss shoot !caution need change in the future
+        // if(Integer.parseInt(lblCurMagazine.getText())>=1){
+        //     map.setOnMouseClicked(me -> lblCurMagazine.setText(String.valueOf(Integer.parseInt(lblCurMagazine.getText())-1)));
+        // }
+        
         map.getChildren().add(view);
     }
 
     @FXML
     public void onSaveClicked() throws IOException {
         World.instance().save("SavedGame.txt");
+    }
+
+    @FXML
+    public void onReloadClicked() throws IOException{
+        lblCurMagazine.setText(lblMaxMagazine.getText());
     }
 
     // code for enemy attack and movement
@@ -128,7 +140,32 @@ public class GameWindow implements PlayerObserver {
         // node.setOnMouseReleased(me -> node.getScene().setCursor(Cursor.HAND));
 
         node.setOnMouseClicked(me -> {
+            Enemy e = (Enemy) node.getUserData();
+            int magazineRest = Integer.parseInt(lblCurMagazine.getText());
+            if(magazineRest>=1){
+                e.damageEnemy(10);
+
+                // !Caution need change in the future
+                //Unfinished version Data is not from the model
+                
+                lblCurMagazine.setText(String.valueOf(magazineRest-1));
+            }
+
+            // Player p = World.instance().getPlayer();
+            // int dmg = p.attack();
+            // Enemy e = (Enemy) node.getUserData();
+            // if(p.getClipRest()>=1){
+            //     e.damageEnemy(dmg);
+            //     p.setClipRest(p.getClipRest()-1); 
+            //     lblCurMagazine.setText(String.valueOf(p.getClipRest()));
+            // }
+
+            
         });
+    }
+
+    void shoot(Node node){
+        int dmg = World.instance().getPlayer().attack();
     }
 
     @Override

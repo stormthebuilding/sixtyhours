@@ -15,6 +15,7 @@ public class World {
     private int score;
     private int coins;
     private int currentWave;
+    private Player player = new Player();
 
     private static int nextId;
 
@@ -27,9 +28,6 @@ public class World {
 
     // Stronghold methods
     public Stronghold stronghold = new Stronghold();
-   
-    // Player
-    private Player player = new Player();
 
     // Singleton implementation
 
@@ -106,7 +104,7 @@ public class World {
     }
 
     public Player getPlayer() {
-        return player;
+        return this.player;
     }
 
     public void setPlayer(Player player) {
