@@ -19,37 +19,12 @@ public class Enemy implements Serializer {
 
     public Enemy(EnemyType type) {
         this.type = type;
-        y = World.instance().rand.nextInt(780 - 301 + 1) + 301;//section of left side of window we want the enemies to spawn
+        y = World.instance().rand.nextInt(780 - 330 + 1) + 301;//section of left side of window we want the enemies to spawn
         x = 0;
         speed = 7;
         health = 10;
         damage = .5;
         id = ++nextId;
-        // if (type == EnemyType.BASIC) {
-        //     speed = 7;
-        //     health = 10;
-        //     damage = 10;
-        // }
-        // else if (type == EnemyType.ADVANCED) {
-        //     speed = 10;
-        //     health = 20;
-        //     damage = 15;
-        // }
-        // else if (type == EnemyType.HEAVY) {
-        //     speed = 5;
-        //     health = 35;
-        //     damage = 30;
-        // }
-        // else if (type == EnemyType.BOSS) {
-        //     speed = 2;
-        //     health = 50;
-        //     damage = 50;
-        // }
-    }
-
-    //called while the enemy moves
-    public void moveEnemy() {
-        x += speed;
     }
 
     //called when enemy is damaged

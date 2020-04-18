@@ -27,6 +27,7 @@ public class GameWindow {
         timeline.play();
     }
 
+    //code for spawning a new enemy
     @FXML
     public void onSpawnEnemyClicked() {
         Enemy enemy = World.instance().spawnEnemy();
@@ -39,6 +40,7 @@ public class GameWindow {
         map.getChildren().add(view);
     }
 
+    //code for enemy attack and movement
     public void handleEnemies() {
         for (Node node: map.getChildren()) {
             if (node.getStyleClass().contains("current")) {
@@ -52,7 +54,7 @@ public class GameWindow {
                         else {
                             if (node.getLayoutX() >= 870) {
                                 if (World.instance().stronghold.getHealth() <= 0) {
-
+                                    //implementation for loosing game goes here
                                 }
                                 else {
                                     double health = World.instance().stronghold.getHealth();
