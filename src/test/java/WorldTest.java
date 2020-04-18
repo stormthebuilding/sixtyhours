@@ -22,7 +22,6 @@ public class WorldTest {
         // start with a new world 
         World.reset();
         World instance = World.instance();
-    
         var objectCollection = instance.getObjectCollection();
         // add player
         Player player = new Player();
@@ -49,7 +48,6 @@ public class WorldTest {
         Weapon weapon = new Weapon(WeaponType.SNIPER, 4);
         weapon.setCost(40);
         objectCollection.add(weapon);
-    
         instance.setObjectCollection(objectCollection);
         // call save method
         try {
