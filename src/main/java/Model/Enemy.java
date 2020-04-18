@@ -11,8 +11,8 @@ import java.util.Random;
 public class Enemy implements Serializer {
     private EnemyType type;
     private int id;
-    private int y;
-    private int x;
+    private double y;
+    private double x;
     private int speed;
     private int health;
     private int damage;
@@ -64,19 +64,19 @@ public class Enemy implements Serializer {
         return damage;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setX(int x) {
+    public void setX(Double x) {
         this.x = x;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
@@ -92,34 +92,10 @@ public class Enemy implements Serializer {
         return health;
     }
 
-<<<<<<< HEAD
     public int getId() {
         return id;
     }
 
-=======
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public EnemyType getType() {
-        return type;
-    }
-
-    public void setType(EnemyType type) {
-        this.type = type;
-    }
-
-
->>>>>>> 1519d34a4c299e8cac63a8fad980f420a320aa4a
     
 
     @Override

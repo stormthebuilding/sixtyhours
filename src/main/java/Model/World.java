@@ -7,11 +7,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-
 public class World {
     // arguments for the world
     private String difficulty;
