@@ -16,6 +16,7 @@ public class Player implements Serializer {
         pistol.setMagazine(6);
         clipCapacity = currentWeapon.getMagazine();
         clipRest = clipCapacity;
+        // collectObject();
     }
 
     //called when the player attacks an enemy
@@ -130,6 +131,12 @@ public class Player implements Serializer {
         }
         currentWeapon.cost = Integer.parseInt(splitted[5]);
         currentWeapon.damage = Integer.parseInt(splitted[6]);
+    }
+
+    public void collectObject() {
+        var objectList = World.instance().getObjectCollection();
+        objectList.add(this);
+        World.instance().setObjectCollection(objectList);
     }
 
 

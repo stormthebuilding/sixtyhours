@@ -99,7 +99,6 @@ public class World {
     public Enemy spawnEnemy() {
         Enemy enemy = new Enemy(EnemyType.BASIC);
         enemyList.add(enemy);
-        objectCollection.add(enemy);
         return enemy;
     }
 
