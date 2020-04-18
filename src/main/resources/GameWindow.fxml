@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <HBox fx:controller="GameWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css"
-    spacing="10" prefHeight="900" prefWidth="1840">
+    spacing="10" prefHeight="900" prefWidth="1700">
 
     <Pane fx:id="map" prefHeight="900" prefWidth="1440" />
     
@@ -31,9 +31,9 @@
                 -fx-padding: 45px;
             </style>
         </Label>
-        <Label text="Stronghold health:" />
-        <Label text="Coins:" />
-        <Label text="Points:" />
+        <Label fx:id="lblHealth" text="Stronghold health: 500" />
+        <Label fx:id="lblCoins" text="Coins: 0" />
+        <Label fx:id="lblPoints" text="Points: 0" />
         <HBox spacing="10" alignment="center">
             <Button fx:id="btnNextWave" text="Spawn Enemy" onAction="#onSpawnEnemyClicked" />
             <Button fx:id="btnSave" text="Save" />

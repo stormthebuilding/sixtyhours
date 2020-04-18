@@ -1,7 +1,7 @@
 package Model;
 
 public class Stronghold implements Serializer {
-    private int health= 500;
+    private double health= 500;
 
     public Stronghold() {
 
@@ -13,11 +13,11 @@ public class Stronghold implements Serializer {
 
     }
 
-    public int getHealth() {
+    public double getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(double health) {
         this.health = health;
     }
 

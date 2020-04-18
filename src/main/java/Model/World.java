@@ -44,25 +44,6 @@ public class World {
         instance = new World();
     }
 
-    public void handleEnemies() {
-        for (int i = 0; i < enemyList.size(); ++i) {
-            Enemy enemy = enemyList.get(i);
-            if (enemy.getHealth() <= 0) {
-                enemyList.remove(i);
-            }
-            else {
-                if (enemy.getX() == 870) {
-                    int damage = enemy.attack();
-                    int health = stronghold.getHealth();
-                    stronghold.setHealth(health - damage);
-                }
-                else {
-                    enemy.moveEnemy();
-                }
-            }
-        }
-    }
-
     public Enemy findEnemy(int id) {
         for (Enemy enemy: enemyList) {
             if (enemy.getId() == id) {

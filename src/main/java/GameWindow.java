@@ -1,23 +1,22 @@
-import java.io.FileInputStream;
-
 import Model.Enemy;
 import Model.World;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 public class GameWindow {
 
-    @FXML
-    Pane map;
+    @FXML Pane map;
+    @FXML Label lblHealth;
+    @FXML Label lblCoins;
+    @FXML Label lblPoints;
+
 
     @FXML
     void initialize() {
@@ -52,7 +51,14 @@ public class GameWindow {
                         }
                         else {
                             if (node.getLayoutX() >= 870) {
+                                if (World.instance().stronghold.getHealth() <= 0) {
 
+                                }
+                                else {
+                                    double health = World.instance().stronghold.getHealth();
+                                    World.instance().stronghold.setHealth(health - enemy.getDamage());
+                                    lblHealth.setText("Stronghold health: " + World.instance().stronghold.getHealth());
+                                }
                             }
                             else {
                                 double x = node.getLayoutX();
@@ -64,24 +70,5 @@ public class GameWindow {
                 }
             }
         }
-
-
-
-        // for (int i = 0; i < World.instance().enemyList.size(); ++i) {
-        //     Enemy enemy = World.instance().enemyList.get(i);
-        //     if (enemy.getHealth() <= 0) {
-        //         World.instance().enemyList.remove(i);
-        //     }
-        //     else {
-        //         if (enemy.getX() >= 870) {
-        //             int damage = enemy.attack();
-        //             int health = World.instance().stronghold.getHealth();
-        //             World.instance().stronghold.setHealth(health - damage);
-        //         }
-        //         else {
-        //             enemy.moveEnemy();
-        //         }
-        //     }
-        // }
     }
 }

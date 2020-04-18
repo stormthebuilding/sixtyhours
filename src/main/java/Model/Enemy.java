@@ -6,8 +6,6 @@
 //----------------------------------------------------------- 
 package Model;
 
-import java.util.Random;
-
 public class Enemy implements Serializer {
     private EnemyType type;
     private int id;
@@ -15,17 +13,17 @@ public class Enemy implements Serializer {
     private double x;
     private int speed;
     private int health;
-    private int damage;
+    private double damage;
 
     private static int nextId;
 
     public Enemy(EnemyType type) {
         this.type = type;
-        y = World.instance().rand.nextInt(900);//section of left side of window we want the enemies to spawn
+        y = World.instance().rand.nextInt(780 - 301 + 1) + 301;//section of left side of window we want the enemies to spawn
         x = 0;
         speed = 7;
         health = 10;
-        damage = 10;
+        damage = .5;
         id = ++nextId;
         // if (type == EnemyType.BASIC) {
         //     speed = 7;
@@ -59,10 +57,6 @@ public class Enemy implements Serializer {
         health -= damage;
         return health;
     }
-    //called when enemy is attacking
-    public int attack() {
-        return damage;
-    }
 
     public void setY(double y) {
         this.y = y;
@@ -94,6 +88,10 @@ public class Enemy implements Serializer {
 
     public int getId() {
         return id;
+    }
+
+    public double getDamage() {
+        return damage;
     }
 
     
