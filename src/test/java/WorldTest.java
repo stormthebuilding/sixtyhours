@@ -1,8 +1,10 @@
 import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import org.junit.Test;
 
@@ -49,6 +51,10 @@ public class WorldTest {
         weapon.setCost(40);
         objectCollection.add(weapon);
         instance.setObjectCollection(objectCollection);
+        // clear current contents of text file
+        PrintWriter writer = new PrintWriter("testSave.txt");
+        writer.print("");
+        writer.close();
         // call save method
         try {
             instance.save("testSave.txt");
@@ -73,38 +79,57 @@ public class WorldTest {
         }
     }
 
-    // @Test 
-    // public void testLoad_LoadFromFile_Pass() {
-    //     // start with a new world instance
-    //     World.reset();
-    //     World instance = World.instance();
-    //     // call load method
-    //     try {
-    //         instance.load("testLoad.txt");
-    //     } catch (Exception e) {
-    //         System.out.println("Exception occurred: " + e.getMessage());
-    //     }
-    //     var objectCollection = instance.getObjectCollection();
+    @Test 
+    public void testLoad_LoadFromFile_Pass() throws FileNotFoundException {
+        // start with a new world instance
+        World.reset();
+        World instance = World.instance();
+        // fill text file with data
+        PrintWriter writer = new PrintWriter("testLoad.txt");
+        writer.println("PLAYER;20,10,200,2000,PISTOL,0,2");
+        writer.println("STRONGHOLD;1");
+        writer.println("SCORE;Larry,2000,NORMAL");
+        writer.println("ENEMY;HEAVY,0,100,5,35,30");
+        writer.println("WEAPON;RIFLE,20,3");
+        writer.println("END;");
+        writer.close();
+        // call load method
+        try {
+            instance.load("testLoad.txt");
+        } catch (Exception e) {
+            System.out.println("Exception occurred: " + e.getMessage());
+        }
+        var objectCollection = instance.getObjectCollection();
         
-    //     // check player 
-    //     var player = objectCollection.get(0);
-    //     assertEquals(3, ((Player) player).getClipCapacity());
-    //     assertEquals(2, ((Player) player).getClipRest());
-    //     assertEquals(100, ((Player) player).getPoint());
-    //     assertEquals(1500, ((Player) player).getScore());
-    //     // check stronghold
-    //     var stronghold = objectCollection.get(1);
-    //     assertEquals(1000, ((Stronghold) stronghold).getHealth());
-    //     // check score
-    //     var score = objectCollection.get(2);
-    //     assertEquals("Caleb", ((Score) score).getName());
-    //     assertEquals(1500, ((Score) score).getScore());
-    //     assertEquals(DifficultyType.INSANE, ((Score) score).getDifficultyType());
-    //     // check enemy
-    //     var enemy = objectCollection.get(3);
-    //     assertEquals(EnemyType.HEAVY, ((Enemy) enemy).getType());
-    //     // check weapon
-    //     var weapon = objectCollection.get(4);
-    //     assertEquals(WeaponType.GRENADE, ((Weapon) weapon).getType());
-    //     }
+        // check player 
+        var player = objectCollection.get(0);
+        assertEquals(20, ((Player) player).getClipCapacity());
+        assertEquals(10, ((Player) player).getClipRest());
+        assertEquals(200, ((Player) player).getPoint());
+        assertEquals(2000, ((Player) player).getScore());
+        assertEquals(WeaponType.PISTOL, ((Player) player).getCurrentWeapon().getType());
+        assertEquals(0, ((Player) player).getCurrentWeapon().getCost());
+        assertEquals(2, ((Player) player).getCurrentWeapon().getDamage()); 
+        // check stronghold
+        var stronghold = objectCollection.get(1);
+        assertEquals(1, ((Stronghold) stronghold).getHealth());
+        // check score
+        var score = objectCollection.get(2);
+        assertEquals("Larry", ((Score) score).getName());
+        assertEquals(2000, ((Score) score).getScore());
+        assertEquals(DifficultyType.NORMAL, ((Score) score).getDifficultyType());
+        // check enemy
+        var enemy = objectCollection.get(3);
+        assertEquals(EnemyType.HEAVY, ((Enemy) enemy).getType());
+        assertEquals(0, ((Enemy) enemy).getX());
+        assertEquals(100, ((Enemy) enemy).getY());
+        assertEquals(5, ((Enemy) enemy).getSpeed());
+        assertEquals(35, ((Enemy) enemy).getHealth());
+        assertEquals(30, ((Enemy) enemy).getDamage());
+        // check weapon
+        var weapon = objectCollection.get(4);
+        assertEquals(WeaponType.RIFLE, ((Weapon) weapon).getType());
+        assertEquals(20, ((Weapon) weapon).getCost());
+        assertEquals(3, ((Weapon) weapon).getDamage());
+        }
 }

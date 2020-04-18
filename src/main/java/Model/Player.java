@@ -91,7 +91,35 @@ public class Player implements Serializer {
 
     @Override
     public void deserialize(String data) {
-        // TODO Auto-generated method stub
+        String[] splitted = data.split(";")[1].split(",");
+        clipCapacity = Integer.parseInt(splitted[0]);
+        clipRest = Integer.parseInt(splitted[1]);
+        point = Integer.parseInt(splitted[2]);
+        score = Integer.parseInt(splitted[3]);
+        if (splitted[4].equals("PISTOL")) {
+            currentWeapon.type = WeaponType.PISTOL;
+        }
+        else if (splitted[4].equals("RIFLE")) {
+            currentWeapon.type = WeaponType.RIFLE;
+        }
+        else if (splitted[4].equals("SNIPER")) {
+            currentWeapon.type = WeaponType.SNIPER;
+        }
+        else if (splitted[4].equals("MACHINEGUN")) {
+            currentWeapon.type = WeaponType.MACHINEGUN;
+        }
+        else if (splitted[4].equals("GRENADE")) {
+            currentWeapon.type = WeaponType.GRENADE;
+        }
+        currentWeapon.cost = Integer.parseInt(splitted[5]);
+        currentWeapon.damage = Integer.parseInt(splitted[6]);
+
+
+
+
+
+
+        
 
     }
 

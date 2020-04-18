@@ -58,7 +58,24 @@ public class Weapon implements Serializer{
 
     @Override
     public void deserialize(String data) {
-        // TODO Auto-generated method stub
+        String[] splitted = data.split(";")[1].split(",");
+        if (splitted[0].equals("PISTOL")) {
+            type = WeaponType.PISTOL;
+        }
+        else if (splitted[0].equals("RIFLE")) {
+            type = WeaponType.RIFLE;
+        }
+        else if (splitted[0].equals("SNIPER")) {
+            type = WeaponType.SNIPER;
+        }
+        else if (splitted[0].equals("MACHINEGUN")) {
+            type = WeaponType.MACHINEGUN;
+        }
+        else if (splitted[0].equals("GRENADE")) {
+            type = WeaponType.GRENADE;
+        }
+        cost = Integer.parseInt(splitted[1]);
+        damage = Integer.parseInt(splitted[2]);
 
     }
 

@@ -99,8 +99,18 @@ public class Score implements Serializer, Comparable<Score> {
 
     @Override
     public void deserialize(String data) {
-        // TODO Auto-generated method stub
-
+        String[] splitted = data.split(";")[1].split(",");
+        name = splitted[0];
+        score = Integer.parseInt(splitted[1]);
+        if (splitted[2].equals("NORMAL")) {
+            difficultyType = DifficultyType.NORMAL;
+        }
+        else if (splitted[2].equals("HARD")) {
+            difficultyType = DifficultyType.HARD;
+        }
+        else if (splitted[2].equals("INSANE")) {
+            difficultyType = DifficultyType.INSANE;
+        }
     }
     
     public int compareTo(Score scoreObj) {

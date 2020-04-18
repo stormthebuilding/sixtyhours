@@ -31,8 +31,8 @@ public class Stronghold implements Serializer {
 
     @Override
     public void deserialize(String data) {
-        // TODO Auto-generated method stub
-
+        String[] splitted = data.split(";");
+        health = Integer.parseInt(splitted[1]);
     }
     
 }
