@@ -12,6 +12,8 @@ public class World {
     private String difficulty;
     private String userName;
     private int id;
+    private int score;
+    private int coins;
     private int currentWave;
 
     private static int nextId;
@@ -76,6 +78,22 @@ public class World {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void addScore(int score) {
+        this.score += score;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void addCoins(int coins) {
+        this.coins += coins;
+    }
+
+    public int getCoins() {
+        return coins;
     }
 
     public Enemy spawnEnemy() {

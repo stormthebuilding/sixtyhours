@@ -68,6 +68,12 @@ public class GameWindow {
                         if (enemy.getHealth() <= 0) {
                             map.getChildren().remove(node);
                             World.instance().enemyList.remove(enemy);
+                            World.instance().addScore(10);
+                            int score = World.instance().getScore();
+                            lblPoints.setText("Points: " + score);
+                            World.instance().addCoins(3);
+                            int coins = World.instance().getCoins();
+                            lblCoins.setText("Coins: " + coins);
                         }
                         else {
                             if (node.getLayoutX() >= 870) {
