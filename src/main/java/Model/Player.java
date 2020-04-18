@@ -1,6 +1,8 @@
 package Model;
 
 public class Player implements Serializer {
+    private PlayerObserver observer;
+    
     private int clipCapacity;
     private int clipRest;
     private int point;
@@ -11,11 +13,18 @@ public class Player implements Serializer {
     public Player() {
         Weapon pistol = new Weapon(WeaponType.PISTOL, 2);
         currentWeapon = pistol;
+        pistol.setMagazine(6);
+        clipCapacity = currentWeapon.getMagazine();
+        clipRest = clipCapacity;
     }
 
     //called when the player attacks an enemy
     //check the weapon then edit the corresponding enemy
     public int attack() {
+        //get the category of weapon, get the number of magazine
+        int magazine = currentWeapon.getMagazine();
+        observer.update(this);
+
         return currentWeapon.getDamage();
     }
 
@@ -57,6 +66,14 @@ public class Player implements Serializer {
 
     public void setCurrentWeapon(Weapon currentWeapon) {
         this.currentWeapon = currentWeapon;
+    }
+
+    public void setObserver(PlayerObserver observer) {
+        this.observer = observer;
+    }
+
+    public PlayerObserver getObserver() {
+        return observer;
     }
 
     @Override

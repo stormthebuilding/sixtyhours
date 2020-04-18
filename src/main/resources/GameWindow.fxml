@@ -19,7 +19,7 @@
         <Pane fx:id="map" prefHeight="850" prefWidth="1180" />
     </VBox>
 
-    <VBox spacing="10">
+    <VBox spacing="20">
         <Label text="Shop">
             <style>
                 -fx-font-size: 50px;
@@ -49,5 +49,22 @@
             <Button fx:id="btnSave" text="Save" />
             <Button fx:id="btnLoad" text="Load" />
         </HBox>
+
+        <VBox spacing="15"> 
+            <Label text = "Magazine Capability" style="-fx-font-size: 22px"/>
+            <HBox spacing = "20">
+
+                <HBox spacing="1">
+
+                    <Label fx:id="lblCurMagazine" style="-fx-font-size: 18px"/>
+                    <Label text = "/" style="-fx-font-size: 18px"/>
+                    <Label fx:id="lblMaxMagazine" style="-fx-font-size: 18px"/>
+
+                </HBox>
+                
+                <Button fx:id="btnReload" text = "Reload" style="-fx-font-size: 14px"/>
+                
+            </HBox>
+        </VBox>
     </VBox>
 </HBox>

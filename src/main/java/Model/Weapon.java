@@ -5,6 +5,7 @@ public class Weapon implements Serializer{
     protected WeaponType type;
     protected int cost;
     protected int damage;
+    protected int magazine;
 
     public Weapon(WeaponType type, int damage) {
         this.type = type;
@@ -12,6 +13,7 @@ public class Weapon implements Serializer{
         cost = 0;
     }
 
+    //getter and setter
     public int getCost() {
         return cost;
     }
@@ -30,6 +32,14 @@ public class Weapon implements Serializer{
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    public int getMagazine() {
+        return this.magazine;
+    }
+
+    public void setMagazine(int magazine) {
+        this.magazine = magazine;
     }
 
 
@@ -78,6 +88,7 @@ public class Weapon implements Serializer{
         damage = Integer.parseInt(splitted[2]);
 
     }
+
 
 
 

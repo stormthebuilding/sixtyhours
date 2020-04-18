@@ -24,8 +24,11 @@ public class World {
 
     // Store methods
 
-    // Stronghold methods (pending)
+    // Stronghold methods
     public Stronghold stronghold = new Stronghold();
+   
+    // Player
+    private Player player = new Player();
 
     // Singleton implementation
 
@@ -84,6 +87,14 @@ public class World {
         return enemy;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
     /**
      * Saves the existing game objects to a text file
      * @param fileName - The name of the file to save data to
@@ -138,5 +149,7 @@ public class World {
 
     public void setObjectCollection(ArrayList<Serializer> objectCollection) {
         this.objectCollection = objectCollection;
-    }
+   
+
+}
 }
