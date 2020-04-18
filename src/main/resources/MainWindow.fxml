@@ -7,5 +7,7 @@
     
     <Label fx:id="title" />
     <Button onAction="#onPlayClicked" text="Play" alignment="CENTER" />
+    <Button onAction="#onLoadClicked" text="Load" alignment="CENTER" />
+    <Button onAction="#onHighScoreClicked" text="High Score" alignment="CENTER" />
 
 </VBox>

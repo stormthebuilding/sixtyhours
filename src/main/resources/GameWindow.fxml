@@ -7,8 +7,18 @@
 <HBox fx:controller="GameWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css"
     spacing="10" prefHeight="900" prefWidth="1700">
 
-    <Pane fx:id="map" prefHeight="900" prefWidth="1440" />
-    
+    <VBox>
+        <MenuBar>
+            <Menu text="Main Menu">
+                <MenuItem fx:id="menuitSave" text="Save"/>
+                <MenuItem fx:id="menuitLoad" text="Load"/>
+                <MenuItem fx:id="menuitHighScore" text="High Score"/>
+            </Menu>
+        </MenuBar>
+        
+        <Pane fx:id="map" prefHeight="900" prefWidth="1440" />
+    </VBox>
+
     <VBox spacing="10">
         <Label text="Shop">
             <style>
@@ -37,7 +47,7 @@
         <HBox spacing="10" alignment="center">
             <Button fx:id="btnNextWave" text="Spawn Enemy" onAction="#onSpawnEnemyClicked" />
             <Button fx:id="btnSave" text="Save" />
-            <Button fx:id="btnMenu" text="Menu" />
+            <Button fx:id="btnLoad" text="Load" />
         </HBox>
     </VBox>
 </HBox>
