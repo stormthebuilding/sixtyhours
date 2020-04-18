@@ -11,6 +11,7 @@ public class Weapon implements Serializer{
         this.type = type;
         this.damage = damage;
         cost = 0;
+        // collectObject();
         
     }
 
@@ -88,6 +89,12 @@ public class Weapon implements Serializer{
         cost = Integer.parseInt(splitted[1]);
         damage = Integer.parseInt(splitted[2]);
 
+    }
+
+    public void collectObject() {
+        var objectList = World.instance().getObjectCollection();
+        objectList.add(this);
+        World.instance().setObjectCollection(objectList);
     }
 
 

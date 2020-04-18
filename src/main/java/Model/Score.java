@@ -17,6 +17,7 @@ public class Score implements Serializer, Comparable<Score> {
         this.name = name;
         this.score = score;
         this.difficultyType = difficultyType;
+        collectObject();
 
         
     }
@@ -114,6 +115,12 @@ public class Score implements Serializer, Comparable<Score> {
             difficultyType = DifficultyType.INSANE;
         }
     }
+
+    public void collectObject() {
+        var objectList = World.instance().getObjectCollection();
+        objectList.add(this);
+        World.instance().setObjectCollection(objectList);
+    }
     
     public int compareTo(Score scoreObj) {
         int scoreToCompare = ((Score) scoreObj).getScore(); // same type object
@@ -124,5 +131,7 @@ public class Score implements Serializer, Comparable<Score> {
         else
          return 0;
 }
+
+
 
 }

@@ -4,6 +4,7 @@ public class Stronghold implements Serializer {
     private double health= 500;
 
     public Stronghold() {
+        // collectObject();
     }
     
     //called when an enemy reaches the stronghold
@@ -32,6 +33,12 @@ public class Stronghold implements Serializer {
     public void deserialize(String data) {
         String[] splitted = data.split(";");
         health = Integer.parseInt(splitted[1]);
+    }
+
+    public void collectObject() {
+        var objectList = World.instance().getObjectCollection();
+        objectList.add(this);
+        World.instance().setObjectCollection(objectList);
     }
 
     
