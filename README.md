@@ -16,16 +16,20 @@ Reshi
 * Title screen
 ## Known Issues
 Caleb
+<<<<<<< HEAD
 * Recent code changes have introduced a host of problems for serialization. At the moment, the serialization mechanism cannot save all of the game objects. However, it successfully saves and loads files with the unit tests.        
+=======
+* *ent code changes have introduced a host of problems for serialization. At the moment, the serialization mechanicism cannot save all *the game objects. However, it successfully saves and loads files with the unit tests. 
+>>>>>>> 73731e054265cf2ed1657ab03cda7ddb347c8586
 
-Kevin
+*evin
 
 Nick
 
-·The shoot implement didn't implement the model-view requirement yet. I creat the observer but didn't use it now.
-·ConcurrentModificationException (The basic functions are not affected)
-·Enemy can attact when the first time to click play from the main window to game window, but they can make damage to the stronghold if I use the same main window, close the game window and open the game window again.
-·I cannot press the screen to use my bullet, on the the way, the missed shoot will not be counted.
+* The shoot implement didn't implement the model-view requirement yet. I creat the observer but didn't use it now.
+* ConcurrentModificationException (The basic functions are not affected)
+* Enemy can attact when the first time to click play from the main window to game window, but they can make damage to the stronghold if I use the same main window, close the game window and open the game window again.
+* I cannot press the screen (the other place beside the enemy) to use my bullet, on the the way, the missed shoot will not be counted.
 
 Reshi
 
@@ -33,6 +37,7 @@ Reshi
 
 ## Recording
 Recording to be added.
+https://drive.google.com/open?id=1CW5kdHxV4GoX-Ov_sJSzhnEn91TZ-8OM
 
 ## Expenses
 Developer|Time Spent|Time Left|Journal Links                                                     
