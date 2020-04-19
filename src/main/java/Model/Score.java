@@ -17,7 +17,7 @@ public class Score implements Serializer, Comparable<Score> {
         this.name = name;
         this.score = score;
         this.difficultyType = difficultyType;
-        collectObject();
+        // collectObject();
 
         
     }
