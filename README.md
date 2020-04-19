@@ -22,15 +22,17 @@ Kevin
 
 Nick
 
-The shoot implement didn't implement the model-view requirement yet. I creat the observer but didn't use it now.
-ConcurrentModificationException (The basic functions are not affected)
+·The shoot implement didn't implement the model-view requirement yet. I creat the observer but didn't use it now.
+·ConcurrentModificationException (The basic functions are not affected)
+·Enemy can attact when the first time to click play from the main window to game window, but they can make damage to the stronghold if I use the same main window, close the game window and open the game window again.
+·I cannot press the screen to use my bullet, on the the way, the missed shoot will not be counted.
 
 Reshi
 
 * No known issues
 
 ## Recording
-[Recording link](https://drive.google.com/file/d/1CW5kdHxV4GoX-Ov_sJSzhnEn91TZ-8OM/view)           
+Recording to be added.
 
 ## Expenses
 Developer|Time Spent|Time Left|Journal Links                                                     
