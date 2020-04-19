@@ -1,6 +1,6 @@
 # Storm the Stronghold (Alpha)
 ## Instructions
-Instructions to be added.
+When the title page appears, click the "Play" button to start the game. At this stage of the game, you must click on the "Spawn Enemy" button to make the enemy appear. You can then click on the enemy to shoot at them. If the enemy gets to the stronghold, they can damage it. Once you have fired all of the shots in your clip, you must click the "Reload" button to fill your clip back up with shots. 
 
 ## Work Completed
 Caleb
