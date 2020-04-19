@@ -16,7 +16,7 @@ Reshi
 * Title screen
 ## Known Issues
 Caleb
-* Recent code changes have introduced a host of problems for serialization. At the moment, the serialization mechanicism cannot save all of the game objects. However, it successfully saves and loads files with the unit tests.        
+* Recent code changes have introduced a host of problems for serialization. At the moment, the serialization mechanism cannot save all of the game objects. However, it successfully saves and loads files with the unit tests.        
 
 Kevin
 
