@@ -75,6 +75,13 @@ public class GameWindow implements PlayerObserver {
     }
 
     @FXML
+    public void onLoadClicked() throws IOException {
+        // World.instance().load("SavedGame.txt");
+    }
+
+    
+
+    @FXML
     public void onReloadClicked() throws IOException{
         lblCurMagazine.setText(lblMaxMagazine.getText());
     }
