@@ -4,6 +4,7 @@ Instructions to be added.
 
 ## Work Completed
 Caleb
+* Game serialization
 
 Kevin
 
