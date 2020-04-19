@@ -15,11 +15,13 @@ public class World {
     private int score;
     private int coins;
     private int currentWave;
+    private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
     private Player player = new Player();
+    public Stronghold stronghold = new Stronghold();
 
     private static int nextId;
 
-    private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
+    
     public ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 
     public Random rand = new Random();
@@ -27,7 +29,7 @@ public class World {
     // Store methods
 
     // Stronghold methods
-    public Stronghold stronghold = new Stronghold();
+    
 
     // Singleton implementation
 

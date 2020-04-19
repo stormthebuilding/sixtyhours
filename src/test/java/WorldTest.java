@@ -26,7 +26,7 @@ public class WorldTest {
         // start with a new world 
         World.reset();
         World instance = World.instance();
-        ArrayList<Serializer> objectCollection = new ArrayList();
+        ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
         // add player
         Player player = new Player();
         player.setClipCapacity(10);
