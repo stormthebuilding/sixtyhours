@@ -26,8 +26,6 @@ public class Enemy implements Serializer {
         damage = .5;
         id = ++nextId;
         collectObject();
-
-
     }
 
     //called when enemy is damaged

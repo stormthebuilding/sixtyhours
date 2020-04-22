@@ -7,8 +7,6 @@ import Model.World;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -49,7 +47,6 @@ public class GameWindow implements PlayerObserver {
     }
 
     // code for spawning a new enemy
-    @FXML
     public void onSpawnEnemyClicked() {
         Enemy enemy = World.instance().spawnEnemy();
         double x = enemy.getX();
@@ -97,7 +94,7 @@ public class GameWindow implements PlayerObserver {
                             lblCoins.setText("Coins: " + coins);
                         }
                         else {
-                            if (node.getLayoutX() >= 870) {
+                            if (node.getLayoutX() >= 700) {
                                 if (World.instance().stronghold.getHealth() <= 0) {
                                     //implementation for loosing game goes here
                                 }

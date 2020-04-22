@@ -58,9 +58,6 @@ public class Weapon implements Serializer{
         else if (type == WeaponType.SNIPER) {
             typeToSave = "SNIPER";
         }
-        else if (type == WeaponType.MACHINEGUN) {
-            typeToSave = "MACHINEGUN";
-        }
         else if (type == WeaponType.GRENADE) {
             typeToSave = "GRENADE";
         }
@@ -79,9 +76,6 @@ public class Weapon implements Serializer{
         }
         else if (splitted[0].equals("SNIPER")) {
             type = WeaponType.SNIPER;
-        }
-        else if (splitted[0].equals("MACHINEGUN")) {
-            type = WeaponType.MACHINEGUN;
         }
         else if (splitted[0].equals("GRENADE")) {
             type = WeaponType.GRENADE;

@@ -30,11 +30,10 @@
             <Button fx:id="btnWeapons" text="Weapons" style="-fx-font-size: 15px" />
             <Button fx:id="btnUpgrades" text="Upgrades" style="-fx-font-size: 15px" />
         </HBox>
-        <Label text="TBI" />
-        <Label text="TBI" />
-        <Label text="TBI" />
-        <Label text="TBI" />
-        <Label text="TBI" />
+        <Label text="Pistol" />
+        <Label text="Rifle" />
+        <Label text="Sniper" />
+        <Label text="Grenade" />
         <Label text="Stats">
             <style>
                 -fx-font-size: 50px;
