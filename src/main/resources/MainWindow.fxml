@@ -7,7 +7,7 @@
     
     <Label fx:id="title" />
     <Label text="Main Menu" style="-fx-font-size: 30px;"/>
-    <HBox spacing="100" alignment="CENTER">
+    <HBox spacing="20" alignment="CENTER">
         <Button onAction="#onAboutClicked" text="About" />
         <Button onAction="#onPlayClicked" text="Play" />
         <Button onAction="#onHelpClicked" text="Help" />
