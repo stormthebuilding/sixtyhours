@@ -39,4 +39,24 @@ public class MainWindow {
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    void onAboutClicked(ActionEvent event) throws IOException {
+        var loader = new FXMLLoader(getClass().getResource("AboutWindow.fxml"));
+        var scene = new Scene(loader.load());
+
+        var stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void onHelpClicked(ActionEvent event) throws IOException {
+        var loader = new FXMLLoader(getClass().getResource("HelpWindow.fxml"));
+        var scene = new Scene(loader.load());
+
+        var stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
 }
