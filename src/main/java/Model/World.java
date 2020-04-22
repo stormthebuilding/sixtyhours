@@ -7,26 +7,29 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-
 public class World {
     // arguments for the world
     private String difficulty;
     private String userName;
     private int id;
+    private int score;
+    private int coins;
+    private int currentWave;
+    private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
+    private Player player = new Player();
+    public Stronghold stronghold = new Stronghold();
 
     private static int nextId;
 
-    private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
-    String file = "SavedGame.txt";
-    private ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+    
+    public ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+
+    public Random rand = new Random();
 
     // Store methods
 
-    // Stronghold methods (pending)
+    // Stronghold methods
+    
 
     // Singleton implementation
 
@@ -45,9 +48,13 @@ public class World {
         instance = new World();
     }
 
-    public void handleEnemies() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> searchList()));
-        timeline.setCycleCount(Animation.INDEFINITE);
+    public Enemy findEnemy(int id) {
+        for (Enemy enemy: enemyList) {
+            if (enemy.getId() == id) {
+                return enemy;
+            }
+        }
+        return null;
     }
 
     //Getter and Setter
@@ -75,22 +82,42 @@ public class World {
         this.id = id;
     }
 
-    public void searchList() {
-        for (int i = 0; i < enemyList.size(); ++i) {
-            Enemy enemy = enemyList.get(i);
-            if (enemy.getHealth() <= 0) {
-                enemyList.remove(i);
-            }
-            else {
-                if (enemy.getX() == 250) {
-                    // code for enemy attacking goes here
-                }
-                else {
-                    enemy.moveEnemy();
-                }
-            }
-            
-        }
+    public void addScore(int score) {
+        this.score += score;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void addCoins(int coins) {
+        this.coins += coins;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public Enemy spawnEnemy() {
+        Enemy enemy = new Enemy(EnemyType.BASIC);
+        enemyList.add(enemy);
+        return enemy;
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public ArrayList<Serializer> getObjectCollection() {
+        return objectCollection;
+    }
+
+    public void setObjectCollection(ArrayList<Serializer> objectCollection) {
+        this.objectCollection = objectCollection;
     }
 
     /**
@@ -98,6 +125,9 @@ public class World {
      * @param fileName - The name of the file to save data to
      */
     public void save(String fileName) throws IOException {
+        PrintWriter cleaner = new PrintWriter(fileName);
+        cleaner.print("");
+        cleaner.close();
         FileWriter fileWriter = new FileWriter(fileName, true); 
         PrintWriter printWriter = new PrintWriter(fileWriter);
         for (Serializer object : objectCollection) {
@@ -138,11 +168,4 @@ public class World {
         }
     }
 
-    public ArrayList<Serializer> getObjectCollection() {
-        return objectCollection;
-    }
-
-    public void setObjectCollection(ArrayList<Serializer> objectCollection) {
-        this.objectCollection = objectCollection;
-    }
 }

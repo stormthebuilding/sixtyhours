@@ -59,4 +59,14 @@ public class MainWindow {
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    void onLoadClicked(ActionEvent event) throws IOException {
+
+    }
+
+    @FXML
+    void onHighScoreClicked(ActionEvent event) throws IOException {
+        
+    }
 }

@@ -1,10 +1,10 @@
 package Model;
 
 public class Stronghold implements Serializer {
-    private int health=100;
+    private double health= 500;
 
     public Stronghold() {
-
+        // collectObject();
     }
     
     //called when an enemy reaches the stronghold
@@ -13,24 +13,36 @@ public class Stronghold implements Serializer {
 
     }
 
-    public int getHealth() {
+    public double getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(double health) {
         this.health = health;
     }
 
     @Override
     public String serialize() {
-        // TODO Auto-generated method stub
-        return null;
+        String serialized = "";
+        serialized = "STRONGHOLD;"+health;
+
+        return serialized;
     }
 
     @Override
     public void deserialize(String data) {
-        // TODO Auto-generated method stub
+        String[] splitted = data.split(";");
+        health = Integer.parseInt(splitted[1]);
+    }
+
+    public void collectObject() {
+        if (World.instance().getObjectCollection() != null) {
+            var objectList = World.instance().getObjectCollection();
+            objectList.add(this);
+            World.instance().setObjectCollection(objectList);
+        }
 
     }
+
     
 }

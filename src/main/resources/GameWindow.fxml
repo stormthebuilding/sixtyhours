@@ -5,10 +5,21 @@
 <?import javafx.scene.layout.*?>
 
 <HBox fx:controller="GameWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css"
-    spacing="10" prefHeight="900" prefWidth="1840">
-    
-    <ImageView><image><Image url="@images/strongholdmap.png" /></image></ImageView>
-    <VBox spacing="10">
+    spacing="10" prefHeight="900" prefWidth="1440">
+
+    <VBox>
+        <MenuBar>
+            <Menu text="Main Menu">
+                <MenuItem fx:id="menuitSave" text="Save" onAction = "#onSaveClicked" />
+                <MenuItem fx:id="menuitLoad" text="Load" onAction = "#onLoadClicked" />
+                <MenuItem fx:id="menuitHighScore" text="High Score"/>
+            </Menu>
+        </MenuBar>
+        
+        <Pane fx:id="map" prefHeight="850" prefWidth="1180" />
+    </VBox>
+
+    <VBox spacing="20">
         <Label text="Shop">
             <style>
                 -fx-font-size: 50px;
@@ -30,13 +41,30 @@
                 -fx-padding: 45px;
             </style>
         </Label>
-        <Label text="Stronghold health:" />
-        <Label text="Coins:" />
-        <Label text="Points:" />
+        <Label fx:id="lblHealth" text="Stronghold health: 500" />
+        <Label fx:id="lblCoins" text="Coins: 0" />
+        <Label fx:id="lblPoints" text="Points: 0" />
         <HBox spacing="10" alignment="center">
-            <Button fx:id="btnNextWave" text="Next Wave" />
+            <Button fx:id="btnNextWave" text="Spawn Enemy" onAction="#onSpawnEnemyClicked" />
             <Button fx:id="btnSave" text="Save" />
-            <Button fx:id="btnMenu" text="Menu" />
+            <Button fx:id="btnLoad" text="Load" />
         </HBox>
+
+        <VBox spacing="15"> 
+            <Label text = "Magazine Capability" style="-fx-font-size: 22px"/>
+            <HBox spacing = "20">
+
+                <HBox spacing="1">
+
+                    <Label fx:id="lblCurMagazine" style="-fx-font-size: 18px"/>
+                    <Label text = "/" style="-fx-font-size: 18px"/>
+                    <Label fx:id="lblMaxMagazine" style="-fx-font-size: 18px"/>
+
+                </HBox>
+                
+                <Button fx:id="btnReload" text = "Reload" onAction="#onReloadClicked" style="-fx-font-size: 14px"/>
+
+            </HBox>
+        </VBox>
     </VBox>
 </HBox>

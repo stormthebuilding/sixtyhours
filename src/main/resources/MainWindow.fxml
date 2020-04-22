@@ -4,12 +4,15 @@
 <?import javafx.scene.layout.*?>
 
 <VBox fx:controller="MainWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css" spacing="30" prefHeight="400" prefWidth="500" alignment="CENTER">
+    
     <Label fx:id="title" />
     <Label text="Main Menu" style="-fx-font-size: 30px;"/>
     <HBox spacing="100" alignment="CENTER">
         <Button onAction="#onAboutClicked" text="About" />
         <Button onAction="#onPlayClicked" text="Play" />
         <Button onAction="#onHelpClicked" text="Help" />
+        <Button onAction="#onLoadClicked" text="Load" />
+        <Button onAction="#onHighScoreClicked" text="High Score" />
     </HBox>
 
 </VBox>
