@@ -25,7 +25,7 @@ public class Enemy implements Serializer {
         health = 10;
         damage = .5;
         id = ++nextId;
-        // collectObject();
+        collectObject();
 
 
     }
@@ -113,11 +113,11 @@ public class Enemy implements Serializer {
         else if (splitted[0].equals("BOSS")) {
             type = EnemyType.BOSS;
         }
-        x = Integer.parseInt(splitted[1]);
-        y = Integer.parseInt(splitted[2]);
+        x = Double.parseDouble(splitted[1]);
+        y = Double.parseDouble(splitted[2]);
         speed = Integer.parseInt(splitted[3]);
         health = Integer.parseInt(splitted[4]);
-        damage = Integer.parseInt(splitted[5]);
+        damage = Double.parseDouble(splitted[5]);
         
 
     }

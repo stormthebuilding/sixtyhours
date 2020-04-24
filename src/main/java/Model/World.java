@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-public class World {
+public class World implements Serializer {
     // arguments for the world
     private String difficulty;
     private String userName;
@@ -17,6 +17,7 @@ public class World {
     private int currentWave;
     private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
     private Player player = new Player();
+    
     public Stronghold stronghold = new Stronghold();
 
     private static int nextId;
@@ -36,6 +37,11 @@ public class World {
     // prevent direct instantiation outside this class
     private World() {
         this.id = ++nextId;
+        objectCollection.add(player);
+        objectCollection.add(player.getCurrentWeapon());
+        objectCollection.add(stronghold);
+        objectCollection.add(this);
+
     }
 
     private static World instance = new World();
@@ -135,6 +141,7 @@ public class World {
         }
         printWriter.println("END;");
         printWriter.close();
+    
     }
 
     /**
@@ -143,6 +150,7 @@ public class World {
      * @param fileName - The name of the file to extract data from
      */
     public void load(String fileName) throws IOException {
+
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while (!(line = reader.readLine()).startsWith("END")) {
@@ -163,9 +171,21 @@ public class World {
                     object = new Weapon(WeaponType.PISTOL, 0);
                 }
                 object.deserialize(line);
-                objectCollection.add(object);
+                // objectCollection.add(object);
             }
         }
+    }
+
+    @Override
+    public String serialize() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void deserialize(String data) {
+        // TODO Auto-generated method stub
+
     }
 
 }

@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+import Model.World;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -61,8 +62,8 @@ public class MainWindow {
     }
 
     @FXML
-    void onLoadClicked(ActionEvent event) throws IOException {
-
+    public void onLoadClicked() throws IOException {
+        // World.instance().load("SavedGame.txt");
     }
 
     @FXML

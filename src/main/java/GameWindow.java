@@ -74,10 +74,7 @@ public class GameWindow implements PlayerObserver {
         World.instance().save("SavedGame.txt");
     }
 
-    @FXML
-    public void onLoadClicked() throws IOException {
-        // World.instance().load("SavedGame.txt");
-    }
+
 
     
 
@@ -96,6 +93,9 @@ public class GameWindow implements PlayerObserver {
                         if (enemy.getHealth() <= 0) {
                             map.getChildren().remove(node);
                             World.instance().enemyList.remove(enemy);
+                            var updatedList = World.instance().getObjectCollection();
+                            updatedList.remove(enemy);
+                            World.instance().setObjectCollection(updatedList);
                             World.instance().addScore(10);
                             int score = World.instance().getScore();
                             lblPoints.setText("Points: " + score);

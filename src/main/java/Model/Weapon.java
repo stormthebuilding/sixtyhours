@@ -6,12 +6,17 @@ public class Weapon implements Serializer{
     protected int cost;
     protected int damage;
     protected int magazine;
+    static boolean instantiated = false;
 
     public Weapon(WeaponType type, int damage) {
         this.type = type;
         this.damage = damage;
         cost = 0;
-        // collectObject();
+
+        if (instantiated) {
+            collectObject(); 
+        }
+        instantiated = true;
         
     }
 
