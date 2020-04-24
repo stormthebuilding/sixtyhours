@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Weapons.*;
+
 public class Player implements Serializer {
     private PlayerObserver observer;
     
@@ -11,9 +13,8 @@ public class Player implements Serializer {
 
 
     public Player() {
-        Weapon pistol = new Weapon(WeaponType.PISTOL, 2);
-        currentWeapon = pistol;
-        pistol.setMagazine(6);
+        Weapon w = new Pistol(WeaponType.PISTOL, 5);
+        currentWeapon = w;
         clipCapacity = currentWeapon.getMagazine();
         clipRest = clipCapacity;
         // collectObject();

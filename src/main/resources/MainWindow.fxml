@@ -9,10 +9,10 @@
     <Label text="Main Menu" style="-fx-font-size: 30px;"/>
     <HBox spacing="20" alignment="CENTER">
         <Button onAction="#onAboutClicked" text="About" />
-        <Button onAction="#onPlayClicked" text="Play" />
         <Button onAction="#onHelpClicked" text="Help" />
         <Button onAction="#onLoadClicked" text="Load" />
         <Button onAction="#onHighScoreClicked" text="High Score" />
+        <Button onAction="#onPlayClicked" text="Play" style="-fx-font-size: 19px"/>
     </HBox>
 
 </VBox>

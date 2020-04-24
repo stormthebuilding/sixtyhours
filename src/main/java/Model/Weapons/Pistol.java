@@ -6,6 +6,6 @@ import Model.WeaponType;
 public class Pistol extends Weapon {
     public Pistol(WeaponType type, int damage) {
         super(type, damage);
-        this.magazine = 6;
+        this.magazine = 7;
     }
 }

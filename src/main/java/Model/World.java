@@ -114,10 +114,6 @@ public class World implements Serializer {
         return this.player;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
     public ArrayList<Serializer> getObjectCollection() {
         return objectCollection;
     }
