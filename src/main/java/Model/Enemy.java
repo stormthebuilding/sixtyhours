@@ -7,13 +7,13 @@
 package Model;
 
 public class Enemy implements Serializer {
-    private EnemyType type;
-    private int id;
-    private double y;
-    private double x;
-    private int speed;
-    private int health;
-    private double damage;
+    protected EnemyType type;
+    protected int id;
+    protected double y;
+    protected double x;
+    protected int speed;
+    protected int health;
+    protected double damage;
 
     private static int nextId;
 
@@ -21,11 +21,8 @@ public class Enemy implements Serializer {
         this.type = type;
         y = World.instance().rand.nextInt(780 - 330 + 1) + 301;//section of left side of window we want the enemies to spawn
         x = 0;
-        speed = 7;
-        health = 10;
-        damage = .5;
         id = ++nextId;
-        collectObject();
+        // collectObject();
 
 
     }
@@ -59,6 +56,10 @@ public class Enemy implements Serializer {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
 
     public int getHealth() {
         return health;

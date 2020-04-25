@@ -14,6 +14,9 @@
                 <MenuItem fx:id="menuitLoad" text="Load" />
                 <MenuItem fx:id="menuitHighScore" text="High Score"/>
             </Menu>
+            <Menu fx:id="lstWeapons" text="Weapons">
+                <MenuItem fx:id="wpnPistol" text="Pistol" onAction="#onlstPistolClicked" />
+            </Menu>
         </MenuBar>
         
         <Pane fx:id="map" prefHeight="850" prefWidth="1180" />
@@ -26,15 +29,19 @@
                 -fx-padding: 45px;
             </style>
         </Label>
-        <HBox alignment="center" spacing="10">
-            <Button fx:id="btnWeapons" text="Weapons" style="-fx-font-size: 15px" />
-            <Button fx:id="btnUpgrades" text="Upgrades" style="-fx-font-size: 15px" />
+        <HBox alignment="center" spacing="5">
+            <VBox spacing="10">
+                <Label text="Pistol" style="-fx-font-size: 15px" />
+                <Label text="Rifle" style="-fx-font-size: 15px" />
+                <Label text="Sniper" style="-fx-font-size: 15px" />
+            </VBox>
+            <VBox spacing="6">
+                <Button fx:id="btnPistol" text="Upgrade: 50 Coins" onAction="#onPistolClicked" />
+                <Button fx:id="btnRifle" text="Buy: 15" onAction="#onRifleClicked" />
+                <Button fx:id="btnSniper" text="Buy: 100 Coins" onAction="#onSniperClicked" />
+            </VBox>
         </HBox>
-        <Label text="TBI" />
-        <Label text="TBI" />
-        <Label text="TBI" />
-        <Label text="TBI" />
-        <Label text="TBI" />
+
         <Label text="Stats">
             <style>
                 -fx-font-size: 50px;
@@ -45,13 +52,15 @@
         <Label fx:id="lblCoins" text="Coins: 0" />
         <Label fx:id="lblPoints" text="Points: 0" />
         <HBox spacing="10" alignment="center">
-            <Button fx:id="btnNextWave" text="Spawn Enemy" onAction="#onSpawnEnemyClicked" />
+            <Button fx:id="btnNextWave" text="Next Wave" onAction="#onNextWaveClicked" />
             <Button fx:id="btnSave" text="Save" />
             <Button fx:id="btnLoad" text="Load" />
         </HBox>
 
         <VBox spacing="15"> 
             <Label text = "Magazine Capability" style="-fx-font-size: 22px"/>
+            <Label fx:id = "lblCurrentWeapon" text = "Current Weapon: Pistol" style="-fx-font-size: 18px" />
+            <Label fx:id = "lblWeaponDamage" style="-fx-font-size: 18px" />
             <HBox spacing = "20">
 
                 <HBox spacing="1">

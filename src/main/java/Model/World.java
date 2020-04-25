@@ -7,16 +7,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import Model.Enemies.Advanced;
+import Model.Enemies.Basic;
+import Model.Enemies.Boss;
+import Model.Enemies.Heavy;
+
 public class World implements Serializer {
     // arguments for the world
     private String difficulty;
     private String userName;
     private int id;
     private int score;
-    private int coins;
+    private int coins = 1000000;
     private int currentWave;
     private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
-    private Player player = new Player();
+    public Player player = new Player();
     
     public Stronghold stronghold = new Stronghold();
 
@@ -37,10 +42,16 @@ public class World implements Serializer {
     // prevent direct instantiation outside this class
     private World() {
         this.id = ++nextId;
-        objectCollection.add(player);
-        objectCollection.add(player.getCurrentWeapon());
-        objectCollection.add(stronghold);
-        objectCollection.add(this);
+
+        objectCollection.add(player); // add Player object to objectCollection
+        objectCollection.add(player.getCurrentWeapon()); // add Weapon object to objectCollection
+        objectCollection.add(stronghold); // add Stronghold object to objectCollection
+
+        // Enemy objects are added to objectCollection in Enemy.java
+
+        objectCollection.add(this); // add World instance to objectCollection
+
+
 
     }
 
@@ -100,13 +111,44 @@ public class World implements Serializer {
         this.coins += coins;
     }
 
+    public void subtractCoins(int coins) {
+        this.coins -= coins;
+    }
+
     public int getCoins() {
         return coins;
     }
 
-    public Enemy spawnEnemy() {
-        Enemy enemy = new Enemy(EnemyType.BASIC);
+    public void addWave() {
+        ++currentWave;
+    }
+
+    public int getCurrentWave() {
+        return currentWave;
+    }
+
+    public Basic spawnBasic() {
+        Basic enemy = new Basic(EnemyType.BASIC);
         enemyList.add(enemy);
+        return enemy;
+    }
+
+    public Advanced spawnAdvanced() {
+        Advanced enemy = new Advanced(EnemyType.ADVANCED);
+        enemyList.add(enemy);
+        return enemy;
+    }
+
+    public Heavy spawnHeavy() {
+        Heavy enemy = new Heavy(EnemyType.HEAVY);
+        enemyList.add(enemy);
+        return enemy;
+    }
+
+    public Boss spawnBoss() {
+        Boss enemy = new Boss(EnemyType.BOSS);
+        enemyList.add(enemy);
+        objectCollection.add(enemy);
         return enemy;
     }
 
@@ -152,35 +194,54 @@ public class World implements Serializer {
             while (!(line = reader.readLine()).startsWith("END")) {
                 Serializer object = null;
                 if (line.startsWith("PLAYER")) {
-                    object = new Player();
+                    object = player;
                 }
                 else if (line.startsWith("STRONGHOLD")) {
-                    object = new Stronghold();
+                    object = stronghold;
                 }
-                else if (line.startsWith("SCORE")) {
-                    object = new Score("", 0, DifficultyType.NORMAL);
+                // else if (line.startsWith("SCORE")) {
+                //     object = new Score("", 0, DifficultyType.NORMAL);
+                // }
+                else if (line.startsWith("WEAPON")) {
+                    object = player.getCurrentWeapon();
+                }
+                else if (line.startsWith("WORLD")) {
+                    object = instance();
                 }
                 else if (line.startsWith("ENEMY")) {
                     object = new Enemy(EnemyType.BASIC);
                 }
-                else if (line.startsWith("WEAPON")) {
-                    object = new Weapon(WeaponType.PISTOL, 0);
-                }
                 object.deserialize(line);
-                // objectCollection.add(object);
+                // adds only Enemy object to objectCollection 
+                if (object instanceof Enemy) {
+                    objectCollection.add(object);
+                }
             }
         }
     }
 
     @Override
     public String serialize() {
-        // TODO Auto-generated method stub
-        return null;
+        String serialized = "";
+
+        serialized = "WORLD;"+difficulty+","+userName+","+id+","+score+","
+        +coins+","+currentWave+","+nextId;
+
+        return serialized; 
+
+
     }
 
     @Override
     public void deserialize(String data) {
-        // TODO Auto-generated method stub
+        String[] splitted = data.split(";")[1].split(",");
+        difficulty = splitted[0];
+        userName = splitted[1];
+        id = Integer.parseInt(splitted[2]);
+        score = Integer.parseInt(splitted[3]);
+        coins = Integer.parseInt(splitted[4]);
+        currentWave = Integer.parseInt(splitted[5]);
+        nextId = Integer.parseInt(splitted[6]);
 
     }
 

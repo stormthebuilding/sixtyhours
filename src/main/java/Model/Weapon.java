@@ -3,28 +3,22 @@ package Model;
 public class Weapon implements Serializer{
 
     protected WeaponType type;
-    protected int cost;
     protected int damage;
     protected int magazine;
     static boolean instantiated = false;
 
-    public Weapon(WeaponType type, int damage) {
+    public Weapon(WeaponType type) {
         this.type = type;
         this.damage = damage;
-        cost = 0;
 
-        if (instantiated) {
-            collectObject(); 
-        }
-        instantiated = true;
+        // if (instantiated) {
+        //     collectObject(); 
+        // }
+        // instantiated = true;
         
     }
 
     //getter and setter
-    public int getCost() {
-        return cost;
-    }
-
     public void setDamage(int damage) {
         this.damage = damage;
     }
@@ -37,10 +31,6 @@ public class Weapon implements Serializer{
         return type;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
     public int getMagazine() {
         return this.magazine;
     }
@@ -48,7 +38,6 @@ public class Weapon implements Serializer{
     public void setMagazine(int magazine) {
         this.magazine = magazine;
     }
-
 
     @Override
     public String serialize() {
@@ -63,13 +52,7 @@ public class Weapon implements Serializer{
         else if (type == WeaponType.SNIPER) {
             typeToSave = "SNIPER";
         }
-        else if (type == WeaponType.MACHINEGUN) {
-            typeToSave = "MACHINEGUN";
-        }
-        else if (type == WeaponType.GRENADE) {
-            typeToSave = "GRENADE";
-        }
-        serialized = "WEAPON;"+typeToSave+","+cost+","+damage;
+        serialized = "WEAPON;"+typeToSave+","+","+damage;
         return serialized;
     }
 
@@ -85,13 +68,6 @@ public class Weapon implements Serializer{
         else if (splitted[0].equals("SNIPER")) {
             type = WeaponType.SNIPER;
         }
-        else if (splitted[0].equals("MACHINEGUN")) {
-            type = WeaponType.MACHINEGUN;
-        }
-        else if (splitted[0].equals("GRENADE")) {
-            type = WeaponType.GRENADE;
-        }
-        cost = Integer.parseInt(splitted[1]);
         damage = Integer.parseInt(splitted[2]);
 
     }
