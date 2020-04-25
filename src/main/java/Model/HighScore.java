@@ -14,7 +14,6 @@ import java.util.List;
 public class HighScore {
     private List<Score> scoresList = new ArrayList<Score>();
     private int maxNumOfHighScoreEntries = 15;
-    private int maxScoresDisplayed = 5;
 
         /* 
     1. Load the Scores from File
@@ -184,21 +183,6 @@ public class HighScore {
         this.maxNumOfHighScoreEntries = maxNumOfHighScoreEntries;
     }
 
-    /**
-     * 
-     * @return - returns the maximum number of scores displayed on the screen at a time (5).
-     */
-    public int getMaxScoresDisplayed() {
-        return maxScoresDisplayed;
-    }
-
-    /**
-     * Sets the maximum number of scores displayed on the screen at a time to 5.
-     * @param maxScoresDisplayed
-     */
-    public void setMaxScoresDisplayed(int maxScoresDisplayed) {
-        this.maxScoresDisplayed = maxScoresDisplayed;
-    }
     
     // Singleton implementation
     // prevent direct instantiation outside this class
