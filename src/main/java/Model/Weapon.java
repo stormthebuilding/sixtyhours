@@ -11,10 +11,10 @@ public class Weapon implements Serializer{
         this.type = type;
         this.damage = damage;
 
-        if (instantiated) {
-            collectObject(); 
-        }
-        instantiated = true;
+        // if (instantiated) {
+        //     collectObject(); 
+        // }
+        // instantiated = true;
         
     }
 

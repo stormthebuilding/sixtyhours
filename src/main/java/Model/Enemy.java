@@ -22,7 +22,7 @@ public class Enemy implements Serializer {
         y = World.instance().rand.nextInt(780 - 330 + 1) + 301;//section of left side of window we want the enemies to spawn
         x = 0;
         id = ++nextId;
-        collectObject();
+        // collectObject();
 
 
     }
