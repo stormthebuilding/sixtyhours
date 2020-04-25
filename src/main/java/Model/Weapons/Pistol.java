@@ -4,8 +4,9 @@ import Model.Weapon;
 import Model.WeaponType;
 
 public class Pistol extends Weapon {
-    public Pistol(WeaponType type, int damage) {
-        super(type, damage);
-        this.magazine = 6;
+    public Pistol(WeaponType type) {
+        super(type);
+        magazine = 7;
+        damage = 2;
     }
 }

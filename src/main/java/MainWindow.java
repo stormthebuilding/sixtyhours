@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import Model.Serializer;
+import Model.World;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -61,7 +63,18 @@ public class MainWindow {
     }
 
     @FXML
-    void onLoadClicked(ActionEvent event) throws IOException {
+    public void onLoadClicked() throws IOException {
+        System.out.println("load clicked");
+        World.instance().load("SavedGame.txt");
+        // for testing purposes
+        var listy = World.instance().getObjectCollection();
+        for (Serializer object : listy) {
+            System.out.println(object);
+        }
+
+        // model is pretty much good for now, add code here to update gui 
+
+        
 
     }
 

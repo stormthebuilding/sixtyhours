@@ -1,5 +1,9 @@
 package Model;
 
+import java.util.ArrayList;
+
+import Model.Weapons.*;
+
 public class Player implements Serializer {
     private PlayerObserver observer;
     
@@ -8,12 +12,13 @@ public class Player implements Serializer {
     private int point;
     private int score;
     private Weapon currentWeapon;
+    private ArrayList<Weapon> weaponList = new ArrayList<Weapon>();
 
 
     public Player() {
-        Weapon pistol = new Weapon(WeaponType.PISTOL, 2);
-        currentWeapon = pistol;
-        pistol.setMagazine(6);
+        Pistol w = new Pistol(WeaponType.PISTOL);
+        weaponList.add(w);
+        currentWeapon = w;
         clipCapacity = currentWeapon.getMagazine();
         clipRest = clipCapacity;
         // collectObject();
@@ -21,12 +26,12 @@ public class Player implements Serializer {
 
     //called when the player attacks an enemy
     //check the weapon then edit the corresponding enemy
-    public int attack() {
+    public void attack() {
         //get the category of weapon, get the number of magazine
         int magazine = currentWeapon.getMagazine();
         observer.update(this);
 
-        return currentWeapon.getDamage();
+
     }
 
     public int getClipCapacity() {
@@ -69,6 +74,14 @@ public class Player implements Serializer {
         this.currentWeapon = currentWeapon;
     }
 
+    public ArrayList<Weapon> getWeaponList() {
+        return weaponList;
+    }
+
+    public void addWeapon(Weapon weapon) {
+        weaponList.add(weapon);
+    }
+
     public void setObserver(PlayerObserver observer) {
         this.observer = observer;
     }
@@ -91,17 +104,11 @@ public class Player implements Serializer {
         else if (currentWeapon.getType() == WeaponType.SNIPER) {
             typeToSave = "SNIPER";
         }
-        else if (currentWeapon.getType() == WeaponType.MACHINEGUN) {
-            typeToSave = "MACHINEGUN";
-        }
-        else if (currentWeapon.getType() == WeaponType.GRENADE) {
-            typeToSave = "GRENADE";
-        }
 
     
 
         serialized = "PLAYER;"+clipCapacity+","+clipRest+","+point+","+score
-        +","+typeToSave+","+Integer.toString(currentWeapon.getCost())+","+Integer.toString(currentWeapon.getDamage());
+        +","+typeToSave+","+ Integer.toString(currentWeapon.getDamage());
 
         return serialized;
         
@@ -123,13 +130,6 @@ public class Player implements Serializer {
         else if (splitted[4].equals("SNIPER")) {
             currentWeapon.type = WeaponType.SNIPER;
         }
-        else if (splitted[4].equals("MACHINEGUN")) {
-            currentWeapon.type = WeaponType.MACHINEGUN;
-        }
-        else if (splitted[4].equals("GRENADE")) {
-            currentWeapon.type = WeaponType.GRENADE;
-        }
-        currentWeapon.cost = Integer.parseInt(splitted[5]);
         currentWeapon.damage = Integer.parseInt(splitted[6]);
     }
 

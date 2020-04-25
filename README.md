@@ -23,9 +23,9 @@ Kevin
 
 Nick
 
-* The shoot implement didn't implement the model-view requirement yet. I creat the observer but didn't use it now.
-* ConcurrentModificationException (The basic functions are not affected)
-* Enemy can attact when the first time to click play from the main window to game window, but they can make damage to the stronghold if I use the same main window, close the game window and open the game window again.
+* Menu window
+* Give a delay to reload
+* Buttons don't work after the gamewindow is opened the seond or the third time from mainwindow
 * I cannot press the screen (the other place beside the enemy) to use my bullet, on the the way, the missed shoot will not be counted.
 
 Reshi
