@@ -61,6 +61,12 @@ public class GameWindow implements PlayerObserver {
         lblCurMagazine.setText(String.valueOf(bulletNum));
         lblCoins.setText("Coins: " + World.instance().getCoins());
         lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
+        lblHealth.setText("Stronghold health: " + World.instance().stronghold.getHealth());
+        lblPoints.setText("Points: " + World.instance().getScore());
+        
+
+        
+
 
     }
 
@@ -106,9 +112,11 @@ public class GameWindow implements PlayerObserver {
                         if (enemy.getHealth() <= 0) {
                             map.getChildren().remove(node);
                             World.instance().enemyList.remove(enemy);
+                            // remove enemy from object list
                             var updatedList = World.instance().getObjectCollection();
                             updatedList.remove(enemy);
                             World.instance().setObjectCollection(updatedList);
+                            
                             World.instance().addScore(10);
                             int score = World.instance().getScore();
                             lblPoints.setText("Points: " + score);

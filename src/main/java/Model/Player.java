@@ -108,7 +108,7 @@ public class Player implements Serializer {
     
 
         serialized = "PLAYER;"+clipCapacity+","+clipRest+","+point+","+score
-        +","+typeToSave+","+ Integer.toString(currentWeapon.getDamage());
+        +","+typeToSave+","+ currentWeapon.getDamage();
 
         return serialized;
         
@@ -130,7 +130,7 @@ public class Player implements Serializer {
         else if (splitted[4].equals("SNIPER")) {
             currentWeapon.type = WeaponType.SNIPER;
         }
-        currentWeapon.damage = Integer.parseInt(splitted[6]);
+        currentWeapon.damage = Integer.parseInt(splitted[5]);
     }
 
     public void collectObject() {
