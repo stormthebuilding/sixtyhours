@@ -8,5 +8,6 @@ public class Sniper extends Weapon {
         super(type);
         damage = 20;
         magazine = 1;
+        magazineRest = magazine;
     }
 }

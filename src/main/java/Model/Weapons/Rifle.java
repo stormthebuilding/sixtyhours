@@ -8,5 +8,6 @@ public class Rifle extends Weapon {
         super(type);
         damage = 4;
         magazine = 10;
+        magazineRest = magazine;
     }
 }

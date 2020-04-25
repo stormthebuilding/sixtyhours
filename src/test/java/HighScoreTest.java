@@ -71,7 +71,7 @@ public class HighScoreTest {
         assertTrue(highScores.getScoresList().get(2).getName().equals("Sue"));
         assertTrue(highScores.getScoresList().get(2).getScore() == 30000);
         
-        assertEquals(5, highScores.getScoresList().size());
+        assertEquals(12, highScores.getScoresList().size());
     }
     
     @Test

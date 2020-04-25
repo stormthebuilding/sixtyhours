@@ -3,20 +3,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:controller="HelpWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css" spacing="70" prefHeight="600" prefWidth="700" alignment="CENTER">
-    <Label fx:id="title"/>
-
-    <VBox spacing = "15" >
-    <Label text="When the title page appears, click the 'Play' button to start the game."  style="-fx-font-size: 20px;" />
-    <Label text="At this stage of the game, you must click on the 'Spawn Enemy' button to" style="-fx-font-size: 20px;"/>
-    <Label text="make the enemy appear. You can then click on the enemy to shoot at them." style="-fx-font-size: 20px;"/>
-    <Label text="If the enemy gets to the stronghold, they can damage it." style="-fx-font-size: 20px;"/>
-    <Label text="Once you have fired all of the shots in your clip," style="-fx-font-size: 20px;"/>
-    <Label text="you must click the 'Reload' button to fill your clip back up with shots." style="-fx-font-size: 20px;"/>
-    <Label text="" style="-fx-font-size: 20px;"/>
-    <Label text="" style="-fx-font-size: 20px;"/>
-    
+<VBox fx:controller="HelpWindow"  xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css"
+   spacing="10" prefHeight="500" prefWidth="450">
+    <HBox alignment="CENTER" style="-fx-font-size: 20px;-fx-border-color:#DAA520;-fx-border-width:2px;-fx-border-height:2px;-fx-font: 28px Vivaldi;" >
+      <Label text="Instructions" alignment="CENTER"/>
+    </HBox>
+    <HBox alignment="CENTER" style="-fx-font-size:15px;-fx-text-color: pink;">
+      <Label text="Follow these to protect your Stronghold."/>
+    </HBox>
+    <VBox alignment="CENTER" style="-fx-font-size:15px;-fx-font-color: pink;" spacing="15">
+        <Label text="You are a sniper who must protect a building by eliminating all the enemy soldiers who are trying to destroy it." wrapText="true"/>
+        <Label text="At this stage of the game, you must click on the 'Spawn Enemy' button to make the enemy appear." wrapText="true"/>
+        <Label text="You can then click on the enemy to shoot at them. If the enemy gets to the stronghold, they can damage it." wrapText="true"/>
+        <Label text="Once you have fired all of the shots in your clip, you must click the 'Reload' button to fill your clip back up with shots." wrapText="true"/>
+        <Label text="HAVE A GREAT GAME!" wrapText="true"/>
     </VBox>
 
-    <Label fx:id="greet"/>
 </VBox>
