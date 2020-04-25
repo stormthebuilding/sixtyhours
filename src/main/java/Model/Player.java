@@ -22,12 +22,12 @@ public class Player implements Serializer {
 
     //called when the player attacks an enemy
     //check the weapon then edit the corresponding enemy
-    public int attack() {
+    public void attack() {
         //get the category of weapon, get the number of magazine
         int magazine = currentWeapon.getMagazine();
         observer.update(this);
 
-        return currentWeapon.getDamage();
+
     }
 
     public int getClipCapacity() {

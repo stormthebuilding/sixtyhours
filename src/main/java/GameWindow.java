@@ -147,6 +147,8 @@ public class GameWindow implements PlayerObserver {
         // node.setOnMouseReleased(me -> node.getScene().setCursor(Cursor.HAND));
 
         node.setOnMouseClicked(me -> {
+            Player p = World.instance().getPlayer();
+            int dmg = p.getCurrentWeapon().getDamage();
             Enemy e = (Enemy) node.getUserData();
             int magazineRest = Integer.parseInt(lblCurMagazine.getText());
             if(magazineRest>=1){
@@ -172,7 +174,7 @@ public class GameWindow implements PlayerObserver {
     }
 
     void shoot(Node node){
-        int dmg = World.instance().getPlayer().attack();
+        int dmg = World.instance().getPlayer().getCurrentWeapon().getDamage();
     }
 
     @Override
