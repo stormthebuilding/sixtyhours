@@ -104,9 +104,6 @@ public class Player implements Serializer {
         else if (currentWeapon.getType() == WeaponType.SNIPER) {
             typeToSave = "SNIPER";
         }
-        else if (currentWeapon.getType() == WeaponType.GRENADE) {
-            typeToSave = "GRENADE";
-        }
 
     
 
@@ -132,9 +129,6 @@ public class Player implements Serializer {
         }
         else if (splitted[4].equals("SNIPER")) {
             currentWeapon.type = WeaponType.SNIPER;
-        }
-        else if (splitted[4].equals("GRENADE")) {
-            currentWeapon.type = WeaponType.GRENADE;
         }
         currentWeapon.damage = Integer.parseInt(splitted[6]);
     }

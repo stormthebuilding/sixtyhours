@@ -14,6 +14,7 @@ import Model.Weapons.Pistol;
 import Model.Weapons.Rifle;
 import Model.Weapons.Sniper;
 import javafx.animation.KeyFrame;
+import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -75,7 +76,7 @@ public class GameWindow implements PlayerObserver {
     }
 
     // code for spawning a new enemy
-    public void onSpawnEnemyClicked() {
+    public void spawnEnemies() {
         Basic enemy = World.instance().spawnBasic();
         double x = enemy.getX();
         double y = enemy.getY();
@@ -151,6 +152,23 @@ public class GameWindow implements PlayerObserver {
         }
     }
 
+    public void onNextWaveClicked(ActionEvent event) {
+        if (World.instance().getCurrentWave() == 0) {
+            spawnEnemies();
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnEnemies()));
+            timeline.setCycleCount(5);
+            timeline.play();
+            World.instance().addWave();
+        }
+        else if (World.instance().getCurrentWave() == 1) {
+            spawnEnemies();
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnEnemies()));
+            timeline.setCycleCount(10);
+            timeline.play();
+            World.instance().addWave();
+        }
+    }
+
     @FXML
     private void setEnermy(Node node) {
         // final Delta dragDelta = new Delta();
@@ -216,6 +234,7 @@ public class GameWindow implements PlayerObserver {
                     lblMaxMagazine.setText("" + weapon.getMagazine());
                 }
             }
+            btnPistol.setText("Fully Upgraded");
         }
     }
 
@@ -226,12 +245,18 @@ public class GameWindow implements PlayerObserver {
             Weapon weapon = list.get(i);
             if (weapon.getType() == WeaponType.RIFLE) {
                 check = true;
+                if (World.instance().getCoins() >= 250) {
+                    World.instance().subtractCoins(250);
+                    weapon.setDamage(weapon.getDamage() + 8);
+                    lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
+                    btnRifle.setText("Fully Upgraded");
+                }
             }
         }
-        if (check == false && World.instance().getCoins() >= 15) {
+        if (check == false && World.instance().getCoins() >= 100) {
             World.instance().subtractCoins(15);
             lblCoins.setText("Coins: " + World.instance().getCoins());
-            btnRifle.setText("Upgrade: TBI");
+            btnRifle.setText("Upgrade: 250 Coins");
             Rifle rifle = new Rifle(WeaponType.RIFLE);
             World.instance().player.addWeapon(rifle);
             MenuItem item = new MenuItem();
@@ -248,12 +273,18 @@ public class GameWindow implements PlayerObserver {
             Weapon weapon = list.get(i);
             if (weapon.getType() == WeaponType.SNIPER) {
                 check = true;
+                if (World.instance().getCoins() >= 500) {
+                    World.instance().subtractCoins(500);
+                    weapon.setMagazine(weapon.getMagazine() + 3);
+                    lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
+                    btnSniper.setText("Fully Upgraded");
+                }
             }
         }
         if (check == false && World.instance().getCoins() >= 100) {
             World.instance().subtractCoins(100);
             lblCoins.setText("Coins: " + World.instance().getCoins());
-            btnSniper.setText("Upgrade: TBI");
+            btnSniper.setText("Upgrade: 500 Coins");
             Sniper sniper = new Sniper(WeaponType.SNIPER);
             World.instance().player.addWeapon(sniper);
             MenuItem item = new MenuItem();
@@ -261,10 +292,6 @@ public class GameWindow implements PlayerObserver {
             item.setOnAction(this::handleSniper);
             lstWeapons.getItems().add(item);
         }
-    }
-
-    public void onGrenadeClicked(ActionEvent event) {
-        btnGrenade.setText("Upgrade: TBI");
     }
 
     public void onlstPistolClicked(ActionEvent event) {

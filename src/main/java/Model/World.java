@@ -18,7 +18,7 @@ public class World implements Serializer {
     private String userName;
     private int id;
     private int score;
-    private int coins = 0;
+    private int coins = 1000000;
     private int currentWave;
     private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
     public Player player = new Player();
@@ -117,6 +117,14 @@ public class World implements Serializer {
 
     public int getCoins() {
         return coins;
+    }
+
+    public void addWave() {
+        ++currentWave;
+    }
+
+    public int getCurrentWave() {
+        return currentWave;
     }
 
     public Basic spawnBasic() {

@@ -29,22 +29,16 @@
                 -fx-padding: 45px;
             </style>
         </Label>
-        <HBox alignment="center" spacing="10">
-            <Button fx:id="btnWeapons" text="Weapons" style="-fx-font-size: 15px" />
-            <Button fx:id="btnUpgrades" text="Upgrades" style="-fx-font-size: 15px" />
-        </HBox>
         <HBox alignment="center" spacing="5">
             <VBox spacing="10">
                 <Label text="Pistol" style="-fx-font-size: 15px" />
                 <Label text="Rifle" style="-fx-font-size: 15px" />
                 <Label text="Sniper" style="-fx-font-size: 15px" />
-                <Label text="Grenade" style="-fx-font-size: 15px" />
             </VBox>
             <VBox spacing="6">
                 <Button fx:id="btnPistol" text="Upgrade: 50 Coins" onAction="#onPistolClicked" />
                 <Button fx:id="btnRifle" text="Buy: 15" onAction="#onRifleClicked" />
                 <Button fx:id="btnSniper" text="Buy: 100 Coins" onAction="#onSniperClicked" />
-                <Button fx:id="btnGrenade" text="Buy: 500 Coins" onAction="#onGrenadeClicked" />
             </VBox>
         </HBox>
 
@@ -58,7 +52,7 @@
         <Label fx:id="lblCoins" text="Coins: 0" />
         <Label fx:id="lblPoints" text="Points: 0" />
         <HBox spacing="10" alignment="center">
-            <Button fx:id="btnNextWave" text="Spawn Enemy" onAction="#onSpawnEnemyClicked" />
+            <Button fx:id="btnNextWave" text="Next Wave" onAction="#onNextWaveClicked" />
             <Button fx:id="btnSave" text="Save" />
             <Button fx:id="btnLoad" text="Load" />
         </HBox>

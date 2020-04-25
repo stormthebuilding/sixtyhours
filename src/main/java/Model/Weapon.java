@@ -52,9 +52,6 @@ public class Weapon implements Serializer{
         else if (type == WeaponType.SNIPER) {
             typeToSave = "SNIPER";
         }
-        else if (type == WeaponType.GRENADE) {
-            typeToSave = "GRENADE";
-        }
         serialized = "WEAPON;"+typeToSave+","+","+damage;
         return serialized;
     }
@@ -70,9 +67,6 @@ public class Weapon implements Serializer{
         }
         else if (splitted[0].equals("SNIPER")) {
             type = WeaponType.SNIPER;
-        }
-        else if (splitted[0].equals("GRENADE")) {
-            type = WeaponType.GRENADE;
         }
         damage = Integer.parseInt(splitted[2]);
 
