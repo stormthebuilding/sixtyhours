@@ -16,7 +16,8 @@ public class Player implements Serializer {
 
 
     public Player() {
-        Weapon w = new Pistol(WeaponType.PISTOL);
+        Pistol w = new Pistol(WeaponType.PISTOL);
+        weaponList.add(w);
         currentWeapon = w;
         clipCapacity = currentWeapon.getMagazine();
         clipRest = clipCapacity;

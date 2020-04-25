@@ -1,3 +1,4 @@
+import java.beans.EventHandler;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,6 +11,7 @@ import Model.WeaponType;
 import Model.World;
 import Model.Enemies.Basic;
 import Model.Weapons.Pistol;
+import Model.Weapons.Rifle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -20,6 +22,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.event.ActionEvent;
 
 import javafx.util.Duration;
 
@@ -38,6 +41,8 @@ public class GameWindow implements PlayerObserver {
     @FXML
     Label lblMaxMagazine;
     @FXML
+    Label lblCurrentWeapon;
+    @FXML
     Button btnPistol;
     @FXML
     Button btnRifle;
@@ -45,6 +50,8 @@ public class GameWindow implements PlayerObserver {
     Button btnSniper;
     @FXML
     Button btnGrenade;
+    @FXML
+    Menu lstWeapons;
 
     @FXML
     void initialize() {
@@ -208,10 +215,24 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void onRifleClicked(ActionEvent event) {
-        if (World.instance().getCoins() >= 15) {
+        ArrayList<Weapon> list = World.instance().player.getWeaponList();
+        boolean check = false;
+        for (int i = 0; i < list.size(); ++i) {
+            Weapon weapon = list.get(i);
+            if (weapon.getType() == WeaponType.RIFLE) {
+                check = true;
+            }
+        }
+        if (check == false && World.instance().getCoins() >= 15) {
             World.instance().subtractCoins(15);
             lblCoins.setText("Coins: " + World.instance().getCoins());
             btnRifle.setText("Upgrade: TBI");
+            Rifle rifle = new Rifle(WeaponType.RIFLE);
+            World.instance().player.addWeapon(rifle);
+            MenuItem item = new MenuItem();
+            item.setText("Rifle");
+            item.setOnAction(this::handleRifle);
+            lstWeapons.getItems().add(item);
         }
     }
 
@@ -225,6 +246,30 @@ public class GameWindow implements PlayerObserver {
 
     public void onGrenadeClicked(ActionEvent event) {
         btnGrenade.setText("Upgrade: TBI");
+    }
+
+    public void onlstPistolClicked(ActionEvent event) {
+        ArrayList<Weapon> list = World.instance().player.getWeaponList();
+        for (int i = 0; i < list.size(); ++i) {
+            Weapon weapon = list.get(i);
+            if (weapon.getType() == WeaponType.PISTOL) {
+                World.instance().player.setCurrentWeapon(weapon);
+                lblMaxMagazine.setText("" + World.instance().player.getCurrentWeapon().getMagazine());
+                lblCurrentWeapon.setText("Current Weapon: Pistol");
+            }
+        }
+    }
+
+    public void handleRifle(ActionEvent event) {
+        ArrayList<Weapon> list = World.instance().player.getWeaponList();
+        for (int i = 0; i < list.size(); ++i) {
+            Weapon weapon = list.get(i);
+            if (weapon.getType() == WeaponType.RIFLE) {
+                World.instance().player.setCurrentWeapon(weapon);
+                lblMaxMagazine.setText("" + World.instance().player.getCurrentWeapon().getMagazine());
+                lblCurrentWeapon.setText("Current Weapon: Rifle");
+            }
+        }
     }
 
     // private class Delta {
