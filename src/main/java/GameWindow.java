@@ -12,6 +12,7 @@ import Model.World;
 import Model.Enemies.Basic;
 import Model.Weapons.Pistol;
 import Model.Weapons.Rifle;
+import Model.Weapons.Sniper;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -43,6 +44,8 @@ public class GameWindow implements PlayerObserver {
     @FXML
     Label lblCurrentWeapon;
     @FXML
+    Label lblWeaponDamage;
+    @FXML
     Button btnPistol;
     @FXML
     Button btnRifle;
@@ -67,6 +70,8 @@ public class GameWindow implements PlayerObserver {
         int bulletNum = World.instance().getPlayer().getClipCapacity();
         lblMaxMagazine.setText(String.valueOf(bulletNum));
         lblCurMagazine.setText(String.valueOf(bulletNum));
+        lblCoins.setText("Coins: " + World.instance().getCoins());
+        lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
     }
 
     // code for spawning a new enemy
@@ -237,10 +242,24 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void onSniperClicked(ActionEvent event) {
-        if (World.instance().getCoins() >= 100) {
+        ArrayList<Weapon> list = World.instance().player.getWeaponList();
+        boolean check = false;
+        for (int i = 0; i < list.size(); ++i) {
+            Weapon weapon = list.get(i);
+            if (weapon.getType() == WeaponType.SNIPER) {
+                check = true;
+            }
+        }
+        if (check == false && World.instance().getCoins() >= 100) {
             World.instance().subtractCoins(100);
             lblCoins.setText("Coins: " + World.instance().getCoins());
             btnSniper.setText("Upgrade: TBI");
+            Sniper sniper = new Sniper(WeaponType.SNIPER);
+            World.instance().player.addWeapon(sniper);
+            MenuItem item = new MenuItem();
+            item.setText("Sniper");
+            item.setOnAction(this::handleSniper);
+            lstWeapons.getItems().add(item);
         }
     }
 
@@ -255,7 +274,10 @@ public class GameWindow implements PlayerObserver {
             if (weapon.getType() == WeaponType.PISTOL) {
                 World.instance().player.setCurrentWeapon(weapon);
                 lblMaxMagazine.setText("" + World.instance().player.getCurrentWeapon().getMagazine());
+                lblCurMagazine.setText("" + lblMaxMagazine.getText());
                 lblCurrentWeapon.setText("Current Weapon: Pistol");
+                lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
+                
             }
         }
     }
@@ -267,7 +289,23 @@ public class GameWindow implements PlayerObserver {
             if (weapon.getType() == WeaponType.RIFLE) {
                 World.instance().player.setCurrentWeapon(weapon);
                 lblMaxMagazine.setText("" + World.instance().player.getCurrentWeapon().getMagazine());
+                lblCurMagazine.setText("" + lblMaxMagazine.getText());
                 lblCurrentWeapon.setText("Current Weapon: Rifle");
+                lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
+            }
+        }
+    }
+
+    public void handleSniper(ActionEvent event) {
+        ArrayList<Weapon> list = World.instance().player.getWeaponList();
+        for (int i = 0; i < list.size(); ++i) {
+            Weapon weapon = list.get(i);
+            if (weapon.getType() == WeaponType.SNIPER) {
+                World.instance().player.setCurrentWeapon(weapon);
+                lblMaxMagazine.setText("" + World.instance().player.getCurrentWeapon().getMagazine());
+                lblCurMagazine.setText("" + lblMaxMagazine.getText());
+                lblCurrentWeapon.setText("Current Weapon: Sniper");
+                lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
             }
         }
     }

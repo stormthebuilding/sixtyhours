@@ -18,7 +18,7 @@ public class World implements Serializer {
     private String userName;
     private int id;
     private int score;
-    private int coins = 50;
+    private int coins = 150;
     private int currentWave;
     private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
     public Player player = new Player();
@@ -203,12 +203,6 @@ public class World implements Serializer {
                 else if (line.startsWith("ENEMY")) {
                     object = new Enemy(EnemyType.BASIC);
                 }
-<<<<<<< HEAD
-                else if (line.startsWith("WEAPON")) {
-                    object = new Weapon(WeaponType.PISTOL);
-                }
-=======
->>>>>>> 41b087613420c9a8c9ceb86be31700a7b354bca9
                 object.deserialize(line);
                 // adds only Enemy object to objectCollection 
                 if (object instanceof Enemy) {

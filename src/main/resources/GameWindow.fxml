@@ -66,6 +66,7 @@
         <VBox spacing="15"> 
             <Label text = "Magazine Capability" style="-fx-font-size: 22px"/>
             <Label fx:id = "lblCurrentWeapon" text = "Current Weapon: Pistol" style="-fx-font-size: 18px" />
+            <Label fx:id = "lblWeaponDamage" style="-fx-font-size: 18px" />
             <HBox spacing = "20">
 
                 <HBox spacing="1">
