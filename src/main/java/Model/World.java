@@ -18,7 +18,7 @@ public class World implements Serializer {
     private String userName;
     private int id;
     private int score;
-    private int coins = 150;
+    private int coins = 0;
     private int currentWave;
     private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
     public Player player = new Player();
