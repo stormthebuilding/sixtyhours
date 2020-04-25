@@ -106,7 +106,9 @@ public class GameWindow implements PlayerObserver {
 
     @FXML
     public void onReloadClicked() throws IOException{
-        lblCurMagazine.setText(lblMaxMagazine.getText());
+        Player p = World.instance().getPlayer();
+        p.setClipRest(p.getClipCapacity());
+        lblCurMagazine.setText(String.valueOf(p.getClipRest()));
     }
 
     // code for enemy attack and movement
@@ -171,45 +173,16 @@ public class GameWindow implements PlayerObserver {
 
     @FXML
     private void setEnermy(Node node) {
-        // final Delta dragDelta = new Delta();
-
-        // node.setOnMouseEntered(me -> node.getScene().setCursor(Cursor.HAND));
-        // node.setOnMouseExited(me -> node.getScene().setCursor(Cursor.DEFAULT));
-        // node.setOnMousePressed(me -> {
-        // dragDelta.x = me.getX();
-        // dragDelta.y = me.getY();
-        // node.getScene().setCursor(Cursor.MOVE);
-        // });
-        // node.setOnMouseDragged(me -> {
-        // node.setLayoutX(node.getLayoutX() + me.getX() - dragDelta.x);
-        // node.setLayoutY(node.getLayoutY() + me.getY() - dragDelta.y);
-        // Enemy e = (Enemy) node.getUserData();
-        // e.setX(node.getLayoutX() + me.getX() - dragDelta.x);
-        // e.setY(node.getLayoutY() + me.getY() - dragDelta.y);
-        // });
-        // node.setOnMouseReleased(me -> node.getScene().setCursor(Cursor.HAND));
 
         node.setOnMouseClicked(me -> {
             Player p = World.instance().getPlayer();
-            int dmg = p.getCurrentWeapon().getDamage();
             Enemy e = (Enemy) node.getUserData();
-            int magazineRest =  p.getClipRest();
-            if(magazineRest>=1){
-                p.setClipRest(magazineRest-1);
+            if(p.getClipRest()>=1){
+                p.setClipRest(p.getClipRest()-1);
                 e.damageEnemy(World.instance().player.getCurrentWeapon().getDamage());
                 
                 lblCurMagazine.setText(String.valueOf(p.getClipRest()));
             }
-
-            // Player p = World.instance().getPlayer();
-            // int dmg = p.attack();
-            // Enemy e = (Enemy) node.getUserData();
-            // if(p.getClipRest()>=1){
-            //     e.damageEnemy(dmg);
-            //     p.setClipRest(p.getClipRest()-1); 
-            //     lblCurMagazine.setText(String.valueOf(p.getClipRest()));
-            // }
-
             
         });
     }
