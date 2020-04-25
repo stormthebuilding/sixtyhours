@@ -49,7 +49,7 @@ public class World implements Serializer {
         objectCollection.add(player.getCurrentWeapon()); // add Weapon object to objectCollection
         objectCollection.add(stronghold); // add Stronghold object to objectCollection
 
-        // Enemy objects are added to objectCollection in Enemy.java
+        // Enemy objects are added to objectCollection in spawnEnemy
 
         objectCollection.add(this); // add World instance to objectCollection
 
@@ -132,18 +132,21 @@ public class World implements Serializer {
     public Basic spawnBasic() {
         Basic enemy = new Basic(EnemyType.BASIC);
         enemyList.add(enemy);
+        objectCollection.add(enemy);
         return enemy;
     }
 
     public Advanced spawnAdvanced() {
         Advanced enemy = new Advanced(EnemyType.ADVANCED);
         enemyList.add(enemy);
+        objectCollection.add(enemy);
         return enemy;
     }
 
     public Heavy spawnHeavy() {
         Heavy enemy = new Heavy(EnemyType.HEAVY);
         enemyList.add(enemy);
+        objectCollection.add(enemy);
         return enemy;
     }
 

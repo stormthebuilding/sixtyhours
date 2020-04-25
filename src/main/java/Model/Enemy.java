@@ -95,7 +95,7 @@ public class Enemy implements Serializer {
         else if (type == EnemyType.BOSS) {
             typeToSave = "BOSS";
         }
-        serialized = "ENEMY;"+typeToSave+","+x+","+y+","+speed+","+health+","+damage;
+        serialized = "ENEMY;"+typeToSave+","+id+","+x+","+y+","+speed+","+health+","+damage;
         return serialized;
     }
 
@@ -114,11 +114,12 @@ public class Enemy implements Serializer {
         else if (splitted[0].equals("BOSS")) {
             type = EnemyType.BOSS;
         }
-        x = Double.parseDouble(splitted[1]);
-        y = Double.parseDouble(splitted[2]);
-        speed = Integer.parseInt(splitted[3]);
-        health = Integer.parseInt(splitted[4]);
-        damage = Double.parseDouble(splitted[5]);
+        id = Integer.parseInt(splitted[1]);
+        x = Double.parseDouble(splitted[2]);
+        y = Double.parseDouble(splitted[3]);
+        speed = Integer.parseInt(splitted[4]);
+        health = Integer.parseInt(splitted[5]);
+        damage = Double.parseDouble(splitted[6]);
         
 
     }
