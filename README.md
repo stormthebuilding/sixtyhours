@@ -23,10 +23,9 @@ Kevin
 
 Nick
 
-* Apply the reload to different weapons
 * Menu window
 * Give a delay to reload
-* Enemy can attact when the first time to click play from the main window to game window, but they can make damage to the stronghold if I use the same main window, close the game window and open the game window again.
+* Buttons don't work after the gamewindow is opened the seond or the third time from mainwindow
 * I cannot press the screen (the other place beside the enemy) to use my bullet, on the the way, the missed shoot will not be counted.
 
 Reshi
