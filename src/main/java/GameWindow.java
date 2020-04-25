@@ -1,9 +1,7 @@
-import java.beans.EventHandler;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import Model.Enemy;
-import Model.EnemyType;
 import Model.Player;
 import Model.PlayerObserver;
 import Model.Weapon;
@@ -14,18 +12,14 @@ import Model.Weapons.Pistol;
 import Model.Weapons.Rifle;
 import Model.Weapons.Sniper;
 import javafx.animation.KeyFrame;
-import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.event.ActionEvent;
-
 import javafx.util.Duration;
 
 public class GameWindow implements PlayerObserver {
@@ -56,7 +50,7 @@ public class GameWindow implements PlayerObserver {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> handleEnemies()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        int bulletNum = World.instance().getPlayer().getClipCapacity();
+        int bulletNum = World.instance().getPlayer().getCurrentWeapon().getMagazine();
         lblMaxMagazine.setText(String.valueOf(bulletNum));
         lblCurMagazine.setText(String.valueOf(bulletNum));
         lblCoins.setText("Coins: " + World.instance().getCoins());
@@ -92,8 +86,8 @@ public class GameWindow implements PlayerObserver {
     @FXML
     public void onReloadClicked() throws IOException{
         Player p = World.instance().getPlayer();
-        p.setClipRest(p.getClipCapacity());
-        lblCurMagazine.setText(String.valueOf(p.getClipRest()));
+        p.getCurrentWeapon().setMagazineRest(p.getCurrentWeapon().getMagazine());
+        lblCurMagazine.setText(String.valueOf(p.getCurrentWeapon().getMagazineRest()));
     }
 
     // code for enemy attack and movement
@@ -166,13 +160,13 @@ public class GameWindow implements PlayerObserver {
     private void setEnermy(Node node) {
 
         node.setOnMouseClicked(me -> {
-            Player p = World.instance().getPlayer();
+            Weapon w = World.instance().getPlayer().getCurrentWeapon();
             Enemy e = (Enemy) node.getUserData();
-            if(p.getClipRest()>=1){
-                p.setClipRest(p.getClipRest()-1);
-                e.damageEnemy(World.instance().player.getCurrentWeapon().getDamage());
+            if(w.getMagazineRest()>=1){
+                w.setMagazineRest(w.getMagazineRest()-1);
+                e.damageEnemy(w.getDamage());
                 
-                lblCurMagazine.setText(String.valueOf(p.getClipRest()));
+                lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
             }
             
         });
@@ -192,10 +186,9 @@ public class GameWindow implements PlayerObserver {
                 Weapon weapon = list.get(i);
                 if (weapon.getType() == WeaponType.PISTOL) {
                     weapon.setMagazine(weapon.getMagazine() + 5);
-                    Player p = World.instance().player;
-                    p.setCurrentWeapon(weapon);
-                    p.setClipCapacity(p.getCurrentWeapon().getMagazine());
-                    lblMaxMagazine.setText("" + weapon.getMagazine());
+                    if(World.instance().player.getCurrentWeapon() == weapon){
+                        lblMaxMagazine.setText("" + weapon.getMagazine());
+                    }
                 }
             }
             btnPistol.setText("Fully Upgraded");
@@ -209,6 +202,7 @@ public class GameWindow implements PlayerObserver {
             Weapon weapon = list.get(i);
             if (weapon.getType() == WeaponType.RIFLE) {
                 check = true;
+                // TODO: Here is a bug, I dont know waht you mean, it will upgrade without deduction when the getCoin didn;t achieve the requirement
                 if (World.instance().getCoins() >= 250) {
                     World.instance().subtractCoins(250);
                     weapon.setDamage(weapon.getDamage() + 8);
@@ -218,7 +212,7 @@ public class GameWindow implements PlayerObserver {
             }
         }
         if (check == false && World.instance().getCoins() >= 100) {
-            World.instance().subtractCoins(15);
+            World.instance().subtractCoins(100);
             lblCoins.setText("Coins: " + World.instance().getCoins());
             btnRifle.setText("Upgrade: 250 Coins");
             Rifle rifle = new Rifle(WeaponType.RIFLE);
@@ -240,6 +234,9 @@ public class GameWindow implements PlayerObserver {
                 if (World.instance().getCoins() >= 500) {
                     World.instance().subtractCoins(500);
                     weapon.setMagazine(weapon.getMagazine() + 3);
+                    if(World.instance().player.getCurrentWeapon() == weapon){
+                        lblMaxMagazine.setText("" + weapon.getMagazine());
+                    }
                     lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
                     btnSniper.setText("Fully Upgraded");
                 }
@@ -265,7 +262,7 @@ public class GameWindow implements PlayerObserver {
             if (weapon.getType() == WeaponType.PISTOL) {
                 World.instance().player.setCurrentWeapon(weapon);
                 lblMaxMagazine.setText("" + World.instance().player.getCurrentWeapon().getMagazine());
-                lblCurMagazine.setText("" + lblMaxMagazine.getText());
+                lblCurMagazine.setText("" + World.instance().player.getCurrentWeapon().getMagazineRest());
                 lblCurrentWeapon.setText("Current Weapon: Pistol");
                 lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
                 
@@ -280,7 +277,7 @@ public class GameWindow implements PlayerObserver {
             if (weapon.getType() == WeaponType.RIFLE) {
                 World.instance().player.setCurrentWeapon(weapon);
                 lblMaxMagazine.setText("" + World.instance().player.getCurrentWeapon().getMagazine());
-                lblCurMagazine.setText("" + lblMaxMagazine.getText());
+                lblCurMagazine.setText("" + World.instance().player.getCurrentWeapon().getMagazineRest());
                 lblCurrentWeapon.setText("Current Weapon: Rifle");
                 lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
             }
@@ -294,7 +291,7 @@ public class GameWindow implements PlayerObserver {
             if (weapon.getType() == WeaponType.SNIPER) {
                 World.instance().player.setCurrentWeapon(weapon);
                 lblMaxMagazine.setText("" + World.instance().player.getCurrentWeapon().getMagazine());
-                lblCurMagazine.setText("" + lblMaxMagazine.getText());
+                lblCurMagazine.setText("" + World.instance().player.getCurrentWeapon().getMagazineRest());
                 lblCurrentWeapon.setText("Current Weapon: Sniper");
                 lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
             }
