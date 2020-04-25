@@ -73,7 +73,6 @@ public class MainWindow {
         stage.show();
         
 
-
         
         
         // for testing purposes
@@ -81,6 +80,11 @@ public class MainWindow {
         for (Serializer object : listy) {
             System.out.println(object);
         }
+
+        // var listyJunior = World.instance().enemyList;
+        // for (Serializer object : listyJunior) {
+        //     System.out.println(object);
+        // }
 
 
 

@@ -57,6 +57,7 @@ public class GameWindow implements PlayerObserver {
         lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
         lblHealth.setText("Stronghold health: " + World.instance().stronghold.getHealth());
         lblPoints.setText("Points: " + World.instance().getScore());
+        loadEnemies();
         
 
         
@@ -83,6 +84,31 @@ public class GameWindow implements PlayerObserver {
         
         map.getChildren().add(view);
     }
+
+    public void loadEnemies() {
+        if (!World.instance().enemyList.isEmpty()) {
+            ImageView view = null;
+            for (Enemy e : World.instance().enemyList) {
+                var enemy = e;
+                double x = enemy.getX();
+                double y = enemy.getY();
+                view = new ImageView(new Image("/images/robo.png"));
+                view.getStyleClass().add("current");
+                view.setId("" + enemy.getId());
+                view.relocate(x, y);
+                view.setUserData(enemy);
+                setEnermy(view);
+                map.getChildren().add(view);
+            }
+            
+        }
+
+        
+        
+       
+    }
+
+    
 
     @FXML
     public void onSaveClicked() throws IOException {
