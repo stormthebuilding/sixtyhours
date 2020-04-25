@@ -13,10 +13,10 @@ public class Weapon implements Serializer{
         this.damage = damage;
         cost = 0;
 
-        if (instantiated) {
-            collectObject(); 
-        }
-        instantiated = true;
+        // if (instantiated) {
+        //     collectObject(); 
+        // }
+        // instantiated = true;
         
     }
 

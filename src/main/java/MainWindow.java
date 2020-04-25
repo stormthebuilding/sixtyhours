@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+import Model.Serializer;
 import Model.World;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -63,7 +64,16 @@ public class MainWindow {
 
     @FXML
     public void onLoadClicked() throws IOException {
-        // World.instance().load("SavedGame.txt");
+        System.out.println("load clicked");
+        World.instance().load("SavedGame.txt");
+        // for testing purposes
+        var listy = World.instance().getObjectCollection();
+        for (Serializer object : listy) {
+            System.out.println(object);
+        }
+
+        
+
     }
 
     @FXML

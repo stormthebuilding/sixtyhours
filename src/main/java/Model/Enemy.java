@@ -25,7 +25,7 @@ public class Enemy implements Serializer {
         health = 10;
         damage = .5;
         id = ++nextId;
-        collectObject();
+        // collectObject();
 
 
     }
