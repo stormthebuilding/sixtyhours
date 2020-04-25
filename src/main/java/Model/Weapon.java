@@ -5,17 +5,13 @@ public class Weapon implements Serializer{
     protected WeaponType type;
     protected int damage;
     protected int magazine;
-    static boolean instantiated = false;
+    protected int magazineRest;
 
     public Weapon(WeaponType type) {
         this.type = type;
-        this.damage = damage;
 
-        // if (instantiated) {
-        //     collectObject(); 
-        // }
-        // instantiated = true;
-        
+        // collectObject(); 
+     
     }
 
     //getter and setter
@@ -38,6 +34,15 @@ public class Weapon implements Serializer{
     public void setMagazine(int magazine) {
         this.magazine = magazine;
     }
+    
+    public int getMagazineRest() {
+        return magazineRest;
+    }
+
+    public void setMagazineRest(int magazineRest) {
+        this.magazineRest = magazineRest;
+    }
+
 
     @Override
     public String serialize() {
@@ -52,7 +57,7 @@ public class Weapon implements Serializer{
         else if (type == WeaponType.SNIPER) {
             typeToSave = "SNIPER";
         }
-        serialized = "WEAPON;"+typeToSave+","+","+damage;
+        serialized = "WEAPON;"+typeToSave+","+damage+","+magazine+","+magazineRest;
         return serialized;
     }
 
@@ -69,6 +74,9 @@ public class Weapon implements Serializer{
             type = WeaponType.SNIPER;
         }
         damage = Integer.parseInt(splitted[2]);
+        magazine = Integer.parseInt(splitted[3]);
+        magazineRest = Integer.parseInt(splitted[4]);
+    
 
     }
 
@@ -77,8 +85,5 @@ public class Weapon implements Serializer{
         objectList.add(this);
         World.instance().setObjectCollection(objectList);
     }
-
-
-
 
 }

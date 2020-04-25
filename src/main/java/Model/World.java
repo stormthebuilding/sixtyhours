@@ -220,6 +220,7 @@ public class World implements Serializer {
                 // adds only Enemy object to objectCollection 
                 if (object instanceof Enemy) {
                     objectCollection.add(object);
+                    enemyList.add((Enemy) object);
                 }
             }
         }

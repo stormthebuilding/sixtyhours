@@ -7,8 +7,6 @@ import Model.Weapons.*;
 public class Player implements Serializer {
     private PlayerObserver observer;
     
-    private int clipCapacity;
-    private int clipRest;
     private int point;
     private int score;
     private Weapon currentWeapon;
@@ -19,35 +17,7 @@ public class Player implements Serializer {
         Pistol w = new Pistol(WeaponType.PISTOL);
         weaponList.add(w);
         currentWeapon = w;
-        clipCapacity = currentWeapon.getMagazine();
-        clipRest = clipCapacity;
         // collectObject();
-    }
-
-    //called when the player attacks an enemy
-    //check the weapon then edit the corresponding enemy
-    public void attack() {
-        //get the category of weapon, get the number of magazine
-        int magazine = currentWeapon.getMagazine();
-        observer.update(this);
-
-
-    }
-
-    public int getClipCapacity() {
-        return clipCapacity;
-    }
-
-    public void setClipCapacity(int clipCapacity) {
-        this.clipCapacity = clipCapacity;
-    }
-
-    public int getClipRest() {
-        return clipRest;
-    }
-
-    public void setClipRest(int clipRest) {
-        this.clipRest = clipRest;
     }
 
     public int getPoint() {
@@ -106,9 +76,8 @@ public class Player implements Serializer {
         }
 
     
-
-        serialized = "PLAYER;"+clipCapacity+","+clipRest+","+point+","+score
-        +","+typeToSave+","+ Integer.toString(currentWeapon.getDamage());
+        serialized = "PLAYER;"+","+point+","+score
+        +","+typeToSave+","+currentWeapon.getDamage();
 
         return serialized;
         
@@ -117,20 +86,18 @@ public class Player implements Serializer {
     @Override
     public void deserialize(String data) {
         String[] splitted = data.split(";")[1].split(",");
-        clipCapacity = Integer.parseInt(splitted[0]);
-        clipRest = Integer.parseInt(splitted[1]);
-        point = Integer.parseInt(splitted[2]);
-        score = Integer.parseInt(splitted[3]);
-        if (splitted[4].equals("PISTOL")) {
+        point = Integer.parseInt(splitted[0]);
+        score = Integer.parseInt(splitted[1]);
+        if (splitted[2].equals("PISTOL")) {
             currentWeapon.type = WeaponType.PISTOL;
         }
-        else if (splitted[4].equals("RIFLE")) {
+        else if (splitted[2].equals("RIFLE")) {
             currentWeapon.type = WeaponType.RIFLE;
         }
-        else if (splitted[4].equals("SNIPER")) {
+        else if (splitted[2].equals("SNIPER")) {
             currentWeapon.type = WeaponType.SNIPER;
         }
-        currentWeapon.damage = Integer.parseInt(splitted[6]);
+        currentWeapon.damage = Integer.parseInt(splitted[3]);
     }
 
     public void collectObject() {

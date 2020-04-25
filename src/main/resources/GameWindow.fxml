@@ -37,7 +37,7 @@
             </VBox>
             <VBox spacing="6">
                 <Button fx:id="btnPistol" text="Upgrade: 50 Coins" onAction="#onPistolClicked" />
-                <Button fx:id="btnRifle" text="Buy: 15" onAction="#onRifleClicked" />
+                <Button fx:id="btnRifle" text="Buy: 15 Coins" onAction="#onRifleClicked" />
                 <Button fx:id="btnSniper" text="Buy: 100 Coins" onAction="#onSniperClicked" />
             </VBox>
         </HBox>

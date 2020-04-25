@@ -63,18 +63,31 @@ public class MainWindow {
     }
 
     @FXML
-    public void onLoadClicked() throws IOException {
-        System.out.println("load clicked");
+    void onLoadClicked(ActionEvent event) throws IOException {
         World.instance().load("SavedGame.txt");
+
+        var loader = new FXMLLoader(getClass().getResource("GameWindow.fxml"));
+        var scene = new Scene(loader.load());
+        var stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+        
+
+        
+        
         // for testing purposes
         var listy = World.instance().getObjectCollection();
         for (Serializer object : listy) {
             System.out.println(object);
         }
 
-        // model is pretty much good for now, add code here to update gui 
+        // var listyJunior = World.instance().enemyList;
+        // for (Serializer object : listyJunior) {
+        //     System.out.println(object);
+        // }
 
-        
+
+
 
     }
 
