@@ -97,7 +97,7 @@ public class Player implements Serializer {
         else if (splitted[2].equals("SNIPER")) {
             currentWeapon.type = WeaponType.SNIPER;
         }
-        currentWeapon.damage = Integer.parseInt(splitted[5]);
+        currentWeapon.damage = Integer.parseInt(splitted[3]);
     }
 
     public void collectObject() {
