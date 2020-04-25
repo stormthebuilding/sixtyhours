@@ -21,7 +21,9 @@ public class World implements Serializer {
     private int coins = 1000000;
     private int currentWave;
     private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
+
     public Player player = new Player();
+
     
     public Stronghold stronghold = new Stronghold();
 

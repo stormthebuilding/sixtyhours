@@ -30,32 +30,20 @@ import javafx.util.Duration;
 
 public class GameWindow implements PlayerObserver {
 
-    @FXML
-    Pane map;
-    @FXML
-    Label lblHealth;
-    @FXML
-    Label lblCoins;
-    @FXML
-    Label lblPoints;
-    @FXML
-    Label lblCurMagazine;
-    @FXML
-    Label lblMaxMagazine;
-    @FXML
-    Label lblCurrentWeapon;
-    @FXML
-    Label lblWeaponDamage;
-    @FXML
-    Button btnPistol;
-    @FXML
-    Button btnRifle;
-    @FXML
-    Button btnSniper;
-    @FXML
-    Button btnGrenade;
-    @FXML
-    Menu lstWeapons;
+    @FXML Pane map;
+    @FXML Label lblHealth;
+    @FXML Label lblCoins;
+    @FXML Label lblPoints;
+    @FXML Label lblCurMagazine;
+    @FXML Label lblMaxMagazine;
+    @FXML Label lblCurrentWeapon;
+    @FXML Label lblWeaponDamage;
+    @FXML Label lblStatus;
+    @FXML Button btnPistol;
+    @FXML Button btnRifle;
+    @FXML Button btnSniper;
+    @FXML Button btnGrenade;
+    @FXML Menu lstWeapons;
 
     @FXML
     void initialize() {
@@ -73,6 +61,7 @@ public class GameWindow implements PlayerObserver {
         lblCurMagazine.setText(String.valueOf(bulletNum));
         lblCoins.setText("Coins: " + World.instance().getCoins());
         lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
+
     }
 
     // code for spawning a new enemy
@@ -99,10 +88,6 @@ public class GameWindow implements PlayerObserver {
     public void onSaveClicked() throws IOException {
         World.instance().save("SavedGame.txt");
     }
-
-
-
-    
 
     @FXML
     public void onReloadClicked() throws IOException{
@@ -140,6 +125,12 @@ public class GameWindow implements PlayerObserver {
                                     double health = World.instance().stronghold.getHealth();
                                     World.instance().stronghold.setHealth(health - enemy.getDamage());
                                     lblHealth.setText("Stronghold health: " + World.instance().stronghold.getHealth());
+                                    
+                                    //update status
+                                    if(World.instance().stronghold.getHealth() == 0){
+                                        lblStatus.setStyle("-fx-text-fill: red; -fx-font-size: 35px;");
+                                        lblStatus.setText("Defeat");
+                                    }
                                 }
                             }
                             else {
@@ -187,10 +178,6 @@ public class GameWindow implements PlayerObserver {
         });
     }
 
-    void shoot(Node node){
-        int dmg = World.instance().getPlayer().getCurrentWeapon().getDamage();
-    }
-
     @Override
     public void update(Player player) {
         // player.();
@@ -205,6 +192,9 @@ public class GameWindow implements PlayerObserver {
                 Weapon weapon = list.get(i);
                 if (weapon.getType() == WeaponType.PISTOL) {
                     weapon.setMagazine(weapon.getMagazine() + 5);
+                    Player p = World.instance().player;
+                    p.setCurrentWeapon(weapon);
+                    p.setClipCapacity(p.getCurrentWeapon().getMagazine());
                     lblMaxMagazine.setText("" + weapon.getMagazine());
                 }
             }
@@ -311,8 +301,4 @@ public class GameWindow implements PlayerObserver {
         }
     }
 
-    // private class Delta {
-    //     public double x;
-    //     public double y;
-    // }
 }
