@@ -193,13 +193,12 @@ public class GameWindow implements PlayerObserver {
             Player p = World.instance().getPlayer();
             int dmg = p.getCurrentWeapon().getDamage();
             Enemy e = (Enemy) node.getUserData();
-            int magazineRest = Integer.parseInt(lblCurMagazine.getText());
+            int magazineRest =  p.getClipRest();
             if(magazineRest>=1){
-                int health = e.damageEnemy(World.instance().player.getCurrentWeapon().getDamage());
-                // !Caution need change in the future
-                //Unfinished version Data is not from the model
+                p.setClipRest(magazineRest-1);
+                e.damageEnemy(World.instance().player.getCurrentWeapon().getDamage());
                 
-                lblCurMagazine.setText(String.valueOf(magazineRest-1));
+                lblCurMagazine.setText(String.valueOf(p.getClipRest()));
             }
 
             // Player p = World.instance().getPlayer();
