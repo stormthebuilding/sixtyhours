@@ -16,16 +16,21 @@ public class HighScore {
     private int maxNumOfHighScoreEntries = 15;
     private int maxScoresDisplayed = 5;
 
+        /* 
+    1. Load the Scores from File
+    3. IF new Score qualifies for High Score
+    2.   Add Score to List
+    3.   Save scores to File
+    4.   Load Scores to scoresList for display purpose 
+    5. End IF
+    */
+
     /**
-     * Takes a Score as I/P.
-     * Loads the High Scores from File into a Data Structure (scoresList).
-     * Adds the incoming Score into the appropriate position in the List.
-     * Writes the List back to the File (overwrite the old file).
-     * 
-     * @param score - Score Object to be added 
+     * @param score
      * @throws IOException
      */
-    public void addHighScore(Score score) throws IOException {
+    public void processScore(Score score) throws IOException {
+        // Load scores
         String fileName = "src/main/resources/SaveScoresData.txt";
         File fileObj = new File(fileName);
         if (!fileObj.exists())
@@ -33,22 +38,51 @@ public class HighScore {
         else
             this.loadScores(fileName);
 
+        if (findIfScoreQualifiesAsHigh(score)) {
+            addHighScore(score);
+            saveScores(fileName);
+            loadScores(fileName);
+        } 
+    }
+
+    /**
+     * Takes a Score as I/P. Loads the High Scores from File into a Data Structure
+     * (scoresList). Adds the incoming Score into the List.  Sort the socresList
+     * List. 
+     * 
+     * @param score - Score Object to be added
+     * @throws IOException
+     */
+    public void addHighScore(Score score) throws IOException {
+
         scoresList.add(score);
         Collections.sort(scoresList, Collections.reverseOrder());
-        this.saveScores(fileName);
     
     }
 
     /**
-     * Takes a Score as I/P. If the List size is < 20 then the Score Qualifies else
+     * Takes a Score as I/P. 
+     * If the List size is < 20 then the Score Qualifies else
      * if Incoming Score > than the lowest score in the List (last element) If so
-     * return 'true' or else return 'false'.
+     *   return 'true' 
+     * else 
+     *   return 'false'.
      * 
      * @param score - checks if the score qualifies to be a Highscore.
      * @return - True or False
      */
     public boolean findIfScoreQualifiesAsHigh(Score score) {
-        return true;
+        // If the List size is < 10 then the Score Qualifies as High    
+        if (scoresList.size() < 10) {
+            return true;
+        }
+         else  {
+            Score leastScore = scoresList.get(scoresList.size() - 1);
+            if (score.getScore() > leastScore.getScore() ) {
+                return true;
+            } else 
+                return false;
+        }  
     }
 
     /**
@@ -100,7 +134,12 @@ public class HighScore {
         try {
             PrintWriter outStream = new PrintWriter(new BufferedWriter(new FileWriter(outFile)), true);
 
-            for (int i = 0; i < scoresList.size(); ++i) {
+            // Save only top 10 scores
+            int scoresSize = scoresList.size();
+            if (scoresSize > 10) 
+                scoresSize = 10;
+
+            for (int i = 0; i < scoresSize; ++i) {
                 String line = scoresList.get(i).getName() + "," + scoresList.get(i).getScore() + "," + scoresList.get(i).getDifficultyType();
                 outStream.println(line);
             }

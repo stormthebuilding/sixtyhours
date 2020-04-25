@@ -5,10 +5,21 @@ public class Weapon implements Serializer{
     protected WeaponType type;
     protected int damage;
     protected int magazine;
+    static boolean instantiated = false;
 
     public Weapon(WeaponType type) {
         this.type = type;
+<<<<<<< HEAD
         // collectObject();
+=======
+        this.damage = damage;
+        cost = 0;
+
+        if (instantiated) {
+            collectObject(); 
+        }
+        instantiated = true;
+>>>>>>> 2eadb9fa9d5089d0d3dbe9d60d272e98c43060d2
         
     }
 

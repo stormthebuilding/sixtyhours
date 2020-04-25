@@ -6,8 +6,13 @@
 <VBox fx:controller="MainWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css" spacing="30" prefHeight="400" prefWidth="500" alignment="CENTER">
     
     <Label fx:id="title" />
-    <Button onAction="#onPlayClicked" text="Play" alignment="CENTER" />
-    <Button onAction="#onLoadClicked" text="Load" alignment="CENTER" />
-    <Button onAction="#onHighScoreClicked" text="High Score" alignment="CENTER" />
+    <Label text="Main Menu" style="-fx-font-size: 30px;"/>
+    <HBox spacing="20" alignment="CENTER">
+        <Button onAction="#onAboutClicked" text="About" />
+        <Button onAction="#onHelpClicked" text="Help" />
+        <Button onAction="#onLoadClicked" text="Load" />
+        <Button onAction="#onHighScoreClicked" text="High Score" />
+        <Button onAction="#onPlayClicked" text="Play" style="-fx-font-size: 19px"/>
+    </HBox>
 
 </VBox>

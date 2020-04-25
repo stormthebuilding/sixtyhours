@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+import Model.World;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -41,8 +42,28 @@ public class MainWindow {
     }
 
     @FXML
-    void onLoadClicked(ActionEvent event) throws IOException {
+    void onAboutClicked(ActionEvent event) throws IOException {
+        var loader = new FXMLLoader(getClass().getResource("AboutWindow.fxml"));
+        var scene = new Scene(loader.load());
 
+        var stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void onHelpClicked(ActionEvent event) throws IOException {
+        var loader = new FXMLLoader(getClass().getResource("HelpWindow.fxml"));
+        var scene = new Scene(loader.load());
+
+        var stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void onLoadClicked() throws IOException {
+        // World.instance().load("SavedGame.txt");
     }
 
     @FXML

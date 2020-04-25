@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-import Model.Weapons.Pistol;
+import Model.Weapons.*;
 
 public class Player implements Serializer {
     private PlayerObserver observer;
@@ -16,10 +16,8 @@ public class Player implements Serializer {
 
 
     public Player() {
-        Pistol pistol = new Pistol(WeaponType.PISTOL);
-        addWeapon(pistol);
-        currentWeapon = pistol;
-        pistol.setMagazine(6);
+        Weapon w = new Pistol(WeaponType.PISTOL);
+        currentWeapon = w;
         clipCapacity = currentWeapon.getMagazine();
         clipRest = clipCapacity;
         // collectObject();

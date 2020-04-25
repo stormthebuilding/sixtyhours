@@ -32,7 +32,7 @@ public class Stronghold implements Serializer {
     @Override
     public void deserialize(String data) {
         String[] splitted = data.split(";");
-        health = Integer.parseInt(splitted[1]);
+        health = Double.parseDouble(splitted[1]);
     }
 
     public void collectObject() {

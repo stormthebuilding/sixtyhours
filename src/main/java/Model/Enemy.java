@@ -22,7 +22,7 @@ public class Enemy implements Serializer {
         y = World.instance().rand.nextInt(780 - 330 + 1) + 301;//section of left side of window we want the enemies to spawn
         x = 0;
         id = ++nextId;
-        // collectObject();
+        collectObject();
 
 
     }
@@ -114,11 +114,11 @@ public class Enemy implements Serializer {
         else if (splitted[0].equals("BOSS")) {
             type = EnemyType.BOSS;
         }
-        x = Integer.parseInt(splitted[1]);
-        y = Integer.parseInt(splitted[2]);
+        x = Double.parseDouble(splitted[1]);
+        y = Double.parseDouble(splitted[2]);
         speed = Integer.parseInt(splitted[3]);
         health = Integer.parseInt(splitted[4]);
-        damage = Integer.parseInt(splitted[5]);
+        damage = Double.parseDouble(splitted[5]);
         
 
     }
