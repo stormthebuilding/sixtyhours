@@ -72,6 +72,8 @@ public class MainWindow {
             System.out.println(object);
         }
 
+        // model is pretty much good for now, add code here to update gui 
+
         
 
     }
