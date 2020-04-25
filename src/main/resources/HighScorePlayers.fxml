@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
+<?import java.lang.String?>
+
+<VBox fx:controller="HighScorePlayers" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css"
+    spacing="15" prefHeight="500" prefWidth="450">
+
+    <HBox alignment="CENTER">
+      <Label text="High Scores" style="-fx-font-size: 20px" alignment="CENTER"/>
+    </HBox>
+
+    <HBox style="-fx-font-size: 17px;" spacing="10" alignment="CENTER">
+      <Label text="Rank" />
+      <Label text="Name" />
+      <Label text="Score"/>
+    </HBox>
+    <HBox spacing="10" alignment="CENTER">
+      <VBox fx:id="vrank"></VBox>
+      <VBox fx:id="vname"></VBox>
+      <VBox fx:id="vscore"></VBox>
+    </HBox>
+
+    <VBox spacing="5" style="-fx-font-size: 14px;" alignment="CENTER">
+      <HBox style="-fx-font-size: 17px;" spacing="5" alignment="CENTER">
+        <Button text="Play" id="playid" />
+      </HBox>
+    </VBox>
+</VBox>

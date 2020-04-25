@@ -80,6 +80,11 @@ public class MainWindow {
 
     @FXML
     void onHighScoreClicked(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HighScorePlayers.fxml"));
+
+        Stage highscoreData = new Stage();
+        highscoreData.setScene(new Scene(loader.load()));
+        highscoreData.show();
         
     }
 }
