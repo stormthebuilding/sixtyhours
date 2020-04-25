@@ -36,9 +36,12 @@ public class Stronghold implements Serializer {
     }
 
     public void collectObject() {
-        var objectList = World.instance().getObjectCollection();
-        objectList.add(this);
-        World.instance().setObjectCollection(objectList);
+        if (World.instance().getObjectCollection() != null) {
+            var objectList = World.instance().getObjectCollection();
+            objectList.add(this);
+            World.instance().setObjectCollection(objectList);
+        }
+
     }
 
     

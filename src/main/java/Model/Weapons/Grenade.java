@@ -4,7 +4,7 @@ import Model.Weapon;
 import Model.WeaponType;
 
 public class Grenade extends Weapon {
-    public Grenade(WeaponType type, int damage) {
-        super(type, damage);
+    public Grenade(WeaponType type) {
+        super(type);
     }
 }

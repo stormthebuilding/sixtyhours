@@ -11,7 +11,7 @@
         <MenuBar>
             <Menu text="Main Menu">
                 <MenuItem fx:id="menuitSave" text="Save" onAction = "#onSaveClicked" />
-                <MenuItem fx:id="menuitLoad" text="Load"/>
+                <MenuItem fx:id="menuitLoad" text="Load" onAction = "#onLoadClicked" />
                 <MenuItem fx:id="menuitHighScore" text="High Score"/>
             </Menu>
         </MenuBar>
@@ -30,10 +30,21 @@
             <Button fx:id="btnWeapons" text="Weapons" style="-fx-font-size: 15px" />
             <Button fx:id="btnUpgrades" text="Upgrades" style="-fx-font-size: 15px" />
         </HBox>
-        <Label text="Pistol" />
-        <Label text="Rifle" />
-        <Label text="Sniper" />
-        <Label text="Grenade" />
+        <HBox alignment="center" spacing="5">
+            <VBox spacing="10">
+                <Label text="Pistol" style="-fx-font-size: 15px" />
+                <Label text="Rifle" style="-fx-font-size: 15px" />
+                <Label text="Sniper" style="-fx-font-size: 15px" />
+                <Label text="Grenade" style="-fx-font-size: 15px" />
+            </VBox>
+            <VBox spacing="6">
+                <Button fx:id="btnPistol" text="Upgrade: 50 Coins" onAction="#onPistolClicked" />
+                <Button fx:id="btnRifle" text="Buy: 15" onAction="#onRifleClicked" />
+                <Button fx:id="btnSniper" text="Buy: 100 Coins" onAction="#onSniperClicked" />
+                <Button fx:id="btnGrenade" text="Buy: 500 Coins" onAction="#onGrenadeClicked" />
+            </VBox>
+        </HBox>
+
         <Label text="Stats">
             <style>
                 -fx-font-size: 50px;

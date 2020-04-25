@@ -1,5 +1,9 @@
 package Model;
 
+import java.util.ArrayList;
+
+import Model.Weapons.Pistol;
+
 public class Player implements Serializer {
     private PlayerObserver observer;
     
@@ -8,10 +12,12 @@ public class Player implements Serializer {
     private int point;
     private int score;
     private Weapon currentWeapon;
+    private ArrayList<Weapon> weaponList = new ArrayList<Weapon>();
 
 
     public Player() {
-        Weapon pistol = new Weapon(WeaponType.PISTOL, 2);
+        Pistol pistol = new Pistol(WeaponType.PISTOL);
+        addWeapon(pistol);
         currentWeapon = pistol;
         pistol.setMagazine(6);
         clipCapacity = currentWeapon.getMagazine();
@@ -69,6 +75,14 @@ public class Player implements Serializer {
         this.currentWeapon = currentWeapon;
     }
 
+    public ArrayList<Weapon> getWeaponList() {
+        return weaponList;
+    }
+
+    public void addWeapon(Weapon weapon) {
+        weaponList.add(weapon);
+    }
+
     public void setObserver(PlayerObserver observer) {
         this.observer = observer;
     }
@@ -98,7 +112,7 @@ public class Player implements Serializer {
     
 
         serialized = "PLAYER;"+clipCapacity+","+clipRest+","+point+","+score
-        +","+typeToSave+","+Integer.toString(currentWeapon.getCost())+","+Integer.toString(currentWeapon.getDamage());
+        +","+typeToSave+","+ Integer.toString(currentWeapon.getDamage());
 
         return serialized;
         
@@ -123,7 +137,6 @@ public class Player implements Serializer {
         else if (splitted[4].equals("GRENADE")) {
             currentWeapon.type = WeaponType.GRENADE;
         }
-        currentWeapon.cost = Integer.parseInt(splitted[5]);
         currentWeapon.damage = Integer.parseInt(splitted[6]);
     }
 

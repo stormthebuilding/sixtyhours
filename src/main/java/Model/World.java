@@ -7,6 +7,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import Model.Enemies.Advanced;
+import Model.Enemies.Basic;
+import Model.Enemies.Boss;
+import Model.Enemies.Heavy;
+
 public class World {
     // arguments for the world
     private String difficulty;
@@ -15,11 +20,13 @@ public class World {
     private int score;
     private int coins;
     private int currentWave;
-    private Player player = new Player();
+    private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
+    public Player player = new Player();
+    public Stronghold stronghold = new Stronghold();
 
     private static int nextId;
 
-    private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
+    
     public ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 
     public Random rand = new Random();
@@ -27,7 +34,7 @@ public class World {
     // Store methods
 
     // Stronghold methods
-    public Stronghold stronghold = new Stronghold();
+    
 
     // Singleton implementation
 
@@ -92,12 +99,34 @@ public class World {
         this.coins += coins;
     }
 
+    public void subtractCoins(int coins) {
+        this.coins -= coins;
+    }
+
     public int getCoins() {
         return coins;
     }
 
-    public Enemy spawnEnemy() {
-        Enemy enemy = new Enemy(EnemyType.BASIC);
+    public Basic spawnBasic() {
+        Basic enemy = new Basic(EnemyType.BASIC);
+        enemyList.add(enemy);
+        return enemy;
+    }
+
+    public Advanced spawnAdvanced() {
+        Advanced enemy = new Advanced(EnemyType.ADVANCED);
+        enemyList.add(enemy);
+        return enemy;
+    }
+
+    public Heavy spawnHeavy() {
+        Heavy enemy = new Heavy(EnemyType.HEAVY);
+        enemyList.add(enemy);
+        return enemy;
+    }
+
+    public Boss spawnBoss() {
+        Boss enemy = new Boss(EnemyType.BOSS);
         enemyList.add(enemy);
         return enemy;
     }
@@ -158,7 +187,7 @@ public class World {
                     object = new Enemy(EnemyType.BASIC);
                 }
                 else if (line.startsWith("WEAPON")) {
-                    object = new Weapon(WeaponType.PISTOL, 0);
+                    object = new Weapon(WeaponType.PISTOL);
                 }
                 object.deserialize(line);
                 objectCollection.add(object);
