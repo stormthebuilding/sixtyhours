@@ -215,8 +215,29 @@ public class GameWindow implements PlayerObserver {
         }
         else if (World.instance().getCurrentWave() == 1) {
             spawnEnemies();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnEnemies()));
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> spawnEnemies()));
             timeline.setCycleCount(10);
+            timeline.play();
+            World.instance().addWave();
+        }
+        else if (World.instance().getCurrentWave() == 2) {
+            spawnEnemies();
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1150), e -> spawnEnemies()));
+            timeline.setCycleCount(25);
+            timeline.play();
+            World.instance().addWave();
+        }
+        else if (World.instance().getCurrentWave() == 3) {
+            spawnEnemies();
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> spawnEnemies()));
+            timeline.setCycleCount(40);
+            timeline.play();
+            World.instance().addWave();
+        }
+        else if (World.instance().getCurrentWave() == 4) {
+            spawnEnemies();
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(925), e -> spawnEnemies()));
+            timeline.setCycleCount(55);
             timeline.play();
             World.instance().addWave();
         }
