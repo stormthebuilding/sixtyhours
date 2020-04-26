@@ -73,9 +73,9 @@ public class Weapon implements Serializer{
         else if (splitted[0].equals("SNIPER")) {
             type = WeaponType.SNIPER;
         }
-        damage = Integer.parseInt(splitted[2]);
-        magazine = Integer.parseInt(splitted[3]);
-        magazineRest = Integer.parseInt(splitted[4]);
+        damage = Integer.parseInt(splitted[1]);
+        magazine = Integer.parseInt(splitted[2]);
+        magazineRest = Integer.parseInt(splitted[3]);
     
 
     }

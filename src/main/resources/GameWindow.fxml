@@ -11,18 +11,23 @@
         <MenuBar>
             <Menu text="Main Menu">
                 <MenuItem fx:id="menuitSave" text="Save" onAction = "#onSaveClicked" />
-                <MenuItem fx:id="menuitLoad" text="Load" />
                 <MenuItem fx:id="menuitHighScore" text="High Score"/>
             </Menu>
             <Menu fx:id="lstWeapons" text="Weapons">
                 <MenuItem fx:id="wpnPistol" text="Pistol" onAction="#onlstPistolClicked" />
             </Menu>
+           
         </MenuBar>
         
         <Pane fx:id="map" prefHeight="850" prefWidth="1180" />
     </VBox>
 
     <VBox spacing="20">
+        <HBox spacing = "5">
+            <CheckBox fx:id="cboxCheatMode" text="Cheat Mode" onAction="#onCheatModeChecked" />
+            <Button fx:id = "btnNuke" text = "NUKE" onAction="#onNukeClicked" style = "-fx-base: #FF0000"  />
+            <Label fx:id = "lblShield" text = "Shield off"  style = "-fx-background-color: #1E90FF" />
+        </HBox>
         <Label text="Shop" alignment="CENTER">
             <style>
                 -fx-font-size: 45px;
@@ -54,8 +59,6 @@
         <Label fx:id="lblPoints" text="Points: 0" />
         <HBox spacing="10" alignment="center">
             <Button fx:id="btnNextWave" text="Next Wave" onAction="#onNextWaveClicked" />
-            <Button fx:id="btnSave" text="Save" />
-            <Button fx:id="btnLoad" text="Load" />
         </HBox>
 
         <VBox spacing="15"> 

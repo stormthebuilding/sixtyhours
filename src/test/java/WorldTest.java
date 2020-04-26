@@ -20,6 +20,8 @@ import Model.Weapon;
 import Model.WeaponType;
 import Model.World;
 
+// -------------------------------- BOTH TESTS ARE NOT CAUGHT UP WITH CODE CHANGES ------------------------------------
+
 public class WorldTest {
     @Test
     public void testSave_SaveToFile_Pass() throws IOException {

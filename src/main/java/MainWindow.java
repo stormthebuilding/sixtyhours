@@ -1,6 +1,4 @@
 import java.io.IOException;
-
-import Model.Serializer;
 import Model.World;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -71,24 +69,11 @@ public class MainWindow {
         var stage = new Stage();
         stage.setScene(scene);
         stage.show();
-        
-
-        
-        
         // for testing purposes
-        var listy = World.instance().getObjectCollection();
-        for (Serializer object : listy) {
-            System.out.println(object);
-        }
-
-        // var listyJunior = World.instance().enemyList;
-        // for (Serializer object : listyJunior) {
+        // var listy = World.instance().getObjectCollection();
+        // for (Serializer object : listy) {
         //     System.out.println(object);
         // }
-
-
-
-
     }
 
     @FXML

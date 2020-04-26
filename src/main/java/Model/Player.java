@@ -76,8 +76,7 @@ public class Player implements Serializer {
         }
 
     
-        serialized = "PLAYER;"+","+point+","+score
-        +","+typeToSave+","+currentWeapon.getDamage();
+        serialized = "PLAYER;"+point+","+score+","+typeToSave+","+currentWeapon.getDamage();
 
         return serialized;
         

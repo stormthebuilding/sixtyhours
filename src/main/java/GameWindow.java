@@ -20,6 +20,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+
+
 import javafx.util.Duration;
 
 public class GameWindow implements PlayerObserver {
@@ -33,11 +35,15 @@ public class GameWindow implements PlayerObserver {
     @FXML Label lblCurrentWeapon;
     @FXML Label lblWeaponDamage;
     @FXML Label lblStatus;
+    @FXML Label lblShield;
     @FXML Button btnPistol;
     @FXML Button btnRifle;
     @FXML Button btnSniper;
     @FXML Button btnGrenade;
+    @FXML Button btnNuke;
     @FXML Menu lstWeapons;
+    @FXML CheckBox cboxCheatMode;
+    
 
     @FXML
     void initialize() {
@@ -58,6 +64,9 @@ public class GameWindow implements PlayerObserver {
         lblHealth.setText("Stronghold health: " + World.instance().stronghold.getHealth());
         lblPoints.setText("Points: " + World.instance().getScore());
         loadEnemies();
+        btnNuke.setDisable(true);
+       
+        
         
 
         
@@ -99,13 +108,8 @@ public class GameWindow implements PlayerObserver {
                 view.setUserData(enemy);
                 setEnermy(view);
                 map.getChildren().add(view);
-            }
-            
+            }  
         }
-
-        
-        
-       
     }
 
     
@@ -115,6 +119,32 @@ public class GameWindow implements PlayerObserver {
         World.instance().save("SavedGame.txt");
     }
 
+    @FXML 
+    public void onCheatModeChecked() throws IOException {
+        if (cboxCheatMode.isSelected() ) {
+            World.instance().setCheatMode(true);
+            lblShield.setText("Shield on");
+            btnNuke.setDisable(false);
+        }
+        else {
+            World.instance().setCheatMode(false);
+            lblShield.setText("Shield off");
+            btnNuke.setDisable(true);
+        }
+        
+    }
+
+    @FXML
+    public void onNukeClicked() throws IOException {
+        // delete from GUI
+        map.getChildren().removeIf(n -> n.getId() != null);
+        // delete from model
+        World.instance().enemyList.clear();
+        var updatedList = World.instance().getObjectCollection();
+        updatedList.clear();
+        World.instance().setObjectCollection(updatedList);
+        
+    }
     @FXML
     public void onReloadClicked() throws IOException{
         Player p = World.instance().getPlayer();
@@ -151,7 +181,9 @@ public class GameWindow implements PlayerObserver {
                                 }
                                 else {
                                     double health = World.instance().stronghold.getHealth();
+                                    if (!World.instance().isCheatMode() ) { // enemy doesn't damage stronghold if cheat mode is on
                                     World.instance().stronghold.setHealth(health - enemy.getDamage());
+                                    }
                                     lblHealth.setText("Stronghold health: " + World.instance().stronghold.getHealth());
                                     
                                     //update status

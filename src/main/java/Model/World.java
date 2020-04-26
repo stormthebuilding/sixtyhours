@@ -21,6 +21,7 @@ public class World implements Serializer {
     private int coins = 1000000;
     private int currentWave;
     private ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
+    private boolean cheatMode = false;
 
     public Player player = new Player();
 
@@ -169,6 +170,14 @@ public class World implements Serializer {
         this.objectCollection = objectCollection;
     }
 
+    public boolean isCheatMode() {
+        return cheatMode;
+    }
+
+    public void setCheatMode(boolean cheatMode) {
+        this.cheatMode = cheatMode;
+    }
+
     /**
      * Saves the existing game objects to a text file
      * @param fileName - The name of the file to save data to
@@ -231,7 +240,7 @@ public class World implements Serializer {
         String serialized = "";
 
         serialized = "WORLD;"+difficulty+","+userName+","+id+","+score+","
-        +coins+","+currentWave+","+nextId;
+        +coins+","+currentWave+","+nextId+","+cheatMode;
 
         return serialized; 
 
@@ -248,7 +257,15 @@ public class World implements Serializer {
         coins = Integer.parseInt(splitted[4]);
         currentWave = Integer.parseInt(splitted[5]);
         nextId = Integer.parseInt(splitted[6]);
+        if (splitted[7].equals("true")) {
+            cheatMode = true;
+        }
+        else {
+            cheatMode = false;
+        }
 
     }
+
+
 
 }
