@@ -18,7 +18,7 @@ Reshi
 * Title screen
 ## Known Issues
 Caleb
-* After loading a saved game, sometimes the enemies move at an increased speed. 
+* After loading a saved game, the enemies sometimes move at an increased speed. 
 
 Kevin
 
@@ -34,11 +34,11 @@ Reshi
 * No known issues
 
 ## Recording
-Alpha Version
-[Recording link](https://drive.google.com/open?id=1CW5kdHxV4GoX-Ov_sJSzhnEn91TZ-8OM)
+Alpha Version      
+[Recording link](https://drive.google.com/open?id=1CW5kdHxV4GoX-Ov_sJSzhnEn91TZ-8OM)            
 
-Beta Version
-[Game Play part](https://drive.google.com/open?id=1emwS6CGHS-1hhpVmmjVIZw2zWpDBjXjN)
+Beta Version             
+[Game Play part](https://drive.google.com/open?id=1emwS6CGHS-1hhpVmmjVIZw2zWpDBjXjN)        
 [Auxiliary Screens + Save/Load](https://bju.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=6aedb9b7-b66f-42d7-947e-aba9003509a8)
 
 
