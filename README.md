@@ -33,7 +33,11 @@ Reshi
 * No known issues
 
 ## Recording
+Alpha Version
 [Recording link](https://drive.google.com/open?id=1CW5kdHxV4GoX-Ov_sJSzhnEn91TZ-8OM)
+
+Beta Version
+[Game Play part](https://drive.google.com/open?id=1emwS6CGHS-1hhpVmmjVIZw2zWpDBjXjN)
 
 ## Expenses
 Developer|Time Spent|Time Left|Journal Links                                                     
