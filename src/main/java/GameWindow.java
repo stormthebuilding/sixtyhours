@@ -193,6 +193,7 @@ public class GameWindow implements PlayerObserver {
                                     }
                                 }
                             }
+                            // TODO: Current enemy movement logic
                             else {
                                 double x = node.getLayoutX();
                                 node.setLayoutX(x + 4);

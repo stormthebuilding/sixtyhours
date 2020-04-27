@@ -22,9 +22,6 @@ public class Enemy implements Serializer {
         y = World.instance().rand.nextInt(780 - 330 + 1) + 301;//section of left side of window we want the enemies to spawn
         x = 0;
         id = ++nextId;
-        // collectObject();
-
-
     }
 
     //called when enemy is damaged
@@ -123,12 +120,6 @@ public class Enemy implements Serializer {
         nextId = id = Integer.parseInt(splitted[7]);
         
 
-    }
-
-    public void collectObject() {
-        var objectList = World.instance().getObjectCollection();
-        objectList.add(this);
-        World.instance().setObjectCollection(objectList);
     }
 
 
