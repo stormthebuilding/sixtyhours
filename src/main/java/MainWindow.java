@@ -16,6 +16,7 @@ public class MainWindow {
     // GUI controls
 
     @FXML Label title;
+    @FXML TextField name; 
 
     // FXML Event Handlers
 

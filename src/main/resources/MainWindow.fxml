@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
+<?import java.lang.String?>
 
 <VBox fx:controller="MainWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css" spacing="30" prefHeight="400" prefWidth="500" alignment="CENTER">
     
@@ -13,6 +15,24 @@
         <Button onAction="#onLoadClicked" text="Load" />
         <Button onAction="#onHighScoreClicked" text="High Score" />
         <Button onAction="#onPlayClicked" text="Play" style="-fx-font-size: 19px"/>
+    </HBox>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Label text = "Enter your name:" prefHeight = "20" prefWidth = "90" />
+        <TextField fx:id="name" text = "Joe" />
+        <ChoiceBox value="">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Difficulty"/>
+                <String fx:value="Normal" />
+                <String fx:value="Hard" />
+                <String fx:value="Insane" />
+                </FXCollections>
+            </items>
+            <value>
+                <String fx:value="Difficulty" />
+            </value>
+        </ChoiceBox>
     </HBox>
 
 </VBox>

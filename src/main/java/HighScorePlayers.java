@@ -26,7 +26,7 @@ public class HighScorePlayers {
         3.Looping through scores list
         4.Display rank, name and scores as labels from scores list
          */
-        highScores.loadScores("src/main/resources/SaveScoresTestData.txt");
+        highScores.loadScores("src/main/resources/SaveScoresData.txt");
         List<Score> slist = highScores.getScoresList();
            
         for (int i = 0; i < slist.size(); ++i) {
