@@ -45,7 +45,7 @@ public class MainWindow {
         stage.setScene(scene);
         stage.show();
 
-        File audioFile = new File("src/main/resources/sounds/confirmation_002.mp3");
+        File audioFile = new File("src/main/resources/sounds/bong_001.mp3");
         Media audio = new Media(audioFile.toURI().toString());
         MediaPlayer audioPlayer = new MediaPlayer(audio);
         audioPlayer.setAutoPlay(true);
@@ -62,7 +62,7 @@ public class MainWindow {
         stage.setScene(scene);
         stage.show();
 
-        File audioFile = new File("src/main/resources/sounds/drop_003.mp3");
+        File audioFile = new File("src/main/resources/sounds/bong_001.mp3");
         Media audio = new Media(audioFile.toURI().toString());
         MediaPlayer audioPlayer = new MediaPlayer(audio);
         audioPlayer.setAutoPlay(true);
@@ -79,7 +79,7 @@ public class MainWindow {
         stage.setScene(scene);
         stage.show();
         
-        File audioFile = new File("src/main/resources/sounds/drop_003.mp3");
+        File audioFile = new File("src/main/resources/sounds/bong_001.mp3");
         Media audio = new Media(audioFile.toURI().toString());
         MediaPlayer audioPlayer = new MediaPlayer(audio);
         audioPlayer.setAutoPlay(true);
@@ -102,7 +102,7 @@ public class MainWindow {
             System.out.println(object);
         }
 
-        File audioFile = new File("src/main/resources/sounds/confirmation_002.mp3");
+        File audioFile = new File("src/main/resources/sounds/bong_001.mp3");
         Media audio = new Media(audioFile.toURI().toString());
         MediaPlayer audioPlayer = new MediaPlayer(audio);
         audioPlayer.setAutoPlay(true);
