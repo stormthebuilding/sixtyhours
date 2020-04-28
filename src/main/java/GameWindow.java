@@ -6,9 +6,12 @@ import javafx.scene.media.MediaPlayer;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Model.DifficultyType;
 import Model.Enemy;
+import Model.HighScore;
 import Model.Player;
 import Model.PlayerObserver;
+import Model.Score;
 import Model.Weapon;
 import Model.WeaponType;
 import Model.World;
@@ -53,6 +56,7 @@ public class GameWindow implements PlayerObserver {
     // Audio
     AudioClip defeatSound = new AudioClip(new File("src/main/resources/sounds/loser.mp3").toURI().toString());
     AudioClip saveSound = new AudioClip(new File("src/main/resources/sounds/confirmation_001.mp3").toURI().toString());
+    AudioClip highScoreSound = new AudioClip(new File("src/main/resources/sounds/applause.mp3").toURI().toString());
 
     
     
@@ -251,6 +255,22 @@ public class GameWindow implements PlayerObserver {
                                         
                                         lblStatus.setStyle("-fx-text-fill: red; -fx-font-size: 35px;");
                                         lblStatus.setText("Defeat");
+                                        // Higscores implementation
+                                        Score score = new Score(World.instance().getUserName(), World.instance().getScore(), 
+                                            DifficultyType.valueOf(World.instance().getDifficulty()));
+                                        //System.out.println(score.toString());
+                                        try {
+                                            if (HighScore.getInstance().findIfScoreQualifiesAsHigh(score)) {
+                                                //System.out.println("It is a high Score");
+                                                // Show the new Score Screen
+                                                displayNewHighScore();
+
+                                                HighScore.getInstance().processScore(score);
+                                            }
+                                        } catch (IOException e) {
+                                            // TODO Auto-generated catch block
+                                            e.printStackTrace();
+                                        }
                                         defeatSound.play();
 
                                         
@@ -465,6 +485,16 @@ public class GameWindow implements PlayerObserver {
         Stage highscoreData = new Stage();
         highscoreData.setScene(new Scene(loader.load()));
         highscoreData.show();
+    }
+
+    @FXML
+    public void displayNewHighScore() throws IOException {
+        // Show the new Score Scrren
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("NewHighScore.fxml"));
+        Stage newHighscore = new Stage();
+        newHighscore.setScene(new Scene(loader.load()));
+        newHighscore.show();
+        highScoreSound.play();
     }
 
 }
