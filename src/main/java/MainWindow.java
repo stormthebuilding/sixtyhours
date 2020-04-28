@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 
 import Model.Serializer;
@@ -5,13 +6,15 @@ import Model.World;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 
 public class MainWindow {
     
@@ -86,6 +89,20 @@ public class MainWindow {
         Stage highscoreData = new Stage();
         highscoreData.setScene(new Scene(loader.load()));
         highscoreData.show();
-        
+        SoundPlay(highscoreData);
     }
+
+    public void SoundPlay(final Stage stage)
+    {
+     File audioFile = new File("src/main/resources/applause.mp3");
+     Media audio = new Media(audioFile.toURI().toString());
+     MediaPlayer audioPlayer = new MediaPlayer(audio);
+     audioPlayer.setAutoPlay(true);
+     audioPlayer.play();   
+     stage.setOnCloseRequest(event -> {
+         audioPlayer.dispose();
+         stage.close();
+     });
+    }
+
 }
