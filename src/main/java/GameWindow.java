@@ -485,6 +485,7 @@ public class GameWindow implements PlayerObserver {
         Stage highscoreData = new Stage();
         highscoreData.setScene(new Scene(loader.load()));
         highscoreData.show();
+        highScoreSound.play();
     }
 
     @FXML
@@ -494,7 +495,6 @@ public class GameWindow implements PlayerObserver {
         Stage newHighscore = new Stage();
         newHighscore.setScene(new Scene(loader.load()));
         newHighscore.show();
-        highScoreSound.play();
     }
 
 }
