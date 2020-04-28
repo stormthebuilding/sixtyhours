@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <VBox fx:controller="NewHighScore"  xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css"
-    spacing="10" prefHeight="500" prefWidth="450">
+    spacing="10" prefHeight="500" prefWidth="450" style="-fx-background-color: #ccddee; -fx-background-image: url(images/texture.jpg); -fx-background-repeat: no-repeat;">
 
     <HBox alignment="CENTER" style="-fx-font-size: 20px">
       <Label text="New HighScore!" alignment="CENTER"/>

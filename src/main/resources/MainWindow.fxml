@@ -5,20 +5,21 @@
 <?import javafx.collections.*?>
 <?import java.lang.String?>
 
-<VBox fx:controller="MainWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css" spacing="30" prefHeight="400" prefWidth="500" alignment="CENTER">
+<VBox fx:controller="MainWindow" xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css" spacing="30" prefHeight="400" 
+        prefWidth="650" alignment="CENTER" style="-fx-background-color: #ccddee; -fx-background-image: url(images/texture.jpg); -fx-background-repeat: no-repeat;">
     
     <Label fx:id="title" />
     <Label text="Main Menu" style="-fx-font-size: 30px;"/>
     <HBox spacing="20" alignment="CENTER">
-        <Button onAction="#onAboutClicked" text="About" />
-        <Button onAction="#onHelpClicked" text="Help" />
-        <Button onAction="#onLoadClicked" text="Load" />
-        <Button onAction="#onHighScoreClicked" text="High Score" />
-        <Button onAction="#onPlayClicked" text="Play" style="-fx-font-size: 19px"/>
+        <Button onAction="#onAboutClicked" style="-fx-graphic: url('images/about.jpg')" />
+        <Button onAction="#onHelpClicked" style="-fx-graphic: url('images/instructions.png')"/>
+        <Button onAction="#onLoadClicked" style="-fx-graphic: url('images/load.png')" />
+        <Button onAction="#onHighScoreClicked" style="-fx-graphic: url('images/highScore.png')" />
+        <Button onAction="#onPlayClicked" style="-fx-graphic: url('images/play.png'); -fx-font-size: 19px" />
     </HBox>
 
     <HBox spacing="20" alignment="CENTER">
-        <Label text = "Enter your name:" prefHeight = "20" prefWidth = "90" />
+        <Label text = "Enter your name:" prefHeight = "20" prefWidth = "110" />
         <TextField fx:id="name" text = "Joe" />
         <ChoiceBox value="">
             <items>
