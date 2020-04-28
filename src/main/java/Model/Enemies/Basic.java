@@ -7,7 +7,7 @@ public class Basic extends Enemy {
 
     public Basic(EnemyType type) {
         super(type);
-        speed = 4;
+        speed = 1;
         health = 5;
         damage = .5;
     }
