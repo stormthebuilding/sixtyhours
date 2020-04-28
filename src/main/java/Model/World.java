@@ -205,10 +205,14 @@ public class World implements Serializer {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
+            Serializer objectDelayed = null;
+            String dataDelayed = "";
             while (!(line = reader.readLine()).startsWith("END")) {
                 Serializer object = null;
+
                 if (line.startsWith("PLAYER")) {
-                    object = player;
+                    objectDelayed = player;
+                    dataDelayed = line;
                 } else if (line.startsWith("STRONGHOLD")) {
                     object = stronghold;
                 } else if (line.startsWith("WORLD")) {
@@ -247,9 +251,16 @@ public class World implements Serializer {
                     objectCollection.add(object);
                     enemyList.add((Enemy) object);
                 }
-
-                object.deserialize(line);
+                if (object!=null) {
+                    object.deserialize(line);
+                }
+                
             }
+            if (objectDelayed!=null) {
+                objectDelayed.deserialize(dataDelayed);
+            }
+            
+
         }
     }
 
