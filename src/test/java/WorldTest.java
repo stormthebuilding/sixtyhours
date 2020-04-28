@@ -31,8 +31,8 @@ public class WorldTest {
         ArrayList<Serializer> objectCollection = new ArrayList<Serializer>();
         // add player
         Player player = new Player();
-        player.setClipCapacity(10);
-        player.setClipRest(5);
+        // player.setClipCapacity(10);
+        // player.setClipRest(5);
         player.setPoint(100);
         player.setScore(1000);
         objectCollection.add(player);
@@ -42,15 +42,15 @@ public class WorldTest {
         objectCollection.add(stronghold);
         // add score
         Score score = new Score("Moe", 1000, DifficultyType.INSANE);
-        objectCollection.add(score);
+        // objectCollection.add(score);
         // add enemy
         Enemy enemy = new Enemy(EnemyType.BASIC);
         enemy.setY(200);
         objectCollection.add(enemy);
         // add weapon
-        Weapon weapon = new Weapon(WeaponType.SNIPER, 4);
-        weapon.setCost(40);
-        objectCollection.add(weapon);
+        // Weapon weapon = new Weapon(WeaponType.SNIPER, 4);
+        // weapon.setCost(40);
+        // objectCollection.add(weapon);
         instance.setObjectCollection(objectCollection);
         // clear current contents of text file
         PrintWriter writer = new PrintWriter("testSave.txt");
@@ -104,12 +104,12 @@ public class WorldTest {
         
         // check player 
         var player = objectCollection.get(0);
-        assertEquals(20, ((Player) player).getClipCapacity());
-        assertEquals(10, ((Player) player).getClipRest());
+        // assertEquals(20, ((Player) player).getClipCapacity());
+        // assertEquals(10, ((Player) player).getClipRest());
         assertEquals(200, ((Player) player).getPoint());
         assertEquals(2000, ((Player) player).getScore());
         assertEquals(WeaponType.PISTOL, ((Player) player).getCurrentWeapon().getType());
-        assertEquals(0, ((Player) player).getCurrentWeapon().getCost());
+        // assertEquals(0, ((Player) player).getCurrentWeapon().getCost());
         assertEquals(2, ((Player) player).getCurrentWeapon().getDamage()); 
         // check stronghold
         var stronghold = objectCollection.get(1);
@@ -130,7 +130,7 @@ public class WorldTest {
         // check weapon
         var weapon = objectCollection.get(4);
         assertEquals(WeaponType.RIFLE, ((Weapon) weapon).getType());
-        assertEquals(20, ((Weapon) weapon).getCost());
+        // assertEquals(20, ((Weapon) weapon).getCost());
         assertEquals(3, ((Weapon) weapon).getDamage());
         }
 }

@@ -64,7 +64,16 @@ public class GameWindow implements PlayerObserver {
         lblHealth.setText("Stronghold health: " + World.instance().stronghold.getHealth());
         lblPoints.setText("Points: " + World.instance().getScore());
         loadEnemies();
-        btnNuke.setDisable(true);
+        if (!World.instance().isCheatMode()) { 
+            cboxCheatMode.setSelected(false); 
+            btnNuke.setDisable(true);
+            lblShield.setText("Shield off");
+        }
+        else {
+            cboxCheatMode.setSelected(true); 
+            btnNuke.setDisable(false);
+            lblShield.setText("Shield on");
+        }
        
         
         
@@ -193,7 +202,7 @@ public class GameWindow implements PlayerObserver {
                                     }
                                 }
                             }
-                            // TODO: Current enemy movement logic
+                            // TODO: Enemy movement needs to use speed var
                             else {
                                 double x = node.getLayoutX();
                                 node.setLayoutX(x + 4);
@@ -304,6 +313,10 @@ public class GameWindow implements PlayerObserver {
             lblCoins.setText("Coins: " + World.instance().getCoins());
             btnRifle.setText("Upgrade: 250 Coins");
             Rifle rifle = new Rifle(WeaponType.RIFLE);
+            // save new rifle to list of objects
+            var updatedList = World.instance().getObjectCollection();
+            updatedList.add(rifle);
+            World.instance().setObjectCollection(updatedList);
             World.instance().player.addWeapon(rifle);
             MenuItem item = new MenuItem();
             item.setText("Rifle");
@@ -335,6 +348,10 @@ public class GameWindow implements PlayerObserver {
             lblCoins.setText("Coins: " + World.instance().getCoins());
             btnSniper.setText("Upgrade: 500 Coins");
             Sniper sniper = new Sniper(WeaponType.SNIPER);
+            // add new sniper to list of objects
+            var updatedList = World.instance().getObjectCollection();
+            updatedList.add(sniper);
+            World.instance().setObjectCollection(updatedList);
             World.instance().player.addWeapon(sniper);
             MenuItem item = new MenuItem();
             item.setText("Sniper");
