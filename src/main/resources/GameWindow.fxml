@@ -9,16 +9,15 @@
 
     <VBox>
         <MenuBar>
-            <Menu text="_Main Menu">
-                <MenuItem fx:id="menuitSave" text="_Save" onAction = "#onSaveClicked" />
-                <MenuItem fx:id="menuitHighScore" text="_High Score"/>
+            <Menu text="Main Menu">
+                <MenuItem fx:id="menuitSave" text="Save" onAction = "#onSaveClicked" />
+                <MenuItem fx:id="menuitHighScore" text="High Score" onAction="#onHighScoreClick" />
             </Menu>
-            <Menu fx:id="lstWeapons" text="_Weapons">
-                <MenuItem fx:id="wpnPistol" text="_Pistol" onAction="#onlstPistolClicked" />
+            <Menu fx:id="lstWeapons" text="Weapons">
+                <MenuItem fx:id="wpnPistol" text="Pistol" onAction="#onlstPistolClicked" />
             </Menu>
            
         </MenuBar>
-        
         <Pane fx:id="map" prefHeight="850" prefWidth="1180" />
     </VBox>
 

@@ -15,13 +15,14 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class GameWindow implements PlayerObserver {
@@ -434,6 +435,15 @@ public class GameWindow implements PlayerObserver {
                 lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
             }
         }
+    }
+
+    @FXML
+    public void onHighScoreClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HighScorePlayers.fxml"));
+
+        Stage highscoreData = new Stage();
+        highscoreData.setScene(new Scene(loader.load()));
+        highscoreData.show();
     }
 
 }
