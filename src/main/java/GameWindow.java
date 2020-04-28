@@ -54,9 +54,15 @@ public class GameWindow implements PlayerObserver {
     @FXML CheckBox cboxCheatMode;
 
     // Audio
-    AudioClip defeatSound = new AudioClip(new File("src/main/resources/sounds/loser.mp3").toURI().toString());
-    AudioClip saveSound = new AudioClip(new File("src/main/resources/sounds/confirmation_001.mp3").toURI().toString());
-    AudioClip highScoreSound = new AudioClip(new File("src/main/resources/sounds/applause.mp3").toURI().toString());
+    AudioClip loserSound = new AudioClip(new File("src/main/resources/sounds/loser.mp3").toURI().toString());
+    AudioClip confirmationSound = new AudioClip(new File("src/main/resources/sounds/confirmation_001.mp3").toURI().toString());
+    AudioClip applauseSound = new AudioClip(new File("src/main/resources/sounds/applause.mp3").toURI().toString());
+    AudioClip clickSound = new AudioClip(new File("src/main/resources/sounds/click_001.mp3").toURI().toString());
+    AudioClip gameOverSound = new AudioClip(new File("src/main/resources/sounds/game_over.mp3").toURI().toString());
+    AudioClip laserSound = new AudioClip(new File("src/main/resources/sounds/laser1.mp3").toURI().toString());
+    AudioClip explosionSound = new AudioClip(new File("src/main/resources/sounds/explosion.mp3").toURI().toString());
+    AudioClip emptySound = new AudioClip(new File("src/main/resources/sounds/empty.mp3").toURI().toString());
+    AudioClip reloadSound = new AudioClip(new File("src/main/resources/sounds/reload.mp3").toURI().toString());
 
     
     
@@ -174,7 +180,7 @@ public class GameWindow implements PlayerObserver {
     @FXML
     public void onSaveClicked() throws IOException {
         World.instance().save("SavedGame.txt");
-        saveSound.play();
+        confirmationSound.play();
         
 
         
@@ -183,17 +189,21 @@ public class GameWindow implements PlayerObserver {
 
     @FXML 
     public void onCheatModeChecked() throws IOException {
-  
+        
         if (cboxCheatMode.isSelected() ) {
             World.instance().setCheatMode(true);
             lblShield.setText("Shield on");
             btnNuke.setDisable(false);
+            clickSound.play();
+            loserSound.play();
             
         }
         else {
             World.instance().setCheatMode(false);
             lblShield.setText("Shield off");
             btnNuke.setDisable(true);
+            clickSound.play();
+
         }
         
     }
@@ -207,6 +217,7 @@ public class GameWindow implements PlayerObserver {
         var updatedList = World.instance().getObjectCollection();
         updatedList.clear();
         World.instance().setObjectCollection(updatedList);
+        explosionSound.play();
         
     }
     @FXML
@@ -214,6 +225,8 @@ public class GameWindow implements PlayerObserver {
         Player p = World.instance().getPlayer();
         p.getCurrentWeapon().setMagazineRest(p.getCurrentWeapon().getMagazine());
         lblCurMagazine.setText(String.valueOf(p.getCurrentWeapon().getMagazineRest()));
+
+        reloadSound.play();
     }
 
     // code for enemy attack and movement
@@ -271,8 +284,8 @@ public class GameWindow implements PlayerObserver {
                                             // TODO Auto-generated catch block
                                             e.printStackTrace();
                                         }
-                                        defeatSound.play();
-
+                                        
+                                        gameOverSound.play();
                                         
                                     }
                                 }
@@ -337,8 +350,12 @@ public class GameWindow implements PlayerObserver {
             if(w.getMagazineRest()>=1){
                 w.setMagazineRest(w.getMagazineRest()-1);
                 e.damageEnemy(w.getDamage());
+                laserSound.play();
                 
                 lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
+            }
+            else {
+                emptySound.play();
             }
             
         });
@@ -350,6 +367,7 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void onPistolClicked(ActionEvent event) {
+        clickSound.play();
         if (World.instance().getCoins() >= 50) {
             World.instance().subtractCoins(50);
             lblCoins.setText("Coins: " + World.instance().getCoins());
@@ -368,6 +386,7 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void onRifleClicked(ActionEvent event) {
+        
         ArrayList<Weapon> list = World.instance().player.getWeaponList();
         boolean check = false;
         for (int i = 0; i < list.size(); ++i) {
@@ -380,6 +399,7 @@ public class GameWindow implements PlayerObserver {
                     weapon.setDamage(weapon.getDamage() + 8);
                     lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
                     btnRifle.setText("Fully Upgraded");
+                    clickSound.play();
                 }
             }
         }
@@ -397,6 +417,7 @@ public class GameWindow implements PlayerObserver {
             item.setText("Rifle");
             item.setOnAction(this::handleRifle);
             lstWeapons.getItems().add(item);
+            confirmationSound.play();
         }
     }
 
@@ -415,6 +436,7 @@ public class GameWindow implements PlayerObserver {
                     }
                     lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
                     btnSniper.setText("Fully Upgraded");
+                    clickSound.play();
                 }
             }
         }
@@ -432,10 +454,12 @@ public class GameWindow implements PlayerObserver {
             item.setText("Sniper");
             item.setOnAction(this::handleSniper);
             lstWeapons.getItems().add(item);
+            confirmationSound.play();
         }
     }
 
     public void onlstPistolClicked(ActionEvent event) {
+        clickSound.play();
         ArrayList<Weapon> list = World.instance().player.getWeaponList();
         for (int i = 0; i < list.size(); ++i) {
             Weapon weapon = list.get(i);
@@ -451,6 +475,7 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void handleRifle(ActionEvent event) {
+        clickSound.play();
         ArrayList<Weapon> list = World.instance().player.getWeaponList();
         for (int i = 0; i < list.size(); ++i) {
             Weapon weapon = list.get(i);
@@ -465,6 +490,7 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void handleSniper(ActionEvent event) {
+        clickSound.play();
         ArrayList<Weapon> list = World.instance().player.getWeaponList();
         for (int i = 0; i < list.size(); ++i) {
             Weapon weapon = list.get(i);
@@ -485,7 +511,7 @@ public class GameWindow implements PlayerObserver {
         Stage highscoreData = new Stage();
         highscoreData.setScene(new Scene(loader.load()));
         highscoreData.show();
-        highScoreSound.play();
+        applauseSound.play();
     }
 
     @FXML
