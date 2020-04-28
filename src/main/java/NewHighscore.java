@@ -3,6 +3,7 @@ import java.util.List;
 
 import Model.HighScore;
 import Model.Score;
+import Model.World;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,9 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
-public class NewHighscore {
+public class NewHighScore {
 
-    @FXML TextField playername;
     @FXML Label newScore;
     @FXML Label playerName;
     @FXML Label message; 
@@ -23,6 +23,8 @@ public class NewHighscore {
 
     @FXML
     public void initialize() { 
+        playerName.setText(World.instance().getUserName());
+        newScore.setText(String.valueOf(World.instance().getScore()));
     }    
 
 }

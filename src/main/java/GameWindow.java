@@ -1,9 +1,12 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Model.DifficultyType;
 import Model.Enemy;
+import Model.HighScore;
 import Model.Player;
 import Model.PlayerObserver;
+import Model.Score;
 import Model.Weapon;
 import Model.WeaponType;
 import Model.World;
@@ -233,6 +236,22 @@ public class GameWindow implements PlayerObserver {
                                     if(World.instance().stronghold.getHealth() == 0){
                                         lblStatus.setStyle("-fx-text-fill: red; -fx-font-size: 35px;");
                                         lblStatus.setText("Defeat");
+                                        // Higscores implementation
+                                        Score score = new Score(World.instance().getUserName(), World.instance().getScore(), 
+                                            DifficultyType.valueOf(World.instance().getDifficulty()));
+                                        //System.out.println(score.toString());
+                                        try {
+                                            if (HighScore.getInstance().findIfScoreQualifiesAsHigh(score)) {
+                                                //System.out.println("It is a high Score");
+                                                // Show the new Score Screen
+                                                displayNewHighScore();
+
+                                                HighScore.getInstance().processScore(score);
+                                            }
+                                        } catch (IOException e) {
+                                            // TODO Auto-generated catch block
+                                            e.printStackTrace();
+                                        }
                                     }
                                 }
                             }
@@ -444,6 +463,15 @@ public class GameWindow implements PlayerObserver {
         Stage highscoreData = new Stage();
         highscoreData.setScene(new Scene(loader.load()));
         highscoreData.show();
+    }
+
+    @FXML
+    public void displayNewHighScore() throws IOException {
+        // Show the new Score Scrren
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("NewHighScore.fxml"));
+        Stage newHighscore = new Stage();
+        newHighscore.setScene(new Scene(loader.load()));
+        newHighscore.show();
     }
 
 }
