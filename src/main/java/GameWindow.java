@@ -56,14 +56,54 @@ public class GameWindow implements PlayerObserver {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> handleEnemies()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+        for (Weapon weapon : World.instance().player.getWeaponList()) {
+            MenuItem item = null;
+            if (weapon.getType() == WeaponType.RIFLE) {
+                item = new MenuItem();
+                item.setText("Rifle");
+                item.setOnAction(this::handleRifle);
+            }
+            else if (weapon.getType() == WeaponType.SNIPER) {
+                item = new MenuItem();
+                item.setText("Sniper");
+                item.setOnAction(this::handleSniper);
+            }
+            if (item!= null) {
+                lstWeapons.getItems().add(item);
+            }
+        }
+        for (Weapon weapon : World.instance().player.getWeaponList()) {
+            if (weapon.getType() == WeaponType.PISTOL) {
+                if (weapon.getDamage()!=2 || weapon.getMagazine()!= 7) {
+                    btnPistol.setText("Fully Upgraded");
+                    btnPistol.setDisable(true);
+                }   
+            }
+            else if (weapon.getType() == WeaponType.RIFLE) {
+                if (weapon.getDamage()!=4 || weapon.getMagazine()!= 10) {
+                    btnRifle.setText("Fully Upgraded");
+                    btnRifle.setDisable(true);
+                }
+            }
+            else if (weapon.getType() == WeaponType.SNIPER) {
+                if (weapon.getDamage()!=20 || weapon.getMagazine()!= 1) {
+                    btnSniper.setText("Fully Upgraded");
+                    btnSniper.setDisable(true);
+                }
+            }
+        }
+        // update currently selected Weapon
+        String currentWeaponLowerCase = (""+World.instance().getPlayer().getCurrentWeapon().getType()).toLowerCase();
+        String currentWeaponCapitalized = currentWeaponLowerCase.substring(0, 1).toUpperCase() + currentWeaponLowerCase.substring(1);
+        lblCurrentWeapon.setText("Current Weapon: "+currentWeaponCapitalized);
         int bulletNum = World.instance().getPlayer().getCurrentWeapon().getMagazine();
         lblMaxMagazine.setText(String.valueOf(bulletNum));
         lblCurMagazine.setText(String.valueOf(bulletNum));
-        lblCoins.setText("Coins: " + World.instance().getCoins());
         lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
+        lblCoins.setText("Coins: " + World.instance().getCoins());
         lblHealth.setText("Stronghold health: " + World.instance().stronghold.getHealth());
         lblPoints.setText("Points: " + World.instance().getScore());
-        loadEnemies();
+        loadEnemies(); // load preexisting enemies if there are any
         if (!World.instance().isCheatMode()) { 
             cboxCheatMode.setSelected(false); 
             btnNuke.setDisable(true);
@@ -74,13 +114,6 @@ public class GameWindow implements PlayerObserver {
             btnNuke.setDisable(false);
             lblShield.setText("Shield on");
         }
-       
-        
-        
-
-        
-
-
     }
 
     // code for spawning a new enemy
@@ -202,11 +235,11 @@ public class GameWindow implements PlayerObserver {
                                     }
                                 }
                             }
-                            // TODO: Enemy movement needs to use speed var
                             else {
-                                double x = node.getLayoutX();
-                                node.setLayoutX(x + 4);
-                                enemy.setX(node.getLayoutX());
+                  
+                                enemy.setX(enemy.getX() +enemy.getSpeed());
+                                node.setLayoutX(node.getLayoutX() +enemy.getSpeed());
+                                
                             }
                         }
                     }
