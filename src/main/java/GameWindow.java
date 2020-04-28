@@ -7,7 +7,10 @@ import Model.PlayerObserver;
 import Model.Weapon;
 import Model.WeaponType;
 import Model.World;
+import Model.Enemies.Advanced;
 import Model.Enemies.Basic;
+import Model.Enemies.Boss;
+import Model.Enemies.Heavy;
 import Model.Weapons.Pistol;
 import Model.Weapons.Rifle;
 import Model.Weapons.Sniper;
@@ -65,17 +68,10 @@ public class GameWindow implements PlayerObserver {
         lblPoints.setText("Points: " + World.instance().getScore());
         loadEnemies();
         btnNuke.setDisable(true);
-       
-        
-        
-
-        
-
-
     }
 
     // code for spawning a new enemy
-    public void spawnEnemies() {
+    public void spawnBasic() {
         Basic enemy = World.instance().spawnBasic();
         double x = enemy.getX();
         double y = enemy.getY();
@@ -84,13 +80,46 @@ public class GameWindow implements PlayerObserver {
         view.setId("" + enemy.getId());
         view.relocate(x, y);
         view.setUserData(enemy);
+        setEnermy(view);       
+        map.getChildren().add(view);
+    }
+
+    public void spawnAdvanced() {
+        Advanced enemy = World.instance().spawnAdvanced();
+        double x = enemy.getX();
+        double y = enemy.getY();
+        ImageView view = new ImageView(new Image("/images/advanced.png"));
+        view.getStyleClass().add("current");
+        view.setId("" + enemy.getId());
+        view.relocate(x, y);
+        view.setUserData(enemy);
+        setEnermy(view);       
+        map.getChildren().add(view);
+    }
+
+    public void spawnHeavy() {
+        Heavy enemy = World.instance().spawnHeavy();
+        double x = enemy.getX();
+        double y = enemy.getY();
+        ImageView view = new ImageView(new Image("/images/Heavy.png"));
+        view.getStyleClass().add("current");
+        view.setId("" + enemy.getId());
+        view.relocate(x, y);
+        view.setUserData(enemy);
         setEnermy(view);
-        
-        //miss shoot !caution need change in the future
-        // if(Integer.parseInt(lblCurMagazine.getText())>=1){
-        //     map.setOnMouseClicked(me -> lblCurMagazine.setText(String.valueOf(Integer.parseInt(lblCurMagazine.getText())-1)));
-        // }
-        
+        map.getChildren().add(view);
+    }
+
+    public void spawnBoss() {
+        Boss enemy = World.instance().spawnBoss();
+        double x = enemy.getX();
+        double y = enemy.getY();
+        ImageView view = new ImageView(new Image("/images/Boss.png"));
+        view.getStyleClass().add("current");
+        view.setId("" + enemy.getId());
+        view.relocate(x, y);
+        view.setUserData(enemy);
+        setEnermy(view);
         map.getChildren().add(view);
     }
 
@@ -207,15 +236,15 @@ public class GameWindow implements PlayerObserver {
 
     public void onNextWaveClicked(ActionEvent event) {
         if (World.instance().getCurrentWave() == 0) {
-            spawnEnemies();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnEnemies()));
+            spawnBasic();
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnBasic()));
             timeline.setCycleCount(5);
             timeline.play();
             World.instance().addWave();
         }
         else if (World.instance().getCurrentWave() == 1) {
-            spawnEnemies();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> spawnEnemies()));
+            spawnBasic();
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> spawnBasic()));
             timeline.setCycleCount(10);
             timeline.play();
             World.instance().addWave();
