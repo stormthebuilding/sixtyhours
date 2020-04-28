@@ -1,3 +1,6 @@
+import java.io.File;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -44,8 +47,18 @@ public class GameWindow implements PlayerObserver {
     @FXML Button btnNuke;
     @FXML Menu lstWeapons;
     @FXML CheckBox cboxCheatMode;
-    
 
+    
+   
+
+ 
+
+    String bip = "src/main/resources/sounds/loser.mp3";
+    Media hit = new Media(new File(bip).toURI().toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(hit);
+
+    
+    
     @FXML
     void initialize() {
         World.instance();
@@ -160,14 +173,18 @@ public class GameWindow implements PlayerObserver {
     @FXML
     public void onSaveClicked() throws IOException {
         World.instance().save("SavedGame.txt");
+       
+        
     }
 
     @FXML 
     public void onCheatModeChecked() throws IOException {
+  
         if (cboxCheatMode.isSelected() ) {
             World.instance().setCheatMode(true);
             lblShield.setText("Shield on");
             btnNuke.setDisable(false);
+            
         }
         else {
             World.instance().setCheatMode(false);
@@ -231,8 +248,12 @@ public class GameWindow implements PlayerObserver {
                                     
                                     //update status
                                     if(World.instance().stronghold.getHealth() == 0){
+                                        
                                         lblStatus.setStyle("-fx-text-fill: red; -fx-font-size: 35px;");
                                         lblStatus.setText("Defeat");
+                                        mediaPlayer.play();
+
+                                        
                                     }
                                 }
                             }

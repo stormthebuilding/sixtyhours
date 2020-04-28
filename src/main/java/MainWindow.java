@@ -44,6 +44,13 @@ public class MainWindow {
         var stage = new Stage();
         stage.setScene(scene);
         stage.show();
+
+        File audioFile = new File("src/main/resources/sounds/confirmation_002.mp3");
+        Media audio = new Media(audioFile.toURI().toString());
+        MediaPlayer audioPlayer = new MediaPlayer(audio);
+        audioPlayer.setAutoPlay(true);
+        audioPlayer.play();   
+
     }
 
     @FXML
@@ -54,6 +61,13 @@ public class MainWindow {
         var stage = new Stage();
         stage.setScene(scene);
         stage.show();
+
+        File audioFile = new File("src/main/resources/sounds/drop_003.mp3");
+        Media audio = new Media(audioFile.toURI().toString());
+        MediaPlayer audioPlayer = new MediaPlayer(audio);
+        audioPlayer.setAutoPlay(true);
+        audioPlayer.play();   
+
     }
 
     @FXML
@@ -64,6 +78,13 @@ public class MainWindow {
         var stage = new Stage();
         stage.setScene(scene);
         stage.show();
+        
+        File audioFile = new File("src/main/resources/sounds/drop_003.mp3");
+        Media audio = new Media(audioFile.toURI().toString());
+        MediaPlayer audioPlayer = new MediaPlayer(audio);
+        audioPlayer.setAutoPlay(true);
+        audioPlayer.play();   
+     
     }
 
     @FXML
@@ -80,6 +101,14 @@ public class MainWindow {
         for (Serializer object : listy) {
             System.out.println(object);
         }
+
+        File audioFile = new File("src/main/resources/sounds/confirmation_002.mp3");
+        Media audio = new Media(audioFile.toURI().toString());
+        MediaPlayer audioPlayer = new MediaPlayer(audio);
+        audioPlayer.setAutoPlay(true);
+        audioPlayer.play();   
+
+        
     }
 
     @FXML
