@@ -226,7 +226,7 @@ public class GameWindow implements PlayerObserver {
         p.getCurrentWeapon().setMagazineRest(p.getCurrentWeapon().getMagazine());
         lblCurMagazine.setText(String.valueOf(p.getCurrentWeapon().getMagazineRest()));
 
-        reloadSound.play();
+        reloadSound.play(1000);
     }
 
     // code for enemy attack and movement
@@ -268,6 +268,7 @@ public class GameWindow implements PlayerObserver {
                                         
                                         lblStatus.setStyle("-fx-text-fill: red; -fx-font-size: 35px;");
                                         lblStatus.setText("Defeat");
+                                        gameOverSound.play();
                                         // Higscores implementation
                                         Score score = new Score(World.instance().getUserName(), World.instance().getScore(), 
                                             DifficultyType.valueOf(World.instance().getDifficulty()));
@@ -285,7 +286,7 @@ public class GameWindow implements PlayerObserver {
                                             e.printStackTrace();
                                         }
                                         
-                                        gameOverSound.play();
+                                        
                                         
                                     }
                                 }
