@@ -512,16 +512,8 @@ public class GameWindow {
             Weapon w = World.instance().getPlayer().getCurrentWeapon();
             Enemy e = (Enemy) node.getUserData();
             if(w.getMagazineRest()>=1){
-                w.setMagazineRest(w.getMagazineRest()-1);
                 e.damageEnemy(w.getDamage());
-                laserSound.play();
-                
-                lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
             }
-            else {
-                emptySound.play();
-            }
-            
         });
     }
 
@@ -555,12 +547,12 @@ public class GameWindow {
                 check = true;
                 // TODO: Here is a bug, I dont know waht you mean, it will upgrade without deduction when the getCoin didn;t achieve the requirement
                 if (World.instance().getCoins() >= 250) {
+                    btnRifle.setDisable(true);
                     World.instance().subtractCoins(250);
                     weapon.setDamage(weapon.getDamage() + 8);
                     lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
                     btnRifle.setText("Fully Upgraded");
                     clickSound.play();
-                    btnRifle.setDisable(true);
                 }
             }
         }
