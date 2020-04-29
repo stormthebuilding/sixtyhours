@@ -248,13 +248,10 @@ public class GameWindow implements PlayerObserver {
 
         p.getCurrentWeapon().setMagazineRest(p.getCurrentWeapon().getMagazine());
         lblCurMagazine.setText(String.valueOf(p.getCurrentWeapon().getMagazineRest()));
-<<<<<<< HEAD
 
         reloadSound.play(1000);
-=======
         
         map.setDisable(false);
->>>>>>> 8aec4b6282fb25faf92222025b7ca2504f386375
     }
 
     // code for enemy attack and movement
