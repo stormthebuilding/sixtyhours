@@ -29,6 +29,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -209,6 +210,20 @@ public class GameWindow implements PlayerObserver {
     }
 
     @FXML
+    public void onMapClicked() {
+        Weapon w = World.instance().getPlayer().getCurrentWeapon();
+        if(w.getMagazineRest()>=1){
+            w.setMagazineRest(w.getMagazineRest()-1);
+            laserSound.play();
+            
+            lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
+        }
+        else {
+            emptySound.play();
+        }
+    }
+
+    @FXML
     public void onNukeClicked() throws IOException {
         // delete from GUI
         map.getChildren().removeIf(n -> n.getId() != null);
@@ -348,14 +363,7 @@ public class GameWindow implements PlayerObserver {
             Weapon w = World.instance().getPlayer().getCurrentWeapon();
             Enemy e = (Enemy) node.getUserData();
             if(w.getMagazineRest()>=1){
-                w.setMagazineRest(w.getMagazineRest()-1);
                 e.damageEnemy(w.getDamage());
-                laserSound.play();
-                
-                lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
-            }
-            else {
-                emptySound.play();
             }
             
         });
