@@ -14,9 +14,14 @@ Nick
 
 Reshi
 
-* Highsocres creating and adding
-* Higscores  load/save
+* Highsocres creating and adding (Model)
+* Higscores  load/save (Model)
 * Title screen
+* About screen
+* Help/Instructions Screen
+* Highscores screen
+* New highscore congratulations screen
+
 ## Known Issues
 Caleb
 * After loading a saved game, the enemies move at an increased speed, and jump across the map. The cause of this issue has not been found. 
