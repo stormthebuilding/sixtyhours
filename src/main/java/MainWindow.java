@@ -21,7 +21,7 @@ public class MainWindow {
     // GUI controls
 
     @FXML Label title;
-    @FXML TextField name; 
+    @FXML TextField name;
 
     // FXML Event Handlers
 
@@ -49,8 +49,7 @@ public class MainWindow {
         Media audio = new Media(audioFile.toURI().toString());
         MediaPlayer audioPlayer = new MediaPlayer(audio);
         audioPlayer.setAutoPlay(true);
-        audioPlayer.play();   
-
+        audioPlayer.play();
     }
 
     @FXML
