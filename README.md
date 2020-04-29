@@ -44,12 +44,12 @@ Beta Version
 [Auxiliary Screens + Save/Load](https://bju.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=6aedb9b7-b66f-42d7-947e-aba9003509a8)
 
 Release Candidate          
-
+[Release Candidate Demo](https://drive.google.com/open?id=1bOQQDxVSb5uDSSS_bJ7s571vdODcnx_p)
 
 ## Expenses
 Developer|Time Spent|Time Left|Journal Links                                                     
 ---------|----------|---------|--------------
 |Caleb|45.34 hrs|14.66 hrs|[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NguyenJournal)
 |Kevin|   | |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/HansenJournal)
-|Nick| 21.75 hrs | 38.25 hrs |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NickJournal)
+|Nick| 37.92 hrs | 22.08 hrs |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NickJournal)
 |Reshi|20 hrs 40 min | 39 hrs 20 min|[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/ReshiJournal)
