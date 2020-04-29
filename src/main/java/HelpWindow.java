@@ -1,3 +1,4 @@
+//Event handler for the Help Screen
 import javafx.fxml.FXML;
 
 

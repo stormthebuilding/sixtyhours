@@ -1,3 +1,4 @@
+// Unit tests for addHighScore loadScores and saveScores methods in Highscore.java
 
 import Model.DifficultyType;
 import Model.Score;

@@ -38,18 +38,21 @@ public class MainWindow {
 
     @FXML
     void onPlayClicked(ActionEvent event) throws IOException {
-        var loader = new FXMLLoader(getClass().getResource("GameWindow.fxml"));
-        var scene = new Scene(loader.load());
+        if (name.getText() == null || name.getText().isBlank()){
+            var alert = new Alert(AlertType.INFORMATION, "Please Enter Name.");
+            alert.setHeaderText(null);
+            alert.show(); 
+        } else {
+            World.instance().setUserName(name.getText());
+            World.instance().setDifficulty(String.valueOf(diff.getSelectionModel().getSelectedItem()));
 
-        var stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
+            var loader = new FXMLLoader(getClass().getResource("GameWindow.fxml"));
+            var scene = new Scene(loader.load());
 
-        File audioFile = new File("src/main/resources/sounds/confirmation_002.mp3");
-        Media audio = new Media(audioFile.toURI().toString());
-        MediaPlayer audioPlayer = new MediaPlayer(audio);
-        audioPlayer.setAutoPlay(true);
-        audioPlayer.play();   
+            var stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }  
 
     }
 
@@ -113,12 +116,19 @@ public class MainWindow {
 
     @FXML
     void onHighScoreClicked(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("HighScorePlayers.fxml"));
+        File fileObj = new File("src/main/resources/SaveScoresData.txt");
+        if (fileObj.exists()){ 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HighScorePlayers.fxml"));
 
-        Stage highscoreData = new Stage();
-        highscoreData.setScene(new Scene(loader.load()));
-        highscoreData.show();
-        SoundPlay(highscoreData);
+            Stage highscoreData = new Stage();
+            highscoreData.setScene(new Scene(loader.load()));
+            highscoreData.show();
+            SoundPlay(highscoreData);
+        } else {
+            var alert = new Alert(AlertType.INFORMATION, "There are no high scores yet.");
+            alert.setHeaderText(null);
+            alert.show();
+        }
     }
 
     public void SoundPlay(final Stage stage)

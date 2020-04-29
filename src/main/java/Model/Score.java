@@ -1,16 +1,18 @@
+// Constructor for the score object and a method to compare two scores.
 package Model;
 
+// Has a construcctor to create a score object and a method to compare tow scores.
 public class Score implements Comparable<Score> {
-    private String name;
-    private int score;
-    private DifficultyType difficultyType;
+    private String name; //Name of the Player with high Score
+    private int score;  // Highscore
+    private DifficultyType difficultyType; //Difficulty Type of the game
 
     /**
      * Constructor for the Score Class
      * 
      * @param name - Name of the Player with high Score
-     * @param score - High Score
-     * @param difficultyType - Difficulty Type of the High Score
+     * @param score - HighScore
+     * @param difficultyType - Difficulty Type of the game
      * @author
      */
     public Score(String name, int score, DifficultyType difficultyType) {
@@ -79,6 +81,7 @@ public class Score implements Comparable<Score> {
         return "Score [difficultyType=" + difficultyType + ", name=" + name + ", score=" + score + "]";
     }
 
+    // compares two scores to see which score is greater.
     public int compareTo(Score scoreObj) {
         int scoreToCompare = ((Score) scoreObj).getScore(); // same type object
         if (this.score > scoreToCompare)

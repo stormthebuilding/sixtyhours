@@ -479,11 +479,18 @@ public class GameWindow implements PlayerObserver {
 
     @FXML
     public void onHighScoreClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("HighScorePlayers.fxml"));
+        File fileObj = new File("src/main/resources/SaveScoresData.txt");
+        if (fileObj.exists()){ 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HighScorePlayers.fxml"));
 
-        Stage highscoreData = new Stage();
-        highscoreData.setScene(new Scene(loader.load()));
-        highscoreData.show();
+            Stage highscoreData = new Stage();
+            highscoreData.setScene(new Scene(loader.load()));
+            highscoreData.show();
+        } else {
+            var alert = new Alert(AlertType.INFORMATION, "There are no high scores yet.");
+            alert.setHeaderText(null);
+            alert.show();
+        }
     }
 
     @FXML
