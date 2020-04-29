@@ -24,6 +24,7 @@ import Model.Weapons.Rifle;
 import Model.Weapons.Sniper;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +41,7 @@ import javafx.util.Duration;
 public class GameWindow implements PlayerObserver {
 
     public String difficulty = "Easy";
+    public int enemiesDestroyed;
 
     @FXML Pane map;
     @FXML Label lblHealth;
@@ -303,6 +305,7 @@ public class GameWindow implements PlayerObserver {
                         if (enemy.getHealth() <= 0) {
                             map.getChildren().remove(node);
                             World.instance().enemyList.remove(enemy);
+                            ++enemiesDestroyed;
                             // remove enemy from object list
                             var updatedList = World.instance().getObjectCollection();
                             updatedList.remove(enemy);
@@ -370,13 +373,21 @@ public class GameWindow implements PlayerObserver {
 
     public void onNextWaveClicked(ActionEvent event) {
         if (difficulty.equals("Easy")) {
+            btnNextWave.setDisable(true);
             if (World.instance().getCurrentWave() == 0) {
                 spawnBasic();
-                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnBasic()));
-                timeline.setCycleCount(5);
-                timeline.play();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnBasic()));
+                    timeline.setCycleCount(5);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(250), e -> checkWave()));
+                });
+                thread1.start();
+                thread2.start();
                 World.instance().addWave();
-                btnNextWave.setDisable(false);
+
             }
             else if (World.instance().getCurrentWave() == 1) {
                 spawnBasic();
@@ -506,6 +517,14 @@ public class GameWindow implements PlayerObserver {
         }
         else if (difficulty.equals("Insane")) {
 
+        }
+    }
+
+    private void checkWave() {
+        if (enemiesDestroyed == 6) {
+            btnNextWave.setDisable(false);
+        }
+            
         }
     }
 
