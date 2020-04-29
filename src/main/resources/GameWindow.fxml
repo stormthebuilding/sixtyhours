@@ -18,7 +18,7 @@
             </Menu>
            
         </MenuBar>
-        <Pane fx:id="map" onMouseClicked="#onMapClicked" prefHeight="850" prefWidth="1180" />
+        <Pane fx:id="map" onAction="#onMapClicked" prefHeight="850" prefWidth="1180" />
     </VBox>
 
     <VBox spacing="20">

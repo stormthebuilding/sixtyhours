@@ -538,6 +538,7 @@ public class GameWindow {
                     lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
                     btnRifle.setText("Fully Upgraded");
                     clickSound.play();
+                    btnRifle.setDisable(true);
                 }
             }
         }
@@ -575,6 +576,7 @@ public class GameWindow {
                     lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
                     btnSniper.setText("Fully Upgraded");
                     clickSound.play();
+                    btnSniper.setDisable(true);
                 }
             }
         }
