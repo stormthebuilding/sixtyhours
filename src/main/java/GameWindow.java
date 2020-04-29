@@ -8,6 +8,7 @@ import Model.Enemy;
 import Model.HighScore;
 import Model.Player;
 import Model.Score;
+import Model.Serializer;
 import Model.Weapon;
 import Model.WeaponType;
 import Model.World;
@@ -258,15 +259,12 @@ public class GameWindow {
 
     @FXML
     public void onNukeClicked() throws IOException {
+        explosionSound.play();
         // delete from GUI
         map.getChildren().removeIf(n -> n.getId() != null);
         // delete from model
         World.instance().enemyList.clear();
-        var updatedList = World.instance().getObjectCollection();
-        updatedList.clear();
-        World.instance().setObjectCollection(updatedList);
-        explosionSound.play();
-        
+        World.instance().getObjectCollection().removeIf(n -> n instanceof Enemy);
     }
     @FXML
     public void onReloadClicked() throws IOException{
