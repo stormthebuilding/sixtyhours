@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
-public class NewHighScore {
+public class NewHighscore {
 
     @FXML Label newScore;
     @FXML Label playerName;

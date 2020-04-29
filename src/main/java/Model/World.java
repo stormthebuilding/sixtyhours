@@ -20,7 +20,7 @@ public class World implements Serializer {
     private String userName;
     private int id;
     private int score;
-    private int coins = 1000000;
+    private int coins;
     private int currentWave;
     private static int nextId;
     private boolean cheatMode = false;

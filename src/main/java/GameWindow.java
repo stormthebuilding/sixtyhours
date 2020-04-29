@@ -1,6 +1,5 @@
 import java.io.File;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.AudioClip;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -8,12 +7,15 @@ import Model.DifficultyType;
 import Model.Enemy;
 import Model.HighScore;
 import Model.Player;
-import Model.PlayerObserver;
 import Model.Score;
+import Model.Serializer;
 import Model.Weapon;
 import Model.WeaponType;
 import Model.World;
+import Model.Enemies.Advanced;
 import Model.Enemies.Basic;
+import Model.Enemies.Boss;
+import Model.Enemies.Heavy;
 import Model.Weapons.Pistol;
 import Model.Weapons.Rifle;
 import Model.Weapons.Sniper;
@@ -31,7 +33,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class GameWindow implements PlayerObserver {
+public class GameWindow {
+
+    public String difficulty = "Easy";
 
     @FXML Pane map;
     @FXML Label lblHealth;
@@ -48,17 +52,20 @@ public class GameWindow implements PlayerObserver {
     @FXML Button btnSniper;
     @FXML Button btnGrenade;
     @FXML Button btnNuke;
+    @FXML Button btnNextWave;
     @FXML Menu lstWeapons;
     @FXML CheckBox cboxCheatMode;
 
-    
-   
-
- 
-
-    String bip = "src/main/resources/sounds/loser.mp3";
-    Media hit = new Media(new File(bip).toURI().toString());
-    MediaPlayer mediaPlayer = new MediaPlayer(hit);
+    // Audio
+    AudioClip loserSound = new AudioClip(new File("src/main/resources/sounds/loser.mp3").toURI().toString());
+    AudioClip confirmationSound = new AudioClip(new File("src/main/resources/sounds/confirmation_001.mp3").toURI().toString());
+    AudioClip applauseSound = new AudioClip(new File("src/main/resources/sounds/applause.mp3").toURI().toString());
+    AudioClip clickSound = new AudioClip(new File("src/main/resources/sounds/click_001.mp3").toURI().toString());
+    AudioClip gameOverSound = new AudioClip(new File("src/main/resources/sounds/game_over.mp3").toURI().toString());
+    AudioClip laserSound = new AudioClip(new File("src/main/resources/sounds/laser1.mp3").toURI().toString());
+    AudioClip explosionSound = new AudioClip(new File("src/main/resources/sounds/explosion.mp3").toURI().toString());
+    AudioClip emptySound = new AudioClip(new File("src/main/resources/sounds/empty.mp3").toURI().toString());
+    AudioClip reloadSound = new AudioClip(new File("src/main/resources/sounds/reload.mp3").toURI().toString());
 
     
     
@@ -134,7 +141,7 @@ public class GameWindow implements PlayerObserver {
     }
 
     // code for spawning a new enemy
-    public void spawnEnemies() {
+    public void spawnBasic() {
         Basic enemy = World.instance().spawnBasic();
         double x = enemy.getX();
         double y = enemy.getY();
@@ -143,13 +150,46 @@ public class GameWindow implements PlayerObserver {
         view.setId("" + enemy.getId());
         view.relocate(x, y);
         view.setUserData(enemy);
+        setEnermy(view);       
+        map.getChildren().add(view);
+    }
+
+    public void spawnAdvanced() {
+        Advanced enemy = World.instance().spawnAdvanced();
+        double x = enemy.getX();
+        double y = enemy.getY();
+        ImageView view = new ImageView(new Image("/images/advanced.png"));
+        view.getStyleClass().add("current");
+        view.setId("" + enemy.getId());
+        view.relocate(x, y);
+        view.setUserData(enemy);
+        setEnermy(view);       
+        map.getChildren().add(view);
+    }
+
+    public void spawnHeavy() {
+        Heavy enemy = World.instance().spawnHeavy();
+        double x = enemy.getX();
+        double y = enemy.getY();
+        ImageView view = new ImageView(new Image("/images/Heavy.png"));
+        view.getStyleClass().add("current");
+        view.setId("" + enemy.getId());
+        view.relocate(x, y);
+        view.setUserData(enemy);
         setEnermy(view);
-        
-        //miss shoot !caution need change in the future
-        // if(Integer.parseInt(lblCurMagazine.getText())>=1){
-        //     map.setOnMouseClicked(me -> lblCurMagazine.setText(String.valueOf(Integer.parseInt(lblCurMagazine.getText())-1)));
-        // }
-        
+        map.getChildren().add(view);
+    }
+
+    public void spawnBoss() {
+        Boss enemy = World.instance().spawnBoss();
+        double x = enemy.getX();
+        double y = enemy.getY();
+        ImageView view = new ImageView(new Image("/images/Boss.png"));
+        view.getStyleClass().add("current");
+        view.setId("" + enemy.getId());
+        view.relocate(x, y);
+        view.setUserData(enemy);
+        setEnermy(view);
         map.getChildren().add(view);
     }
 
@@ -176,44 +216,73 @@ public class GameWindow implements PlayerObserver {
     @FXML
     public void onSaveClicked() throws IOException {
         World.instance().save("SavedGame.txt");
-       
-        
+        confirmationSound.play();
     }
 
     @FXML 
     public void onCheatModeChecked() throws IOException {
-  
+
+        World.instance().addCoins(10000);
+        lblCoins.setText("Coins: " + World.instance().getCoins());
+        
         if (cboxCheatMode.isSelected() ) {
             World.instance().setCheatMode(true);
             lblShield.setText("Shield on");
             btnNuke.setDisable(false);
+            clickSound.play();
+            loserSound.play();
             
         }
         else {
             World.instance().setCheatMode(false);
             lblShield.setText("Shield off");
             btnNuke.setDisable(true);
+            clickSound.play();
+
         }
         
     }
 
     @FXML
+    public void onMapClicked() {
+        Weapon w = World.instance().getPlayer().getCurrentWeapon();
+        if(w.getMagazineRest()>=1){
+            w.setMagazineRest(w.getMagazineRest()-1);
+            laserSound.play();
+
+            lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
+        }
+        else {
+            emptySound.play();
+        }
+    }
+
+    @FXML
     public void onNukeClicked() throws IOException {
+        explosionSound.play();
         // delete from GUI
         map.getChildren().removeIf(n -> n.getId() != null);
         // delete from model
         World.instance().enemyList.clear();
-        var updatedList = World.instance().getObjectCollection();
-        updatedList.clear();
-        World.instance().setObjectCollection(updatedList);
-        
+        World.instance().getObjectCollection().removeIf(n -> n instanceof Enemy);
     }
     @FXML
     public void onReloadClicked() throws IOException{
+        reloadSound.play();
+        map.setDisable(true);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1950), e -> reload()));
+        timeline.play();
+    }
+
+    public void reload(){
         Player p = World.instance().getPlayer();
+
         p.getCurrentWeapon().setMagazineRest(p.getCurrentWeapon().getMagazine());
         lblCurMagazine.setText(String.valueOf(p.getCurrentWeapon().getMagazineRest()));
+
+        map.setDisable(false);
     }
+
 
     // code for enemy attack and movement
     public void handleEnemies() {
@@ -254,6 +323,7 @@ public class GameWindow implements PlayerObserver {
                                         
                                         lblStatus.setStyle("-fx-text-fill: red; -fx-font-size: 35px;");
                                         lblStatus.setText("Defeat");
+                                        gameOverSound.play();
                                         // Higscores implementation
                                         Score score = new Score(World.instance().getUserName(), World.instance().getScore(), 
                                             DifficultyType.valueOf(World.instance().getDifficulty()));
@@ -270,8 +340,8 @@ public class GameWindow implements PlayerObserver {
                                             // TODO Auto-generated catch block
                                             e.printStackTrace();
                                         }
-                                        mediaPlayer.play();
-
+                                        
+                                        
                                         
                                     }
                                 }
@@ -290,40 +360,143 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void onNextWaveClicked(ActionEvent event) {
-        if (World.instance().getCurrentWave() == 0) {
-            spawnEnemies();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnEnemies()));
-            timeline.setCycleCount(5);
-            timeline.play();
-            World.instance().addWave();
+        if (difficulty.equals("Easy")) {
+            if (World.instance().getCurrentWave() == 0) {
+                spawnBasic();
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnBasic()));
+                timeline.setCycleCount(5);
+                timeline.play();
+                World.instance().addWave();
+                btnNextWave.setDisable(false);
+            }
+            else if (World.instance().getCurrentWave() == 1) {
+                spawnBasic();
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1700), e -> spawnBasic()));
+                timeline.setCycleCount(12);
+                timeline.play();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 2) {
+                spawnAdvanced();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 3) {
+                spawnBasic();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2700), e -> spawnBasic()));
+                    timeline.setCycleCount(12);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(6000), e -> spawnAdvanced()));
+                    timeline.setCycleCount(5);
+                    timeline.play();
+                });
+                thread1.start();
+                thread2.start();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 4) {
+                spawnBasic();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2700), e -> spawnBasic()));
+                    timeline.setCycleCount(17);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5600), e -> spawnAdvanced()));
+                    timeline.setCycleCount(8);
+                    timeline.play();
+                });
+                thread1.start();
+                thread2.start();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 5) {
+                spawnBasic();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1700), e -> spawnBasic()));
+                    timeline.setCycleCount(20);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5500), e -> spawnAdvanced()));
+                    timeline.setCycleCount(12);
+                    timeline.play();
+                });
+                thread1.start();
+                thread2.start();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 6) {
+                spawnAdvanced();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1700), e -> spawnAdvanced()));
+                    timeline.setCycleCount(12);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnAdvanced()));
+                    timeline.setCycleCount(8);
+                    timeline.play();
+                });
+                thread1.start();
+                thread2.start();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 7) {
+                spawnHeavy();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 8) {
+                spawnAdvanced();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1700), e -> spawnAdvanced()));
+                    timeline.setCycleCount(15);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000), e -> spawnHeavy()));
+                    timeline.setCycleCount(7);
+                    timeline.play();
+                });
+                thread1.start();
+                thread2.start();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 9) {
+                spawnAdvanced();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> spawnAdvanced()));
+                    timeline.setCycleCount(15);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2500), e -> spawnHeavy()));
+                    timeline.setCycleCount(9);
+                    timeline.play();
+                });
+                Thread thread3 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1400), e -> spawnBasic()));
+                    timeline.setCycleCount(20);
+                });
+                Thread thread4 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(30000), e -> spawnBoss()));
+                    timeline.setCycleCount(1);
+                    timeline.play();
+                });
+                thread1.start();
+                thread2.start();
+                thread3.start();
+                thread4.start();
+                World.instance().addWave();
+            }
         }
-        else if (World.instance().getCurrentWave() == 1) {
-            spawnEnemies();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> spawnEnemies()));
-            timeline.setCycleCount(10);
-            timeline.play();
-            World.instance().addWave();
+        else if (difficulty.equals("Hard")) {
+
         }
-        else if (World.instance().getCurrentWave() == 2) {
-            spawnEnemies();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1150), e -> spawnEnemies()));
-            timeline.setCycleCount(25);
-            timeline.play();
-            World.instance().addWave();
-        }
-        else if (World.instance().getCurrentWave() == 3) {
-            spawnEnemies();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> spawnEnemies()));
-            timeline.setCycleCount(40);
-            timeline.play();
-            World.instance().addWave();
-        }
-        else if (World.instance().getCurrentWave() == 4) {
-            spawnEnemies();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(925), e -> spawnEnemies()));
-            timeline.setCycleCount(55);
-            timeline.play();
-            World.instance().addWave();
+        else if (difficulty.equals("Insane")) {
+
         }
     }
 
@@ -334,21 +507,13 @@ public class GameWindow implements PlayerObserver {
             Weapon w = World.instance().getPlayer().getCurrentWeapon();
             Enemy e = (Enemy) node.getUserData();
             if(w.getMagazineRest()>=1){
-                w.setMagazineRest(w.getMagazineRest()-1);
                 e.damageEnemy(w.getDamage());
-                
-                lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
             }
-            
         });
     }
 
-    @Override
-    public void update(Player player) {
-        // player.();
-    }
-
     public void onPistolClicked(ActionEvent event) {
+        clickSound.play();
         if (World.instance().getCoins() >= 50) {
             World.instance().subtractCoins(50);
             lblCoins.setText("Coins: " + World.instance().getCoins());
@@ -363,10 +528,12 @@ public class GameWindow implements PlayerObserver {
                 }
             }
             btnPistol.setText("Fully Upgraded");
+            btnPistol.setDisable(true);
         }
     }
 
     public void onRifleClicked(ActionEvent event) {
+        
         ArrayList<Weapon> list = World.instance().player.getWeaponList();
         boolean check = false;
         for (int i = 0; i < list.size(); ++i) {
@@ -375,10 +542,12 @@ public class GameWindow implements PlayerObserver {
                 check = true;
                 // TODO: Here is a bug, I dont know waht you mean, it will upgrade without deduction when the getCoin didn;t achieve the requirement
                 if (World.instance().getCoins() >= 250) {
+                    btnRifle.setDisable(true);
                     World.instance().subtractCoins(250);
                     weapon.setDamage(weapon.getDamage() + 8);
                     lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
                     btnRifle.setText("Fully Upgraded");
+                    clickSound.play();
                 }
             }
         }
@@ -396,6 +565,7 @@ public class GameWindow implements PlayerObserver {
             item.setText("Rifle");
             item.setOnAction(this::handleRifle);
             lstWeapons.getItems().add(item);
+            confirmationSound.play();
         }
     }
 
@@ -414,11 +584,13 @@ public class GameWindow implements PlayerObserver {
                     }
                     lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
                     btnSniper.setText("Fully Upgraded");
+                    clickSound.play();
+                    btnSniper.setDisable(true);
                 }
             }
         }
         if (check == false && World.instance().getCoins() >= 100) {
-            World.instance().subtractCoins(100);
+            World.instance().subtractCoins(500);
             lblCoins.setText("Coins: " + World.instance().getCoins());
             btnSniper.setText("Upgrade: 500 Coins");
             Sniper sniper = new Sniper(WeaponType.SNIPER);
@@ -431,10 +603,12 @@ public class GameWindow implements PlayerObserver {
             item.setText("Sniper");
             item.setOnAction(this::handleSniper);
             lstWeapons.getItems().add(item);
+            confirmationSound.play();
         }
     }
 
     public void onlstPistolClicked(ActionEvent event) {
+        clickSound.play();
         ArrayList<Weapon> list = World.instance().player.getWeaponList();
         for (int i = 0; i < list.size(); ++i) {
             Weapon weapon = list.get(i);
@@ -450,6 +624,7 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void handleRifle(ActionEvent event) {
+        clickSound.play();
         ArrayList<Weapon> list = World.instance().player.getWeaponList();
         for (int i = 0; i < list.size(); ++i) {
             Weapon weapon = list.get(i);
@@ -464,6 +639,7 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void handleSniper(ActionEvent event) {
+        clickSound.play();
         ArrayList<Weapon> list = World.instance().player.getWeaponList();
         for (int i = 0; i < list.size(); ++i) {
             Weapon weapon = list.get(i);

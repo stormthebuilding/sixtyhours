@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import Model.Weapons.*;
 
 public class Player implements Serializer {
-    private PlayerObserver observer;
     
     private int point;
     private int score;
@@ -53,14 +52,6 @@ public class Player implements Serializer {
 
     public void addWeapon(Weapon weapon) {
         weaponList.add(weapon);
-    }
-
-    public void setObserver(PlayerObserver observer) {
-        this.observer = observer;
-    }
-
-    public PlayerObserver getObserver() {
-        return observer;
     }
 
     @Override
