@@ -520,8 +520,6 @@ public class GameWindow {
         if (enemiesDestroyed == 6) {
             btnNextWave.setDisable(false);
         }
-            
-        }
     }
 
     @FXML
