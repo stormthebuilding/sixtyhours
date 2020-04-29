@@ -220,6 +220,9 @@ public class GameWindow {
 
     @FXML 
     public void onCheatModeChecked() throws IOException {
+
+        World.instance().addCoins(10000);
+        lblCoins.setText("Coins: " + World.instance().getCoins());
         
         if (cboxCheatMode.isSelected() ) {
             World.instance().setCheatMode(true);
