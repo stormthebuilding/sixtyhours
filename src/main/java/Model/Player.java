@@ -17,7 +17,6 @@ public class Player implements Serializer {
         Pistol w = new Pistol(WeaponType.PISTOL);
         weaponList.add(w);
         currentWeapon = w;
-        // collectObject();
     }
 
     public int getPoint() {
@@ -48,6 +47,10 @@ public class Player implements Serializer {
         return weaponList;
     }
 
+    public void setWeaponList(ArrayList<Weapon> weaponList) {
+        this.weaponList = weaponList;
+	}
+
     public void addWeapon(Weapon weapon) {
         weaponList.add(weapon);
     }
@@ -62,6 +65,7 @@ public class Player implements Serializer {
 
     @Override
     public String serialize() {
+
         String serialized = "";
         String typeToSave = "";
     
@@ -75,8 +79,7 @@ public class Player implements Serializer {
             typeToSave = "SNIPER";
         }
 
-    
-        serialized = "PLAYER;"+point+","+score+","+typeToSave+","+currentWeapon.getDamage();
+        serialized = "PLAYER;"+point+","+score+","+typeToSave;
 
         return serialized;
         
@@ -84,27 +87,34 @@ public class Player implements Serializer {
 
     @Override
     public void deserialize(String data) {
+
         String[] splitted = data.split(";")[1].split(",");
         point = Integer.parseInt(splitted[0]);
         score = Integer.parseInt(splitted[1]);
+
         if (splitted[2].equals("PISTOL")) {
-            currentWeapon.type = WeaponType.PISTOL;
+            for (Weapon weapon : weaponList) {
+                if (weapon.getType() == WeaponType.PISTOL) {
+                    currentWeapon = weapon;
+                }
+            }
         }
         else if (splitted[2].equals("RIFLE")) {
-            currentWeapon.type = WeaponType.RIFLE;
+            for (Weapon weapon : weaponList) {
+                if (weapon.getType() == WeaponType.RIFLE) {
+                    currentWeapon = weapon;
+                }
+            }
         }
         else if (splitted[2].equals("SNIPER")) {
-            currentWeapon.type = WeaponType.SNIPER;
+            for (Weapon weapon : weaponList) {
+                if (weapon.getType() == WeaponType.SNIPER) {
+                    currentWeapon = weapon;
+                }
+            }
         }
-        currentWeapon.damage = Integer.parseInt(splitted[3]);
-    }
-
-    public void collectObject() {
-        var objectList = World.instance().getObjectCollection();
-        objectList.add(this);
-        World.instance().setObjectCollection(objectList);
     }
 
 
-    
+
 }

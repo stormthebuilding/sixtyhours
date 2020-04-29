@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:controller="NewHighScore"  xmlns:fx="http://javafx.com/fxml" stylesheets="MainWindow.css"
+    spacing="10" prefHeight="300" prefWidth="450" style="-fx-background-color: #ccddee; -fx-background-image: url(images/texture.jpg); -fx-background-repeat: no-repeat;">
+
+    <HBox alignment="CENTER" style="-fx-font-size: 20px">
+      <Label text="New HighScore!" alignment="CENTER"/>
+    </HBox>
+    <HBox alignment="CENTER" style="-fx-font-size: 13px;">
+      <Label text="Congrats you got into the list of great Defenders of the Stronghold!" wrapText="true"/>
+    </HBox>
+    <HBox alignment="CENTER" style="-fx-font-size: 13px;">
+      <Label text="Hi " wrapText="true"/>
+      <Label fx:id="playerName" text="Joe Brown" />
+    </HBox>
+    <HBox alignment="CENTER" style="-fx-font-size: 14px;-fx-spacing:2px;">
+      <Label text="Your HighScore:"/>
+      <Label fx:id="newScore" text="50,000"/>
+    </HBox>
+    <HBox alignment="CENTER" style="-fx-font-size: 14px;-fx-spacing:2px;">
+      <Label fx:id="message"/>
+    </HBox>
+</VBox>

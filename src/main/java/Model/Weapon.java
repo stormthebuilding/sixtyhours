@@ -9,8 +9,6 @@ public class Weapon implements Serializer{
 
     public Weapon(WeaponType type) {
         this.type = type;
-
-        // collectObject(); 
      
     }
 
@@ -46,8 +44,10 @@ public class Weapon implements Serializer{
 
     @Override
     public String serialize() {
+
         String serialized = "";
         String typeToSave = "";
+
         if (type == WeaponType.PISTOL) {
             typeToSave = "PISTOL";
         }
@@ -57,13 +57,19 @@ public class Weapon implements Serializer{
         else if (type == WeaponType.SNIPER) {
             typeToSave = "SNIPER";
         }
+ 
         serialized = "WEAPON;"+typeToSave+","+damage+","+magazine+","+magazineRest;
+        
         return serialized;
+
+
     }
 
     @Override
     public void deserialize(String data) {
+
         String[] splitted = data.split(";")[1].split(",");
+
         if (splitted[0].equals("PISTOL")) {
             type = WeaponType.PISTOL;
         }
@@ -73,6 +79,7 @@ public class Weapon implements Serializer{
         else if (splitted[0].equals("SNIPER")) {
             type = WeaponType.SNIPER;
         }
+
         damage = Integer.parseInt(splitted[1]);
         magazine = Integer.parseInt(splitted[2]);
         magazineRest = Integer.parseInt(splitted[3]);
@@ -80,10 +87,5 @@ public class Weapon implements Serializer{
 
     }
 
-    public void collectObject() {
-        var objectList = World.instance().getObjectCollection();
-        objectList.add(this);
-        World.instance().setObjectCollection(objectList);
-    }
 
 }

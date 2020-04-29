@@ -22,9 +22,6 @@ public class Enemy implements Serializer {
         y = World.instance().rand.nextInt(780 - 330 + 1) + 301;//section of left side of window we want the enemies to spawn
         x = 0;
         id = ++nextId;
-        // collectObject();
-
-
     }
 
     //called when enemy is damaged
@@ -81,8 +78,10 @@ public class Enemy implements Serializer {
 
     @Override
     public String serialize() {
+
         String serialized = "";
         String typeToSave = "";
+
         if (type == EnemyType.BASIC) {
             typeToSave = "BASIC";
         }
@@ -95,13 +94,18 @@ public class Enemy implements Serializer {
         else if (type == EnemyType.BOSS) {
             typeToSave = "BOSS";
         }
+
         serialized = "ENEMY;"+typeToSave+","+id+","+x+","+y+","+speed+","+health+","+damage+","+nextId;
+
         return serialized;
+
     }
 
     @Override
     public void deserialize(String data) {
+
         String[] splitted = data.split(";")[1].split(",");
+
         if (splitted[0].equals("BASIC")) {
             type = EnemyType.BASIC;
         }
@@ -114,6 +118,7 @@ public class Enemy implements Serializer {
         else if (splitted[0].equals("BOSS")) {
             type = EnemyType.BOSS;
         }
+        
         id = Integer.parseInt(splitted[1]);
         x = Double.parseDouble(splitted[2]);
         y = Double.parseDouble(splitted[3]);
@@ -124,26 +129,4 @@ public class Enemy implements Serializer {
         
 
     }
-
-    public void collectObject() {
-        var objectList = World.instance().getObjectCollection();
-        objectList.add(this);
-        World.instance().setObjectCollection(objectList);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

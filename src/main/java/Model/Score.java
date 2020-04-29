@@ -1,6 +1,6 @@
 package Model;
 
-public class Score implements Serializer, Comparable<Score> {
+public class Score implements Comparable<Score> {
     private String name;
     private int score;
     private DifficultyType difficultyType;
@@ -17,9 +17,6 @@ public class Score implements Serializer, Comparable<Score> {
         this.name = name;
         this.score = score;
         this.difficultyType = difficultyType;
-        // collectObject(); 
-
-        
     }
 
     /**
@@ -82,46 +79,6 @@ public class Score implements Serializer, Comparable<Score> {
         return "Score [difficultyType=" + difficultyType + ", name=" + name + ", score=" + score + "]";
     }
 
-    @Override
-    public String serialize() {
-        String serialized = "";
-        String difficultyToSave = "";
-        if (difficultyType == DifficultyType.NORMAL) {
-            difficultyToSave = "NORMAL";
-        }
-        else if (difficultyType == DifficultyType.HARD) {
-            difficultyToSave = "HARD";
-        }
-        else if (difficultyType == DifficultyType.INSANE) {
-            difficultyToSave = "INSANE";
-        }
-        serialized = "SCORE;"+name+","+score+","+difficultyToSave;
-       
-        return serialized;
-    }
-
-    @Override
-    public void deserialize(String data) {
-        String[] splitted = data.split(";")[1].split(",");
-        name = splitted[0];
-        score = Integer.parseInt(splitted[1]);
-        if (splitted[2].equals("NORMAL")) {
-            difficultyType = DifficultyType.NORMAL;
-        }
-        else if (splitted[2].equals("HARD")) {
-            difficultyType = DifficultyType.HARD;
-        }
-        else if (splitted[2].equals("INSANE")) {
-            difficultyType = DifficultyType.INSANE;
-        }
-    }
-
-    public void collectObject() {
-        var objectList = World.instance().getObjectCollection();
-        objectList.add(this);
-        World.instance().setObjectCollection(objectList);
-    }
-    
     public int compareTo(Score scoreObj) {
         int scoreToCompare = ((Score) scoreObj).getScore(); // same type object
         if (this.score > scoreToCompare)

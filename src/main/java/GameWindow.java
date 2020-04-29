@@ -1,9 +1,17 @@
+import java.io.File;
+
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Model.DifficultyType;
 import Model.Enemy;
+import Model.HighScore;
 import Model.Player;
 import Model.PlayerObserver;
+import Model.Score;
 import Model.Weapon;
 import Model.WeaponType;
 import Model.World;
@@ -18,16 +26,19 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class GameWindow implements PlayerObserver {
+
+    public String difficulty = "Easy";
 
     @FXML Pane map;
     @FXML Label lblHealth;
@@ -44,10 +55,23 @@ public class GameWindow implements PlayerObserver {
     @FXML Button btnSniper;
     @FXML Button btnGrenade;
     @FXML Button btnNuke;
+    @FXML Button btnNextWave;
     @FXML Menu lstWeapons;
     @FXML CheckBox cboxCheatMode;
-    
 
+    // Audio
+    AudioClip loserSound = new AudioClip(new File("src/main/resources/sounds/loser.mp3").toURI().toString());
+    AudioClip confirmationSound = new AudioClip(new File("src/main/resources/sounds/confirmation_001.mp3").toURI().toString());
+    AudioClip applauseSound = new AudioClip(new File("src/main/resources/sounds/applause.mp3").toURI().toString());
+    AudioClip clickSound = new AudioClip(new File("src/main/resources/sounds/click_001.mp3").toURI().toString());
+    AudioClip gameOverSound = new AudioClip(new File("src/main/resources/sounds/game_over.mp3").toURI().toString());
+    AudioClip laserSound = new AudioClip(new File("src/main/resources/sounds/laser1.mp3").toURI().toString());
+    AudioClip explosionSound = new AudioClip(new File("src/main/resources/sounds/explosion.mp3").toURI().toString());
+    AudioClip emptySound = new AudioClip(new File("src/main/resources/sounds/empty.mp3").toURI().toString());
+    AudioClip reloadSound = new AudioClip(new File("src/main/resources/sounds/reload.mp3").toURI().toString());
+
+    
+    
     @FXML
     void initialize() {
         World.instance();
@@ -59,15 +83,64 @@ public class GameWindow implements PlayerObserver {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> handleEnemies()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+        for (Weapon weapon : World.instance().player.getWeaponList()) {
+            MenuItem item = null;
+            if (weapon.getType() == WeaponType.RIFLE) {
+                item = new MenuItem();
+                item.setText("Rifle");
+                item.setOnAction(this::handleRifle);
+            }
+            else if (weapon.getType() == WeaponType.SNIPER) {
+                item = new MenuItem();
+                item.setText("Sniper");
+                item.setOnAction(this::handleSniper);
+            }
+            if (item!= null) {
+                lstWeapons.getItems().add(item);
+            }
+        }
+        for (Weapon weapon : World.instance().player.getWeaponList()) {
+            if (weapon.getType() == WeaponType.PISTOL) {
+                if (weapon.getDamage()!=2 || weapon.getMagazine()!= 7) {
+                    btnPistol.setText("Fully Upgraded");
+                    btnPistol.setDisable(true);
+                }   
+            }
+            else if (weapon.getType() == WeaponType.RIFLE) {
+                if (weapon.getDamage()!=4 || weapon.getMagazine()!= 10) {
+                    btnRifle.setText("Fully Upgraded");
+                    btnRifle.setDisable(true);
+                }
+            }
+            else if (weapon.getType() == WeaponType.SNIPER) {
+                if (weapon.getDamage()!=20 || weapon.getMagazine()!= 1) {
+                    btnSniper.setText("Fully Upgraded");
+                    btnSniper.setDisable(true);
+                }
+            }
+        }
+        // update currently selected Weapon
+        String currentWeaponLowerCase = (""+World.instance().getPlayer().getCurrentWeapon().getType()).toLowerCase();
+        String currentWeaponCapitalized = currentWeaponLowerCase.substring(0, 1).toUpperCase() + currentWeaponLowerCase.substring(1);
+        lblCurrentWeapon.setText("Current Weapon: "+currentWeaponCapitalized);
         int bulletNum = World.instance().getPlayer().getCurrentWeapon().getMagazine();
         lblMaxMagazine.setText(String.valueOf(bulletNum));
         lblCurMagazine.setText(String.valueOf(bulletNum));
-        lblCoins.setText("Coins: " + World.instance().getCoins());
         lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
+        lblCoins.setText("Coins: " + World.instance().getCoins());
         lblHealth.setText("Stronghold health: " + World.instance().stronghold.getHealth());
         lblPoints.setText("Points: " + World.instance().getScore());
-        loadEnemies();
-        btnNuke.setDisable(true);
+        loadEnemies(); // load preexisting enemies if there are any
+        if (!World.instance().isCheatMode()) { 
+            cboxCheatMode.setSelected(false); 
+            btnNuke.setDisable(true);
+            lblShield.setText("Shield off");
+        }
+        else {
+            cboxCheatMode.setSelected(true); 
+            btnNuke.setDisable(false);
+            lblShield.setText("Shield on");
+        }
     }
 
     // code for spawning a new enemy
@@ -146,19 +219,30 @@ public class GameWindow implements PlayerObserver {
     @FXML
     public void onSaveClicked() throws IOException {
         World.instance().save("SavedGame.txt");
+        confirmationSound.play();
+        
+
+        
+        
     }
 
     @FXML 
     public void onCheatModeChecked() throws IOException {
+        
         if (cboxCheatMode.isSelected() ) {
             World.instance().setCheatMode(true);
             lblShield.setText("Shield on");
             btnNuke.setDisable(false);
+            clickSound.play();
+            loserSound.play();
+            
         }
         else {
             World.instance().setCheatMode(false);
             lblShield.setText("Shield off");
             btnNuke.setDisable(true);
+            clickSound.play();
+
         }
         
     }
@@ -172,6 +256,7 @@ public class GameWindow implements PlayerObserver {
         var updatedList = World.instance().getObjectCollection();
         updatedList.clear();
         World.instance().setObjectCollection(updatedList);
+        explosionSound.play();
         
     }
     @FXML
@@ -179,6 +264,8 @@ public class GameWindow implements PlayerObserver {
         Player p = World.instance().getPlayer();
         p.getCurrentWeapon().setMagazineRest(p.getCurrentWeapon().getMagazine());
         lblCurMagazine.setText(String.valueOf(p.getCurrentWeapon().getMagazineRest()));
+
+        reloadSound.play();
     }
 
     // code for enemy attack and movement
@@ -217,15 +304,36 @@ public class GameWindow implements PlayerObserver {
                                     
                                     //update status
                                     if(World.instance().stronghold.getHealth() == 0){
+                                        
                                         lblStatus.setStyle("-fx-text-fill: red; -fx-font-size: 35px;");
                                         lblStatus.setText("Defeat");
+                                        // Higscores implementation
+                                        Score score = new Score(World.instance().getUserName(), World.instance().getScore(), 
+                                            DifficultyType.valueOf(World.instance().getDifficulty()));
+                                        //System.out.println(score.toString());
+                                        try {
+                                            if (HighScore.getInstance().findIfScoreQualifiesAsHigh(score)) {
+                                                //System.out.println("It is a high Score");
+                                                // Show the new Score Screen
+                                                displayNewHighScore();
+
+                                                HighScore.getInstance().processScore(score);
+                                            }
+                                        } catch (IOException e) {
+                                            // TODO Auto-generated catch block
+                                            e.printStackTrace();
+                                        }
+                                        
+                                        gameOverSound.play();
+                                        
                                     }
                                 }
                             }
                             else {
-                                double x = node.getLayoutX();
-                                node.setLayoutX(x + 4);
-                                enemy.setX(node.getLayoutX());
+                  
+                                enemy.setX(enemy.getX() +enemy.getSpeed());
+                                node.setLayoutX(node.getLayoutX() +enemy.getSpeed());
+                                
                             }
                         }
                     }
@@ -235,40 +343,143 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void onNextWaveClicked(ActionEvent event) {
-        if (World.instance().getCurrentWave() == 0) {
-            spawnBasic();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnBasic()));
-            timeline.setCycleCount(5);
-            timeline.play();
-            World.instance().addWave();
+        if (difficulty.equals("Easy")) {
+            if (World.instance().getCurrentWave() == 0) {
+                spawnBasic();
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnBasic()));
+                timeline.setCycleCount(5);
+                timeline.play();
+                World.instance().addWave();
+                btnNextWave.setDisable(false);
+            }
+            else if (World.instance().getCurrentWave() == 1) {
+                spawnBasic();
+                Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1700), e -> spawnBasic()));
+                timeline.setCycleCount(12);
+                timeline.play();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 2) {
+                spawnAdvanced();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 3) {
+                spawnBasic();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2700), e -> spawnBasic()));
+                    timeline.setCycleCount(12);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(6000), e -> spawnAdvanced()));
+                    timeline.setCycleCount(5);
+                    timeline.play();
+                });
+                thread1.start();
+                thread2.start();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 4) {
+                spawnBasic();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2700), e -> spawnBasic()));
+                    timeline.setCycleCount(17);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5600), e -> spawnAdvanced()));
+                    timeline.setCycleCount(8);
+                    timeline.play();
+                });
+                thread1.start();
+                thread2.start();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 5) {
+                spawnBasic();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1700), e -> spawnBasic()));
+                    timeline.setCycleCount(20);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5500), e -> spawnAdvanced()));
+                    timeline.setCycleCount(12);
+                    timeline.play();
+                });
+                thread1.start();
+                thread2.start();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 6) {
+                spawnAdvanced();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1700), e -> spawnAdvanced()));
+                    timeline.setCycleCount(12);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> spawnAdvanced()));
+                    timeline.setCycleCount(8);
+                    timeline.play();
+                });
+                thread1.start();
+                thread2.start();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 7) {
+                spawnHeavy();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 8) {
+                spawnAdvanced();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1700), e -> spawnAdvanced()));
+                    timeline.setCycleCount(15);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000), e -> spawnHeavy()));
+                    timeline.setCycleCount(7);
+                    timeline.play();
+                });
+                thread1.start();
+                thread2.start();
+                World.instance().addWave();
+            }
+            else if (World.instance().getCurrentWave() == 9) {
+                spawnAdvanced();
+                Thread thread1 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> spawnAdvanced()));
+                    timeline.setCycleCount(15);
+                    timeline.play();
+                });
+                Thread thread2 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2500), e -> spawnHeavy()));
+                    timeline.setCycleCount(9);
+                    timeline.play();
+                });
+                Thread thread3 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1400), e -> spawnBasic()));
+                    timeline.setCycleCount(20);
+                });
+                Thread thread4 = new Thread(() -> {
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(30000), e -> spawnBoss()));
+                    timeline.setCycleCount(1);
+                    timeline.play();
+                });
+                thread1.start();
+                thread2.start();
+                thread3.start();
+                thread4.start();
+                World.instance().addWave();
+            }
         }
-        else if (World.instance().getCurrentWave() == 1) {
-            spawnBasic();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> spawnBasic()));
-            timeline.setCycleCount(10);
-            timeline.play();
-            World.instance().addWave();
+        else if (difficulty.equals("Hard")) {
+
         }
-        else if (World.instance().getCurrentWave() == 2) {
-            spawnEnemies();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1150), e -> spawnEnemies()));
-            timeline.setCycleCount(25);
-            timeline.play();
-            World.instance().addWave();
-        }
-        else if (World.instance().getCurrentWave() == 3) {
-            spawnEnemies();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> spawnEnemies()));
-            timeline.setCycleCount(40);
-            timeline.play();
-            World.instance().addWave();
-        }
-        else if (World.instance().getCurrentWave() == 4) {
-            spawnEnemies();
-            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(925), e -> spawnEnemies()));
-            timeline.setCycleCount(55);
-            timeline.play();
-            World.instance().addWave();
+        else if (difficulty.equals("Insane")) {
+
         }
     }
 
@@ -281,8 +492,12 @@ public class GameWindow implements PlayerObserver {
             if(w.getMagazineRest()>=1){
                 w.setMagazineRest(w.getMagazineRest()-1);
                 e.damageEnemy(w.getDamage());
+                laserSound.play();
                 
                 lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
+            }
+            else {
+                emptySound.play();
             }
             
         });
@@ -294,6 +509,7 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void onPistolClicked(ActionEvent event) {
+        clickSound.play();
         if (World.instance().getCoins() >= 50) {
             World.instance().subtractCoins(50);
             lblCoins.setText("Coins: " + World.instance().getCoins());
@@ -308,10 +524,12 @@ public class GameWindow implements PlayerObserver {
                 }
             }
             btnPistol.setText("Fully Upgraded");
+            btnPistol.setDisable(true);
         }
     }
 
     public void onRifleClicked(ActionEvent event) {
+        
         ArrayList<Weapon> list = World.instance().player.getWeaponList();
         boolean check = false;
         for (int i = 0; i < list.size(); ++i) {
@@ -324,6 +542,7 @@ public class GameWindow implements PlayerObserver {
                     weapon.setDamage(weapon.getDamage() + 8);
                     lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
                     btnRifle.setText("Fully Upgraded");
+                    clickSound.play();
                 }
             }
         }
@@ -332,11 +551,16 @@ public class GameWindow implements PlayerObserver {
             lblCoins.setText("Coins: " + World.instance().getCoins());
             btnRifle.setText("Upgrade: 250 Coins");
             Rifle rifle = new Rifle(WeaponType.RIFLE);
+            // save new rifle to list of objects
+            var updatedList = World.instance().getObjectCollection();
+            updatedList.add(rifle);
+            World.instance().setObjectCollection(updatedList);
             World.instance().player.addWeapon(rifle);
             MenuItem item = new MenuItem();
             item.setText("Rifle");
             item.setOnAction(this::handleRifle);
             lstWeapons.getItems().add(item);
+            confirmationSound.play();
         }
     }
 
@@ -355,23 +579,30 @@ public class GameWindow implements PlayerObserver {
                     }
                     lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
                     btnSniper.setText("Fully Upgraded");
+                    clickSound.play();
                 }
             }
         }
         if (check == false && World.instance().getCoins() >= 100) {
-            World.instance().subtractCoins(100);
+            World.instance().subtractCoins(500);
             lblCoins.setText("Coins: " + World.instance().getCoins());
             btnSniper.setText("Upgrade: 500 Coins");
             Sniper sniper = new Sniper(WeaponType.SNIPER);
+            // add new sniper to list of objects
+            var updatedList = World.instance().getObjectCollection();
+            updatedList.add(sniper);
+            World.instance().setObjectCollection(updatedList);
             World.instance().player.addWeapon(sniper);
             MenuItem item = new MenuItem();
             item.setText("Sniper");
             item.setOnAction(this::handleSniper);
             lstWeapons.getItems().add(item);
+            confirmationSound.play();
         }
     }
 
     public void onlstPistolClicked(ActionEvent event) {
+        clickSound.play();
         ArrayList<Weapon> list = World.instance().player.getWeaponList();
         for (int i = 0; i < list.size(); ++i) {
             Weapon weapon = list.get(i);
@@ -387,6 +618,7 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void handleRifle(ActionEvent event) {
+        clickSound.play();
         ArrayList<Weapon> list = World.instance().player.getWeaponList();
         for (int i = 0; i < list.size(); ++i) {
             Weapon weapon = list.get(i);
@@ -401,6 +633,7 @@ public class GameWindow implements PlayerObserver {
     }
 
     public void handleSniper(ActionEvent event) {
+        clickSound.play();
         ArrayList<Weapon> list = World.instance().player.getWeaponList();
         for (int i = 0; i < list.size(); ++i) {
             Weapon weapon = list.get(i);
@@ -412,6 +645,25 @@ public class GameWindow implements PlayerObserver {
                 lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
             }
         }
+    }
+
+    @FXML
+    public void onHighScoreClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HighScorePlayers.fxml"));
+
+        Stage highscoreData = new Stage();
+        highscoreData.setScene(new Scene(loader.load()));
+        highscoreData.show();
+        applauseSound.play();
+    }
+
+    @FXML
+    public void displayNewHighScore() throws IOException {
+        // Show the new Score Scrren
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("NewHighScore.fxml"));
+        Stage newHighscore = new Stage();
+        newHighscore.setScene(new Scene(loader.load()));
+        newHighscore.show();
     }
 
 }

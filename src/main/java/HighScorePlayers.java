@@ -15,6 +15,8 @@ public class HighScorePlayers {
     VBox vname;
     @FXML
     VBox vscore;
+    @FXML
+    VBox vdifficulty;
 
     HighScore highScores = HighScore.getInstance();
 
@@ -26,7 +28,7 @@ public class HighScorePlayers {
         3.Looping through scores list
         4.Display rank, name and scores as labels from scores list
          */
-        highScores.loadScores("src/main/resources/SaveScoresTestData.txt");
+        highScores.loadScores("src/main/resources/SaveScoresData.txt");
         List<Score> slist = highScores.getScoresList();
            
         for (int i = 0; i < slist.size(); ++i) {
@@ -34,6 +36,7 @@ public class HighScorePlayers {
             Label rank = new Label();
             Label name = new Label();
             Label scoreLabel = new Label();
+            Label difficultyLabel = new Label();
 
             rank.setText("" + (i + 1));
             vrank.getChildren().add(rank);
@@ -43,6 +46,10 @@ public class HighScorePlayers {
 
             scoreLabel.setText(String.valueOf(slist.get(i).getScore()));
             vscore.getChildren().add(scoreLabel);
+
+            difficultyLabel.setText(String.valueOf(slist.get(i).getDifficultyType()));
+            vdifficulty.getChildren().add(difficultyLabel);
+
 
         }
         

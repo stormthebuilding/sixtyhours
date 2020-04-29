@@ -11,21 +11,20 @@
         <MenuBar>
             <Menu text="Main Menu">
                 <MenuItem fx:id="menuitSave" text="Save" onAction = "#onSaveClicked" />
-                <MenuItem fx:id="menuitHighScore" text="High Score"/>
+                <MenuItem fx:id="menuitHighScore" text="High Score" onAction="#onHighScoreClick" />
             </Menu>
             <Menu fx:id="lstWeapons" text="Weapons">
                 <MenuItem fx:id="wpnPistol" text="Pistol" onAction="#onlstPistolClicked" />
             </Menu>
            
         </MenuBar>
-        
         <Pane fx:id="map" prefHeight="850" prefWidth="1180" />
     </VBox>
 
     <VBox spacing="20">
         <HBox spacing = "5">
-            <CheckBox fx:id="cboxCheatMode" text="Cheat Mode" onAction="#onCheatModeChecked" />
-            <Button fx:id = "btnNuke" text = "NUKE" onAction="#onNukeClicked" style = "-fx-base: #FF0000"  />
+            <CheckBox fx:id="cboxCheatMode" text="_Cheat Mode" onAction="#onCheatModeChecked" />
+            <Button fx:id = "btnNuke" text = "_NUKE" onAction="#onNukeClicked" style = "-fx-base: #FF0000"  />
             <Label fx:id = "lblShield" text = "Shield off"  style = "-fx-background-color: #1E90FF" />
         </HBox>
         <Label text="Shop" alignment="CENTER">
@@ -41,9 +40,9 @@
                 <Label text="Sniper" style="-fx-font-size: 15px" />
             </VBox>
             <VBox spacing="6">
-                <Button fx:id="btnPistol" text="Upgrade: 50 Coins" onAction="#onPistolClicked" />
-                <Button fx:id="btnRifle" text="Buy: 15 Coins" onAction="#onRifleClicked" />
-                <Button fx:id="btnSniper" text="Buy: 100 Coins" onAction="#onSniperClicked" />
+                <Button fx:id="btnPistol" text="_Upgrade: 50 Coins" onAction="#onPistolClicked" />
+                <Button fx:id="btnRifle" text="_Buy: 100 Coins" onAction="#onRifleClicked" />
+                <Button fx:id="btnSniper" text="_Buy: 500 Coins" onAction="#onSniperClicked" />
             </VBox>
         </HBox>
 
@@ -58,7 +57,7 @@
         <Label fx:id="lblCoins" text="Coins: 0" />
         <Label fx:id="lblPoints" text="Points: 0" />
         <HBox spacing="10" alignment="center">
-            <Button fx:id="btnNextWave" text="Next Wave" onAction="#onNextWaveClicked" />
+            <Button fx:id="btnNextWave" text="_Next Wave" onAction="#onNextWaveClicked" />
         </HBox>
 
         <VBox spacing="15"> 
@@ -75,7 +74,7 @@
 
                 </HBox>
                 
-                <Button fx:id="btnReload" text = "Reload" onAction="#onReloadClicked" style="-fx-font-size: 14px"/>
+                <Button fx:id="btnReload" text = "_Reload" onAction="#onReloadClicked" style="-fx-font-size: 14px"/>
 
             </HBox>
         </VBox>
