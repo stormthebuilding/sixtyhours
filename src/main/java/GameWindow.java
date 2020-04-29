@@ -8,6 +8,7 @@ import Model.Enemy;
 import Model.HighScore;
 import Model.Player;
 import Model.Score;
+import Model.Serializer;
 import Model.Weapon;
 import Model.WeaponType;
 import Model.World;
@@ -222,6 +223,9 @@ public class GameWindow {
 
     @FXML 
     public void onCheatModeChecked() throws IOException {
+
+        World.instance().addCoins(10000);
+        lblCoins.setText("Coins: " + World.instance().getCoins());
         
         if (cboxCheatMode.isSelected() ) {
             World.instance().setCheatMode(true);
@@ -257,15 +261,12 @@ public class GameWindow {
 
     @FXML
     public void onNukeClicked() throws IOException {
+        explosionSound.play();
         // delete from GUI
         map.getChildren().removeIf(n -> n.getId() != null);
         // delete from model
         World.instance().enemyList.clear();
-        var updatedList = World.instance().getObjectCollection();
-        updatedList.clear();
-        World.instance().setObjectCollection(updatedList);
-        explosionSound.play();
-        
+        World.instance().getObjectCollection().removeIf(n -> n instanceof Enemy);
     }
     @FXML
     public void onReloadClicked() throws IOException{
@@ -280,8 +281,6 @@ public class GameWindow {
 
         p.getCurrentWeapon().setMagazineRest(p.getCurrentWeapon().getMagazine());
         lblCurMagazine.setText(String.valueOf(p.getCurrentWeapon().getMagazineRest()));
-
-        reloadSound.play(1000);
 
         map.setDisable(false);
     }
@@ -514,16 +513,8 @@ public class GameWindow {
             Weapon w = World.instance().getPlayer().getCurrentWeapon();
             Enemy e = (Enemy) node.getUserData();
             if(w.getMagazineRest()>=1){
-                w.setMagazineRest(w.getMagazineRest()-1);
                 e.damageEnemy(w.getDamage());
-                laserSound.play();
-                
-                lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
             }
-            else {
-                emptySound.play();
-            }
-            
         });
     }
 
@@ -557,6 +548,7 @@ public class GameWindow {
                 check = true;
                 // TODO: Here is a bug, I dont know waht you mean, it will upgrade without deduction when the getCoin didn;t achieve the requirement
                 if (World.instance().getCoins() >= 250) {
+                    btnRifle.setDisable(true);
                     World.instance().subtractCoins(250);
                     weapon.setDamage(weapon.getDamage() + 8);
                     lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
@@ -599,6 +591,7 @@ public class GameWindow {
                     lblWeaponDamage.setText("Damage: " + World.instance().player.getCurrentWeapon().getDamage());
                     btnSniper.setText("Fully Upgraded");
                     clickSound.play();
+                    btnSniper.setDisable(true);
                 }
             }
         }
