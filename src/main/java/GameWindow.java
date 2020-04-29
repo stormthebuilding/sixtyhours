@@ -1,3 +1,4 @@
+// Main Game Window
 import java.io.File;
 import javafx.scene.media.AudioClip;
 import java.io.IOException;
@@ -654,6 +655,7 @@ public class GameWindow {
         }
     }
 
+    // Event handler to pull up screen with list of Highscores when Highscores is clicked in main menu dropdown
     @FXML
     public void onHighScoreClick() throws IOException {
         File fileObj = new File("src/main/resources/SaveScoresData.txt");
@@ -670,9 +672,10 @@ public class GameWindow {
         }
     }
 
+    //Event handler to show the NewHighscore screen when the user makes a new highscore.
     @FXML
     public void displayNewHighScore() throws IOException {
-        // Show the new Score Scrren
+        // Show the new Score Screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("NewHighScore.fxml"));
         Stage newHighscore = new Stage();
         newHighscore.setScene(new Scene(loader.load()));

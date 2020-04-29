@@ -10,6 +10,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
+// Contains unit tests for addHighScore loadScores and saveScores methods in Highscore.java
 public class HighScoreTest {
 
     /**

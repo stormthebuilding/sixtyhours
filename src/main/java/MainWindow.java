@@ -1,3 +1,4 @@
+// GUI controls and event handlers for the Title Screen
 import java.io.File;
 import java.io.IOException;
 
@@ -17,16 +18,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+// contains GUI controls and event handlers for the Title Screen
 public class MainWindow {
     
     // GUI controls
 
-    @FXML Label title;
-    @FXML TextField name;
-    @FXML ChoiceBox diff;
+    @FXML Label title; // title on the title screen
+    @FXML TextField name; // textfield for the player to enter their name
+    @FXML ChoiceBox diff; // dropdown for difficulty levels
 
     // FXML Event Handlers
 
+    // initialize method for the title screen
     @FXML 
     void initialize() {
         title.setText("Storm the Stronghold");
@@ -38,6 +41,7 @@ public class MainWindow {
         title.setFont(font);
     }
 
+    // Event handler for the Play button
     @FXML
     void onPlayClicked(ActionEvent event) throws IOException {
         if (name.getText() == null || name.getText().isBlank()){
@@ -58,6 +62,7 @@ public class MainWindow {
 
     }
 
+    // Event handler for the About button
     @FXML
     void onAboutClicked(ActionEvent event) throws IOException {
         var loader = new FXMLLoader(getClass().getResource("AboutWindow.fxml"));
@@ -75,6 +80,7 @@ public class MainWindow {
 
     }
 
+    // Event handler for the Help button
     @FXML
     void onHelpClicked(ActionEvent event) throws IOException {
         var loader = new FXMLLoader(getClass().getResource("HelpWindow.fxml"));
@@ -92,6 +98,7 @@ public class MainWindow {
      
     }
 
+    //Event handler for the Load button
     @FXML
     void onLoadClicked(ActionEvent event) throws IOException {
         World.instance().load("SavedGame.txt");
@@ -116,6 +123,7 @@ public class MainWindow {
         
     }
 
+    // Event handler for the Highscore button
     @FXML
     void onHighScoreClicked(ActionEvent event) throws IOException {
         File fileObj = new File("src/main/resources/SaveScoresData.txt");
@@ -133,6 +141,7 @@ public class MainWindow {
         }
     }
 
+    // method to play an applause sound
     public void SoundPlay(final Stage stage)
     {
      File audioFile = new File("src/main/resources/applause.mp3");
