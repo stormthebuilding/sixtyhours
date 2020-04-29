@@ -237,11 +237,19 @@ public class GameWindow implements PlayerObserver {
     }
     @FXML
     public void onReloadClicked() throws IOException{
+        reloadSound.play();
+        map.setDisable(true);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1950), e -> reload()));
+        timeline.play();
+    }
+
+    public void reload(){
         Player p = World.instance().getPlayer();
+
         p.getCurrentWeapon().setMagazineRest(p.getCurrentWeapon().getMagazine());
         lblCurMagazine.setText(String.valueOf(p.getCurrentWeapon().getMagazineRest()));
-
-        reloadSound.play();
+        
+        map.setDisable(false);
     }
 
     // code for enemy attack and movement
