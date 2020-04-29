@@ -29,6 +29,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -209,6 +210,20 @@ public class GameWindow implements PlayerObserver {
     }
 
     @FXML
+    public void onMapClicked() {
+        Weapon w = World.instance().getPlayer().getCurrentWeapon();
+        if(w.getMagazineRest()>=1){
+            w.setMagazineRest(w.getMagazineRest()-1);
+            laserSound.play();
+            
+            lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
+        }
+        else {
+            emptySound.play();
+        }
+    }
+
+    @FXML
     public void onNukeClicked() throws IOException {
         // delete from GUI
         map.getChildren().removeIf(n -> n.getId() != null);
@@ -222,11 +237,24 @@ public class GameWindow implements PlayerObserver {
     }
     @FXML
     public void onReloadClicked() throws IOException{
+        reloadSound.play();
+        map.setDisable(true);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1950), e -> reload()));
+        timeline.play();
+    }
+
+    public void reload(){
         Player p = World.instance().getPlayer();
+
         p.getCurrentWeapon().setMagazineRest(p.getCurrentWeapon().getMagazine());
         lblCurMagazine.setText(String.valueOf(p.getCurrentWeapon().getMagazineRest()));
+<<<<<<< HEAD
 
         reloadSound.play(1000);
+=======
+        
+        map.setDisable(false);
+>>>>>>> 8aec4b6282fb25faf92222025b7ca2504f386375
     }
 
     // code for enemy attack and movement
@@ -349,14 +377,7 @@ public class GameWindow implements PlayerObserver {
             Weapon w = World.instance().getPlayer().getCurrentWeapon();
             Enemy e = (Enemy) node.getUserData();
             if(w.getMagazineRest()>=1){
-                w.setMagazineRest(w.getMagazineRest()-1);
                 e.damageEnemy(w.getDamage());
-                laserSound.play();
-                
-                lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
-            }
-            else {
-                emptySound.play();
             }
             
         });
