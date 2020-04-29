@@ -10,7 +10,6 @@ import Model.DifficultyType;
 import Model.Enemy;
 import Model.HighScore;
 import Model.Player;
-import Model.PlayerObserver;
 import Model.Score;
 import Model.Weapon;
 import Model.WeaponType;
@@ -37,7 +36,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class GameWindow implements PlayerObserver {
+public class GameWindow {
 
     public String difficulty = "Easy";
 
@@ -520,11 +519,6 @@ public class GameWindow implements PlayerObserver {
             }
             
         });
-    }
-
-    @Override
-    public void update(Player player) {
-        // player.();
     }
 
     public void onPistolClicked(ActionEvent event) {
