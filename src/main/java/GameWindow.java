@@ -365,7 +365,6 @@ public class GameWindow {
 
     public void onNextWaveClicked(ActionEvent event) {
         if (difficulty.equals("Easy")) {
-            btnNextWave.setDisable(true);
             if (World.instance().getCurrentWave() == 0) {
                 spawnBasic();
                 Thread thread1 = new Thread(() -> {
@@ -373,11 +372,7 @@ public class GameWindow {
                     timeline.setCycleCount(5);
                     timeline.play();
                 });
-                Thread thread2 = new Thread(() -> {
-                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(250), e -> checkWave()));
-                });
                 thread1.start();
-                thread2.start();
                 World.instance().addWave();
 
             }
@@ -509,12 +504,6 @@ public class GameWindow {
         }
         else if (difficulty.equals("Insane")) {
 
-        }
-    }
-
-    private void checkWave() {
-        if (enemiesDestroyed == 6) {
-            btnNextWave.setDisable(false);
         }
     }
 
