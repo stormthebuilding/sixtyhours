@@ -10,7 +10,6 @@ import Model.DifficultyType;
 import Model.Enemy;
 import Model.HighScore;
 import Model.Player;
-import Model.PlayerObserver;
 import Model.Score;
 import Model.Weapon;
 import Model.WeaponType;
@@ -33,12 +32,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.input.MouseEvent;
 
-public class GameWindow implements PlayerObserver {
+public class GameWindow {
 
     public String difficulty = "Easy";
     public int enemiesDestroyed;
@@ -223,10 +222,6 @@ public class GameWindow implements PlayerObserver {
     public void onSaveClicked() throws IOException {
         World.instance().save("SavedGame.txt");
         confirmationSound.play();
-        
-
-        
-        
     }
 
     @FXML 
@@ -256,7 +251,7 @@ public class GameWindow implements PlayerObserver {
         if(w.getMagazineRest()>=1){
             w.setMagazineRest(w.getMagazineRest()-1);
             laserSound.play();
-            
+
             lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
         }
         else {
@@ -291,9 +286,10 @@ public class GameWindow implements PlayerObserver {
         lblCurMagazine.setText(String.valueOf(p.getCurrentWeapon().getMagazineRest()));
 
         reloadSound.play(1000);
-        
+
         map.setDisable(false);
     }
+
 
     // code for enemy attack and movement
     public void handleEnemies() {
@@ -535,15 +531,17 @@ public class GameWindow implements PlayerObserver {
             Weapon w = World.instance().getPlayer().getCurrentWeapon();
             Enemy e = (Enemy) node.getUserData();
             if(w.getMagazineRest()>=1){
+                w.setMagazineRest(w.getMagazineRest()-1);
                 e.damageEnemy(w.getDamage());
+                laserSound.play();
+                
+                lblCurMagazine.setText(String.valueOf(w.getMagazineRest()));
+            }
+            else {
+                emptySound.play();
             }
             
         });
-    }
-
-    @Override
-    public void update(Player player) {
-        // player.();
     }
 
     public void onPistolClicked(ActionEvent event) {
