@@ -282,8 +282,6 @@ public class GameWindow {
         p.getCurrentWeapon().setMagazineRest(p.getCurrentWeapon().getMagazine());
         lblCurMagazine.setText(String.valueOf(p.getCurrentWeapon().getMagazineRest()));
 
-        reloadSound.play(1000);
-
         map.setDisable(false);
     }
 
