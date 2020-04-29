@@ -1,8 +1,5 @@
 import java.io.File;
-
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -35,7 +32,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.scene.input.MouseEvent;
 
 public class GameWindow {
 
