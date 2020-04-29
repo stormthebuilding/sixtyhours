@@ -1,5 +1,5 @@
 PLAYER;0,0,PISTOL
 STRONGHOLD;500.0
-WORLD;null,null,1,0,1000000,0,1,false
+WORLD;null,null,1,0,0,0,1,false
 WEAPON;PISTOL,2,7,7
 END;

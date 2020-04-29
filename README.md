@@ -49,7 +49,7 @@ Release Candidate
 ## Expenses
 Developer|Time Spent|Time Left|Journal Links                                                     
 ---------|----------|---------|--------------
-|Caleb|44.93 hrs|15.07 hrs|[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NguyenJournal)
+|Caleb|45.34 hrs|14.66 hrs|[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NguyenJournal)
 |Kevin|   | |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/HansenJournal)
 |Nick| 21.75 hrs | 38.25 hrs |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NickJournal)
 |Reshi|20 hrs 40 min | 39 hrs 20 min|[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/ReshiJournal)
