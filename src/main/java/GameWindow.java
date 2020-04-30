@@ -1,4 +1,8 @@
-// Main Game Window
+//-----------------------------------------------------------
+//File:   GameWindow.java
+//Desc:   This class is the controller for GameWindow.fxml
+//----------------------------------------------------------- 
+
 import java.io.File;
 import javafx.scene.media.AudioClip;
 import java.io.IOException;
@@ -6,6 +10,7 @@ import java.util.ArrayList;
 
 import Model.DifficultyType;
 import Model.Enemy;
+import Model.EnemyType;
 import Model.HighScore;
 import Model.Player;
 import Model.Score;
@@ -69,7 +74,6 @@ public class GameWindow {
     AudioClip emptySound = new AudioClip(new File("src/main/resources/sounds/empty.mp3").toURI().toString());
     AudioClip reloadSound = new AudioClip(new File("src/main/resources/sounds/reload.mp3").toURI().toString());
 
-    
     
     @FXML
     void initialize() {
@@ -202,7 +206,18 @@ public class GameWindow {
                 var enemy = e;
                 double x = enemy.getX();
                 double y = enemy.getY();
-                view = new ImageView(new Image("/images/robo.png"));
+                if (enemy.getType() == EnemyType.BASIC) {
+                    view = new ImageView(new Image("/images/robo.png"));
+                }
+                else if (enemy.getType() == EnemyType.ADVANCED) {
+                    view = new ImageView(new Image("/images/advanced.png"));
+                }
+                else if (enemy.getType() == EnemyType.HEAVY) {
+                    view = new ImageView(new Image("/images/Heavy.png"));
+                }
+                else if (enemy.getType() == EnemyType.BOSS) {
+                    view = new ImageView(new Image("/images/Boss.png"));
+                }
                 view.getStyleClass().add("current");
                 view.setId("" + enemy.getId());
                 view.relocate(x, y);
@@ -511,6 +526,7 @@ public class GameWindow {
             if(w.getMagazineRest()>=1){
                 e.damageEnemy(w.getDamage());
             }
+           
         });
     }
 

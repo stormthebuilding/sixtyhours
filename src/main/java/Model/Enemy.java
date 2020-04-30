@@ -75,7 +75,10 @@ public class Enemy implements Serializer {
     }
 
     
-
+    /**
+     * Takes instance variables 
+     * @return A comma-delimited String containing the variables
+     */
     @Override
     public String serialize() {
 
@@ -101,6 +104,10 @@ public class Enemy implements Serializer {
 
     }
 
+    /**
+     * Sets instance variables according to the data from the specified file
+     * @param  - The file to extract data from
+     */
     @Override
     public void deserialize(String data) {
 

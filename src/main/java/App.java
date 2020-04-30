@@ -1,3 +1,8 @@
+//-----------------------------------------------------------
+//File:   App.java
+//Desc:   This class launches the GUI Application 
+//----------------------------------------------------------- 
+
 import javafx.application.Application;
 
 public class App {

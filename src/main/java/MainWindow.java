@@ -108,11 +108,6 @@ public class MainWindow {
         var stage = new Stage();
         stage.setScene(scene);
         stage.show();
-        // for testing purposes
-        var listy = World.instance().getObjectCollection();
-        for (Serializer object : listy) {
-            System.out.println(object);
-        }
 
         File audioFile = new File("src/main/resources/sounds/bong_001.mp3");
         Media audio = new Media(audioFile.toURI().toString());
