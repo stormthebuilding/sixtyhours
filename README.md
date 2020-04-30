@@ -1,4 +1,4 @@
-# Storm the Stronghold (Release Candidate)
+# Storm the Stronghold (Release)
 ## Instructions
 When the title page appears, click the "Play" button to start the game. At this stage of the game, you must click on the "Spawn Enemy" button to make the enemy appear. You can then click on the enemy to shoot at them. If the enemy gets to the stronghold, they can damage it. Once you have fired all of the shots in your clip, you must click the "Reload" button to fill your clip back up with shots. 
 
@@ -24,8 +24,8 @@ Reshi
 
 ## Known Issues
 Caleb
-* After loading a saved game, the enemies move at an increased speed, and jump across the map. The cause of this issue has not been found. 
-* Eliminating enemies after loading a saved game is another issue. It seems that the GUI is not properly linked to the model.  
+* After loading a saved game, the enemies move at an increased speed. When one enemy is damaged, the speed of the other enemies return to normal.          
+* After loading a saved game in which some of the enemies are at the stronghold, enemy elimination becomes very inconsistent. When one enemy is clicked on, a different one appears to get damaged instead. On some occasions not all of the enemies can be eliminated after loading.                
 
 Kevin
 
