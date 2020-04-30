@@ -21,17 +21,17 @@
     <HBox spacing="20" alignment="CENTER">
         <Label text = "Enter your name:" prefHeight = "20" prefWidth = "110" />
         <TextField fx:id="name" text = "Joe" />
-        <ChoiceBox fx:id="cbDifficulty" value="">
+        <Label text = "Difficulty Level:" prefHeight = "20" />
+        <ChoiceBox fx:id="cbDifficulty">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Difficulty"/>
                 <String fx:value="Normal" />
                 <String fx:value="Hard" />
                 <String fx:value="Insane" />
                 </FXCollections>
             </items>
             <value>
-                <String fx:value="Difficulty" />
+                <String fx:value="Normal" />
             </value>
         </ChoiceBox>
     </HBox>

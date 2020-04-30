@@ -50,7 +50,7 @@ public class MainWindow {
             alert.show(); 
         } else {
             World.instance().setUserName(name.getText());
-            World.instance().setDifficulty(String.valueOf(cbDifficulty.getSelectionModel().getSelectedItem()));
+            World.instance().setDifficulty(cbDifficulty.getValue());
 
             var loader = new FXMLLoader(getClass().getResource("GameWindow.fxml"));
             var scene = new Scene(loader.load());
