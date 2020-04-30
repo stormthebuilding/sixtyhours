@@ -25,7 +25,7 @@ public class MainWindow {
 
     @FXML Label title; // title on the title screen
     @FXML TextField name; // textfield for the player to enter their name
-    @FXML ChoiceBox diff; // dropdown for difficulty levels
+    @FXML ChoiceBox<String> cbDifficulty; // dropdown for difficulty levels
 
     // FXML Event Handlers
 
@@ -50,7 +50,7 @@ public class MainWindow {
             alert.show(); 
         } else {
             World.instance().setUserName(name.getText());
-            World.instance().setDifficulty(String.valueOf(diff.getSelectionModel().getSelectedItem()));
+            World.instance().setDifficulty(String.valueOf(cbDifficulty.getSelectionModel().getSelectedItem()));
 
             var loader = new FXMLLoader(getClass().getResource("GameWindow.fxml"));
             var scene = new Scene(loader.load());

@@ -21,7 +21,7 @@
     <HBox spacing="20" alignment="CENTER">
         <Label text = "Enter your name:" prefHeight = "20" prefWidth = "110" />
         <TextField fx:id="name" text = "Joe" />
-        <ChoiceBox value="">
+        <ChoiceBox fx:id="cbDifficulty" value="">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                 <String fx:value="Difficulty"/>
