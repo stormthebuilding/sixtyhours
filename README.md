@@ -11,6 +11,12 @@ Caleb
 Kevin
 
 Nick
+* Player shoot and reload 
+* Game window view
+* Shop and weapon adapt (originally written by kevin)
+* Game over
+* Game menu
+
 
 Reshi
 
@@ -31,10 +37,6 @@ Kevin
 
 Nick
 
-* Menu window
-* Give a delay to reload
-* Buttons don't work after the gamewindow is opened the seond or the third time from mainwindow
-* I cannot press the screen (the other place beside the enemy) to use my bullet, on the the way, the missed shoot will not be counted.
 
 Reshi
 
