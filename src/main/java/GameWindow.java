@@ -5,6 +5,8 @@
 
 import java.io.File;
 import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Color;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -31,18 +33,23 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class GameWindow {
 
+    Timeline timelineMain;
     public String difficulty = "Easy";
     public int enemiesDestroyed;
 
@@ -85,9 +92,9 @@ public class GameWindow {
         view.setFitWidth(1180);
         view.setFitHeight(850);
         map.getChildren().add(view);
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), e -> handleEnemies()));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+        timelineMain = new Timeline(new KeyFrame(Duration.millis(100), e -> handleEnemies()));
+        timelineMain.setCycleCount(Timeline.INDEFINITE);
+        timelineMain.play();
         for (Weapon weapon : World.instance().player.getWeaponList()) {
             MenuItem item = null;
             if (weapon.getType() == WeaponType.RIFLE) {
@@ -328,10 +335,6 @@ public class GameWindow {
                         }
                         else {
                             if (node.getLayoutX() >= 700) {
-                                if (World.instance().stronghold.getHealth() <= 0) {
-                                    //implementation for loosing game goes here
-                                }
-                                else {
                                     double health = World.instance().stronghold.getHealth();
                                     if (!World.instance().isCheatMode() ) { // enemy doesn't damage stronghold if cheat mode is on
                                     World.instance().stronghold.setHealth(health - enemy.getDamage());
@@ -339,8 +342,9 @@ public class GameWindow {
                                     lblHealth.setText("Stronghold health: " + World.instance().stronghold.getHealth());
                                     
                                     //update status
-                                    if(World.instance().stronghold.getHealth() == 0){
-                                        
+                                    if(World.instance().stronghold.getHealth() <= 0){
+                                        timelineMain.stop();
+                                        btnNextWave.setDisable(true);
                                         lblStatus.setStyle("-fx-text-fill: red; -fx-font-size: 35px;");
                                         lblStatus.setText("Defeat");
                                         gameOverSound.play();
@@ -364,7 +368,6 @@ public class GameWindow {
                                         
                                         
                                     }
-                                }
                             }
                             else {
                   
@@ -439,12 +442,12 @@ public class GameWindow {
                 spawnBasic();
                 Thread thread1 = new Thread(() -> {
                     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1700), e -> spawnBasic()));
-                    timeline.setCycleCount(20);
+                    timeline.setCycleCount(22);
                     timeline.play();
                 });
                 Thread thread2 = new Thread(() -> {
-                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5500), e -> spawnAdvanced()));
-                    timeline.setCycleCount(12);
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(4500), e -> spawnAdvanced()));
+                    timeline.setCycleCount(8);
                     timeline.play();
                 });
                 thread1.start();
@@ -454,7 +457,7 @@ public class GameWindow {
             else if (World.instance().getCurrentWave() == 6) {
                 spawnAdvanced();
                 Thread thread1 = new Thread(() -> {
-                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1700), e -> spawnAdvanced()));
+                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1700), e -> spawnBasic()));
                     timeline.setCycleCount(12);
                     timeline.play();
                 });
@@ -499,10 +502,6 @@ public class GameWindow {
                     timeline.setCycleCount(9);
                     timeline.play();
                 });
-                Thread thread3 = new Thread(() -> {
-                    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1400), e -> spawnBasic()));
-                    timeline.setCycleCount(20);
-                });
                 Thread thread4 = new Thread(() -> {
                     Timeline timeline = new Timeline(new KeyFrame(Duration.millis(30000), e -> spawnBoss()));
                     timeline.setCycleCount(1);
@@ -510,7 +509,6 @@ public class GameWindow {
                 });
                 thread1.start();
                 thread2.start();
-                thread3.start();
                 thread4.start();
                 World.instance().addWave();
             }
