@@ -1,7 +1,7 @@
 // Constructor for the score object and a method to compare two scores.
 package Model;
 
-// Has a construcctor to create a score object and a method to compare tow scores.
+// Has a constructor to create a score object and a method to compare two scores.
 public class Score implements Comparable<Score> {
     private String name; //Name of the Player with high Score
     private int score;  // Highscore

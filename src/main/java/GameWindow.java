@@ -356,6 +356,7 @@ public class GameWindow {
                                             DifficultyType.valueOf(World.instance().getDifficulty()));
                                         //System.out.println(score.toString());
                                         try {
+                                            HighScore.getInstance().loadScores("src/main/resources/SaveScoresData.txt");
                                             if (HighScore.getInstance().findIfScoreQualifiesAsHigh(score)) {
                                                 //System.out.println("It is a high Score");
                                                 // Show the new Score Screen

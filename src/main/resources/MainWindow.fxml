@@ -25,13 +25,13 @@
         <ChoiceBox fx:id="cbDifficulty">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Normal" />
-                <String fx:value="Hard" />
-                <String fx:value="Insane" />
+                <String fx:value="NORMAL" />
+                <String fx:value="HARD" />
+                <String fx:value="INSANE" />
                 </FXCollections>
             </items>
             <value>
-                <String fx:value="Normal" />
+                <String fx:value="NORMAL" />
             </value>
         </ChoiceBox>
     </HBox>
