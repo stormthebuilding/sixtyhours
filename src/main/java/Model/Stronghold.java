@@ -1,4 +1,9 @@
+//-----------------------------------------------------------
+//File:   Stronghold.java
+//Desc:   This class holds the Stronghold object and its methods
 //save the health point of the stronghold
+//----------------------------------------------------------- 
+
 package Model;
 
 public class Stronghold implements Serializer {
@@ -21,6 +26,10 @@ public class Stronghold implements Serializer {
         this.health = health;
     }
 
+    /**
+     * Takes instance variables 
+     * @return A comma-delimited String containing the variables
+     */
     @Override
     public String serialize() {
         
@@ -30,6 +39,10 @@ public class Stronghold implements Serializer {
         return serialized;
     }
 
+    /**
+     * Sets instance variables according to the data from the specified file
+     * @param  - The file to extract data from
+     */
     @Override
     public void deserialize(String data) {
 

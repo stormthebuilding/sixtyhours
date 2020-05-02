@@ -1,5 +1,10 @@
+//-----------------------------------------------------------
+//File:   Weapon.java
+//Desc:   This class holds the Weapon object and its methods
 //related to current weapon in Player and shop system in Gamewindow
 //get and check all features of different weapons
+//----------------------------------------------------------- 
+
 package Model;
 
 public class Weapon implements Serializer{
@@ -44,6 +49,10 @@ public class Weapon implements Serializer{
     }
 
 
+    /**
+     * Takes instance variables 
+     * @return A comma-delimited String containing the variables
+     */
     @Override
     public String serialize() {
 
@@ -67,6 +76,10 @@ public class Weapon implements Serializer{
 
     }
 
+    /**
+     * Sets instance variables according to the data from the specified file
+     * @param  - The file to extract data from
+     */
     @Override
     public void deserialize(String data) {
 

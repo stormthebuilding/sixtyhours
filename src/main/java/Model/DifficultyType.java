@@ -1,4 +1,8 @@
-// The posible difficulty types of the game
+//-----------------------------------------------------------
+//File:   DifficultyType.java
+//Desc:   This enum holds the difficulty levels of the game
+//----------------------------------------------------------- 
+
 package Model;
 
 public enum DifficultyType {

@@ -1,4 +1,9 @@
-//World class, from here can access the instance and all the game data
+//-----------------------------------------------------------
+//File:   World.java
+//Desc:   This class holds the World instance and its methods
+//from here can access the instance and all the game data
+//----------------------------------------------------------- 
+
 package Model;
 
 import java.io.BufferedReader;
@@ -33,27 +38,26 @@ public class World implements Serializer {
     public Stronghold stronghold = new Stronghold();
     public Random rand = new Random();
 
-    // Store methods
-
-    // Stronghold methods
-
     // Singleton implementation
 
     // prevent direct instantiation outside this class
     private World() {
         this.id = ++nextId;
 
-        objectCollection.add(player); // add Player object to objectCollection
-        objectCollection.add(stronghold); // add Stronghold object to objectCollection
-        objectCollection.add(this); // add World instance to objectCollection
-
-        objectCollection.add(player.getCurrentWeapon()); // add original Weapon object to objectCollection
-        var weaponList = player.getWeaponList(); // add original Weapon object to weaponList
+        // add Player object to objectCollection
+        objectCollection.add(player); 
+        // add Stronghold object to objectCollection
+        objectCollection.add(stronghold); 
+        // add World instance to objectCollection
+        objectCollection.add(this); 
+        // add original Weapon object to objectCollection
+        objectCollection.add(player.getCurrentWeapon()); 
+        // add original Weapon object to weaponList
+        var weaponList = player.getWeaponList(); 
         weaponList.add(player.getCurrentWeapon());
         player.setWeaponList(weaponList);
-        // Additional Weapon objects are added in GameWindow.java when they are created
-        // Enemy objects are added in World.java when they are spawned in their
-        // respective methods
+        // Additional Weapon objects are added when they are created in World.java
+        // Enemy objects are added when they are created in GameWindow.java
     }
 
     private static World instance = new World();
@@ -265,6 +269,10 @@ public class World implements Serializer {
         }
     }
 
+    /**
+     * Takes instance variables 
+     * @return A comma-delimited String containing the variables
+     */
     @Override
     public String serialize() {
 
@@ -276,6 +284,10 @@ public class World implements Serializer {
         return serialized; 
     }
 
+    /**
+     * Sets instance variables according to the data from the specified file
+     * @param  - The file to extract data from
+     */
     @Override
     public void deserialize(String data) {
 

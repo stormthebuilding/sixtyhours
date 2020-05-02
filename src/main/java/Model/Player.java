@@ -1,4 +1,9 @@
+//-----------------------------------------------------------
+//File:   Player.java
+//Desc:   This class holds the Player object and its methods
 //store the player information, score and currentwealon
+//----------------------------------------------------------- 
+
 package Model;
 
 import java.util.ArrayList;
@@ -55,6 +60,10 @@ public class Player implements Serializer {
         weaponList.add(weapon);
     }
 
+    /**
+     * Takes instance variables 
+     * @return A comma-delimited String containing the variables
+     */
     @Override
     public String serialize() {
 
@@ -77,6 +86,10 @@ public class Player implements Serializer {
         
     }
 
+    /**
+     * Sets instance variables according to the data from the specified file
+     * @param  - The file to extract data from
+     */
     @Override
     public void deserialize(String data) {
 
