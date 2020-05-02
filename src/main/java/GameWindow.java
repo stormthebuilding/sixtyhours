@@ -262,6 +262,7 @@ public class GameWindow {
         
     }
 
+    //give the feedback after the pane is clicked(shot)
     @FXML
     public void onMapClicked() {
         Weapon w = World.instance().getPlayer().getCurrentWeapon();
@@ -519,6 +520,7 @@ public class GameWindow {
         }
     }
 
+    //The response after an enemy got shot
     @FXML
     private void setEnermy(Node node) {
 
