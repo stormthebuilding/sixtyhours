@@ -1,6 +1,8 @@
 //-----------------------------------------------------------
 //File:   GameWindow.java
 //Desc:   This class is the controller for GameWindow.fxml
+//allow user to input user name, choose difficulty,
+//play new game, check highscore, and load the saved game
 //----------------------------------------------------------- 
 
 import java.io.File;
@@ -269,6 +271,7 @@ public class GameWindow {
         
     }
 
+    //give the feedback after the pane is clicked(shot)
     @FXML
     public void onMapClicked() {
         Weapon w = World.instance().getPlayer().getCurrentWeapon();
@@ -521,6 +524,7 @@ public class GameWindow {
         }
     }
 
+    //The response after an enemy got shot
     @FXML
     private void setEnermy(Node node) {
 

@@ -1,6 +1,7 @@
 //-----------------------------------------------------------
 //File:   Player.java
 //Desc:   This class holds the Player object and its methods
+//store the player information, score and currentwealon
 //----------------------------------------------------------- 
 
 package Model;

@@ -1,6 +1,7 @@
 //-----------------------------------------------------------
 //File:   World.java
 //Desc:   This class holds the World instance and its methods
+//from here can access the instance and all the game data
 //----------------------------------------------------------- 
 
 package Model;

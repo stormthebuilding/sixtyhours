@@ -1,6 +1,7 @@
 //-----------------------------------------------------------
 //File:   Stronghold.java
 //Desc:   This class holds the Stronghold object and its methods
+//save the health point of the stronghold
 //----------------------------------------------------------- 
 
 package Model;

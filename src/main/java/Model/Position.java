@@ -1,3 +1,4 @@
+//save the position of the view in pane
 package Model;
 
 public class Position {

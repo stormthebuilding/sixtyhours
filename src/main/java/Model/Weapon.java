@@ -1,6 +1,8 @@
 //-----------------------------------------------------------
 //File:   Weapon.java
 //Desc:   This class holds the Weapon object and its methods
+//related to current weapon in Player and shop system in Gamewindow
+//get and check all features of different weapons
 //----------------------------------------------------------- 
 
 package Model;
