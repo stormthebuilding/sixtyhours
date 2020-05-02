@@ -56,5 +56,5 @@ Developer|Time Spent|Time Left|Journal Links
 ---------|----------|---------|--------------
 |Caleb|45.34 hrs|14.66 hrs|[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NguyenJournal)
 |Kevin|   | |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/HansenJournal)
-|Nick| 37.92 hrs | 22.08 hrs |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NickJournal)
+|Nick| 42.62 hrs | 17.38 hrs |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NickJournal)
 |Reshi|40 hrs 15 min | 19 hrs 45 min|[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/ReshiJournal)
