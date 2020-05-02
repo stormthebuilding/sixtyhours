@@ -1,3 +1,9 @@
+//-----------------------------------------------------------
+//File:   Serializer.java
+//Desc:   This class holds the Serializer interface and its methods
+//----------------------------------------------------------- 
+
+
 package Model;
 
 public interface Serializer {

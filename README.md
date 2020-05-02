@@ -1,4 +1,4 @@
-# Storm the Stronghold (Release Candidate)
+# Storm the Stronghold (Release)
 ## Instructions
 When the title page appears, click the "Play" button to start the game. At this stage of the game, you must click on the "Spawn Enemy" button to make the enemy appear. You can then click on the enemy to shoot at them. If the enemy gets to the stronghold, they can damage it. Once you have fired all of the shots in your clip, you must click the "Reload" button to fill your clip back up with shots. 
 
@@ -14,13 +14,18 @@ Nick
 
 Reshi
 
-* Highsocres creating and adding
-* Higscores  load/save
+* Highsocres creating and adding (Model)
+* Higscores  load/save (Model)
 * Title screen
+* About screen
+* Help/Instructions Screen
+* Highscores screen
+* New highscore congratulations screen
+
 ## Known Issues
 Caleb
-* After loading a saved game, the enemies move at an increased speed, and jump across the map. The cause of this issue has not been found. 
-* Eliminating enemies after loading a saved game is another issue. It seems that the GUI is not properly linked to the model.  
+* After loading a saved game, the enemies move at an increased speed. When one enemy is damaged, the speed of the other enemies return to normal.          
+* After loading a saved game in which some of the enemies are at the stronghold, enemy elimination becomes very inconsistent. When one enemy is clicked on, a different one appears to get damaged instead. On some occasions not all of the enemies can be eliminated after loading.                
 
 Kevin
 
@@ -52,4 +57,4 @@ Developer|Time Spent|Time Left|Journal Links
 |Caleb|45.34 hrs|14.66 hrs|[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NguyenJournal)
 |Kevin|   | |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/HansenJournal)
 |Nick| 37.92 hrs | 22.08 hrs |[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/NickJournal)
-|Reshi|20 hrs 40 min | 39 hrs 20 min|[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/ReshiJournal)
+|Reshi|40 hrs 15 min | 19 hrs 45 min|[Journal link](https://github.com/stormthebuilding/sixtyhours/wiki/ReshiJournal)

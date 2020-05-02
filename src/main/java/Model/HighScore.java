@@ -1,3 +1,5 @@
+// Methods to check if a score qualifies as a Highscore, add a highscore to a list of highscores, and load and save highscores. 
+
 package Model;
 
 import java.io.BufferedReader;
@@ -11,11 +13,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// This is the main class for the implementation of highscores. Contains menthods to process a score, add a highscore to a list of highscores, and load and save highscores. 
 public class HighScore {
-    private List<Score> scoresList = new ArrayList<Score>();
-    private int maxNumOfHighScoreEntries = 15;
+    private List<Score> scoresList = new ArrayList<Score>(); // the list of Highscores
+    private int maxNumOfHighScoreEntries = 15; // the maximum number of highscore entries
 
-        /* 
+    /* 
     1. Load the Scores from File
     3. IF new Score qualifies for High Score
     2.   Add Score to List
@@ -85,7 +88,7 @@ public class HighScore {
     }
 
     /**
-     * 
+     * Loads highscores from the specified file and adds them to the highscore list- scoresList
      * @param fileName - File name to load high scores from.
      * @throws IOException
      */
@@ -118,13 +121,8 @@ public class HighScore {
 
     }
     
-    /**
-     * 1. Create the File Object to identify the file to write to
-     * 2. Create the FileWriter object for the File object to work with a character Stream
-     * 3. Create the BufferedWriter object to write into the stream by passing the FileWriter object
-     *    connected to the File object. 
-     * 4. Loop through the Scores List and Write each line to PrintWriter Stream 
-     * 5. Close the file
+    /** 
+     * Loops through the Scores List and saves the highscores to the specified file. 
      * @param fileName - File to Write to
      */
     public void saveScores(String fileName){
@@ -185,7 +183,7 @@ public class HighScore {
 
     
     // Singleton implementation
-    // prevent direct instantiation outside this class
+    // prevents direct instantiation outside this class
     private HighScore() {
 
     }

@@ -1,3 +1,8 @@
+//-----------------------------------------------------------
+//File:   GameWindow.java
+//Desc:   This class is the controller for GameWindow.fxml
+//----------------------------------------------------------- 
+
 import java.io.File;
 import javafx.scene.media.AudioClip;
 import java.io.IOException;
@@ -5,6 +10,7 @@ import java.util.ArrayList;
 
 import Model.DifficultyType;
 import Model.Enemy;
+import Model.EnemyType;
 import Model.HighScore;
 import Model.Player;
 import Model.Score;
@@ -28,6 +34,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -69,7 +76,6 @@ public class GameWindow {
     AudioClip emptySound = new AudioClip(new File("src/main/resources/sounds/empty.mp3").toURI().toString());
     AudioClip reloadSound = new AudioClip(new File("src/main/resources/sounds/reload.mp3").toURI().toString());
 
-    
     
     @FXML
     void initialize() {
@@ -202,7 +208,18 @@ public class GameWindow {
                 var enemy = e;
                 double x = enemy.getX();
                 double y = enemy.getY();
-                view = new ImageView(new Image("/images/robo.png"));
+                if (enemy.getType() == EnemyType.BASIC) {
+                    view = new ImageView(new Image("/images/robo.png"));
+                }
+                else if (enemy.getType() == EnemyType.ADVANCED) {
+                    view = new ImageView(new Image("/images/advanced.png"));
+                }
+                else if (enemy.getType() == EnemyType.HEAVY) {
+                    view = new ImageView(new Image("/images/Heavy.png"));
+                }
+                else if (enemy.getType() == EnemyType.BOSS) {
+                    view = new ImageView(new Image("/images/Boss.png"));
+                }
                 view.getStyleClass().add("current");
                 view.setId("" + enemy.getId());
                 view.relocate(x, y);
@@ -515,6 +532,7 @@ public class GameWindow {
             if(w.getMagazineRest()>=1){
                 e.damageEnemy(w.getDamage());
             }
+           
         });
     }
 
@@ -659,19 +677,27 @@ public class GameWindow {
         }
     }
 
+    // Event handler to pull up screen with list of Highscores when Highscores is clicked in main menu dropdown
     @FXML
     public void onHighScoreClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("HighScorePlayers.fxml"));
+        File fileObj = new File("src/main/resources/SaveScoresData.txt");
+        if (fileObj.exists()){ 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HighScorePlayers.fxml"));
 
-        Stage highscoreData = new Stage();
-        highscoreData.setScene(new Scene(loader.load()));
-        highscoreData.show();
-        applauseSound.play();
+            Stage highscoreData = new Stage();
+            highscoreData.setScene(new Scene(loader.load()));
+            highscoreData.show();
+        } else {
+            var alert = new Alert(AlertType.INFORMATION, "There are no high scores yet.");
+            alert.setHeaderText(null);
+            alert.show();
+        }
     }
 
+    //Event handler to show the NewHighscore screen when the user makes a new highscore.
     @FXML
     public void displayNewHighScore() throws IOException {
-        // Show the new Score Scrren
+        // Show the new Score Screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("NewHighScore.fxml"));
         Stage newHighscore = new Stage();
         newHighscore.setScene(new Scene(loader.load()));

@@ -1,3 +1,4 @@
+//initialize method for the Help Screen
 import javafx.fxml.FXML;
 
 

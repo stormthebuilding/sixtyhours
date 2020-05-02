@@ -1,3 +1,4 @@
+// GUI controls and event handlers for the About Screen
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -15,7 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
+// has GUI controls and event handlers for the About Screen
 public class AboutWindow {
     // GUI controls
 
