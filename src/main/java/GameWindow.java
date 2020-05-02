@@ -1,4 +1,6 @@
 // Main Game Window
+//allow user to input user name, choose difficulty,
+//play new game, check highscore, and load the saved game
 import java.io.File;
 import javafx.scene.media.AudioClip;
 import java.io.IOException;

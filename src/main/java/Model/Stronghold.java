@@ -1,3 +1,4 @@
+//save the health point of the stronghold
 package Model;
 
 public class Stronghold implements Serializer {

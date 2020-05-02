@@ -1,3 +1,4 @@
+//store the player information, score and currentwealon
 package Model;
 
 import java.util.ArrayList;

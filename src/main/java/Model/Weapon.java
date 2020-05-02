@@ -1,3 +1,5 @@
+//related to current weapon in Player and shop system in Gamewindow
+//get and check all features of different weapons
 package Model;
 
 public class Weapon implements Serializer{

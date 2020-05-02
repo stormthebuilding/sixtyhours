@@ -1,3 +1,4 @@
+//World class, from here can access the instance and all the game data
 package Model;
 
 import java.io.BufferedReader;
